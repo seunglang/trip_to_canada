@@ -8,4 +8,5 @@
 	<li class="nav-item"><a href="#" class="nav-link nav-font-color">여행 TIP</a></li>
 	<li class="nav-item"><a href="#" class="nav-link nav-font-color">교통정보</a></li>
 	<li class="nav-item"><a href="#" class="nav-link nav-font-color">패키지 상품</a></li>
+	<li class="nav-item"><a href="#" class="nav-link nav-font-color">자유게시판</a></li>
 </ul>

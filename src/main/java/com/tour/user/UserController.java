@@ -5,6 +5,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import jakarta.servlet.http.HttpSession;
+
 @RequestMapping("/user")
 @Controller
 public class UserController {
@@ -19,5 +21,24 @@ public class UserController {
 	public String signUp(Model model) {
 		model.addAttribute("viewName", "user/signUp");
 		return "template/layout";
+	}
+	
+	// 로그인 화면
+	@GetMapping("/sign_in_view")
+	public String signIn(Model model) {
+		model.addAttribute("viewName", "user/signIn");
+		return "template/layout";
+	}
+	
+	// 로그아웃 화면
+	@GetMapping("/sign_out")
+	public String signOut(HttpSession session) {
+		// 로그아웃을 위해 세션으로 설정해둔 모든 값을 지워준다 - remove를 통해
+		session.removeAttribute("userId");
+		session.removeAttribute("userName");
+		session.removeAttribute("userLoginId");
+		session.removeAttribute("adminId");
+		
+		return "redirect:/user/sign_in_view"; // 로그아웃 후 로그인 페이지로 리다이렉트
 	}
 }
