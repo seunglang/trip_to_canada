@@ -78,7 +78,7 @@ public class UserRestController {
 			//session.setAttribute("userId", user.getId());
 			session.setAttribute("userName", user.getName());
 			session.setAttribute("adminId", user.getAdminId());
-			//session.setAttribute("userLoginId", user.getLoginId());
+			session.setAttribute("userLoginId", user.getLoginId());
 		} else {
 			result.put("code", 500);
 			result.put("errorMessage", "존재하지 않는 사용자입니다.");

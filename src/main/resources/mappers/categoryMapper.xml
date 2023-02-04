@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="com.tour.category.dao.CategoryDAO">
+ 	<insert id="insertCategory" parameterType="String">
+ 		INSERT INTO `category`
+ 		(
+ 			`categoryName`
+ 			, `categoryAttr`
+ 		)
+ 		VALUES
+ 		(
+ 			#{categoryName}
+ 			, #{categoryAttr}
+ 		)
+ 	</insert>
+ 	
+ 	<select id="selectCategoryList" resultType="com.tour.category.model.Category">
+ 		SELECT
+ 			`id`
+ 			, `categoryName`
+ 			, `categoryAttr`
+ 			, `createdAt`
+ 			, `updatedAt`
+ 		FROM
+ 			`category`	
+ 	</select>
+ 	
+ 	<select id="selectCategoryByNameAttr" parameterType="String" resultType="int">
+ 		SELECT
+ 			count(*)
+ 		FROM
+ 			`category`
+ 		WHERE
+ 			`categoryName` = #{categoryName}
+ 	</select>
+ 	
+ 	<delete id="deleteCategoryByAttr" parameterType="String">
+ 		DELETE
+ 		FROM
+ 			`category`
+ 		WHERE
+ 			`categoryName` = #{categoryName}
+ 	</delete>
+ 	
+ 	<insert id="addCategoryInfo" parameterType="map">
+ 		INSERT INTO `accomodation`
+ 		(
+			`categoryId`
+			,`name`
+			,`address`
+			,`zipCode`
+			,`intro`
+			,`price`
+			,`phoneNumber`
+			,`email`
+			,`thumbnailPic`
+			,`createdAt`
+			,`updatedAt`
+ 		)
+ 		VALUES
+ 		(
+ 			#{categoryId}
+ 			, #{name}
+ 			, #{address}
+ 			, #{zipCode}
+ 			, #{intro}
+ 			, #{price}
+ 			, #{phoneNumber}
+ 			, #{email}
+ 			, #{thumbnailPic}
+ 			, NOW()
+ 			, NOW()
+ 		)
+ 	</insert>
+ </mapper>

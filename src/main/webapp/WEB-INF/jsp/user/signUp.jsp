@@ -5,7 +5,7 @@
 	<div class="sign-up mt-5">
 		<legend>회원가입</legend>
 		<div class="border rounded p-3 sign-up-shape">
-			<div class="sign-up-sen mb-3"><span class="text-danger"><img src="/static/image/canadalogo.png" width="30px">캐나다</span> 여행,<br>저희와 함께 준비해요</div>
+			<div class="sign-up-sen mb-3"><img src="/static/image/canadalogo.png" width="30px"><span class="text-danger">캐나다</span> 여행,<br>저희와 함께 준비해요</div>
 				<div class="row">
 					<div class="col-xs-12 col-md-12 d-flex align-items-center">
 						<input type="text" id="loginId" name="loginId" class="form-control input-lg" placeholder="아이디를 입력해주세요" />

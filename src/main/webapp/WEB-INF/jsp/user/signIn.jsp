@@ -25,6 +25,11 @@
 	</div>
 </div>
 
+<div class="sign-up-width d-flex justify-content-start mt-1 pl-1">
+	<div><a href="/user/sign_up_view" class="sign-up-font-size">회원가입&nbsp;/</a></div>
+	<div><a href="#" class="sign-up-font-size">&nbsp;카카오 회원가입</a></div>
+</div>
+
 <script>
 $(document).ready(function() {
 	// 로그인 서브밋
@@ -54,6 +59,7 @@ $(document).ready(function() {
 				location.href="/mainpage/mainpageView"; 
 			} else {
 				alert("로그인에 실패했습니다. 다시 시도해주세요.");
+				location.reload();
 			}
 		}); 
 	});

@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <article class="col-6 d-flex justify-content-center">
 	<img src="/static/image/travleIcon.png" width="80px" class="mr-2 mt-1" alt="logo">
-	<div class="display-4 mt-1 banner"><a href="http://localhost:8080/mainpage/mainpageView" class="banner-color">Trip to Canada</a></div>
+	<div class="display-4 mt-1 banner"><a href="/mainpage/mainpageView" class="banner-color">Trip to Canada</a></div>
 </article>
 <article class="col-6">
 	<%-- 로그인 유저 노출 --%>
