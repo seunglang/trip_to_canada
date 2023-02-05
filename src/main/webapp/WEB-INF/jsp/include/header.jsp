@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<article class="col-6 d-flex justify-content-center">
+<article class="col-6 d-flex justify-content-start">
 	<img src="/static/image/travleIcon.png" width="80px" class="mr-2 mt-1" alt="logo">
 	<div class="display-4 mt-1 banner"><a href="/mainpage/mainpageView" class="banner-color">Trip to Canada</a></div>
 </article>

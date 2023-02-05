@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -67,6 +68,29 @@ public class CategoryRestController {
 		return result;
 	}
 	
+	// 카테고리 업데이트
+	@PostMapping("/update_category")
+	public Map<String, Object> updateCategory(
+			@RequestParam("categoryName") String categoryName,
+			@RequestParam("categoryAttr") String categoryAttr,
+			@RequestParam("checkName") String checkName) {
+		
+		Map<String, Object> result = new HashMap<>();
+		
+		// 모달창으로 값을 넘기기 위한 ajax 호출 무시
+		boolean deleteCategory = categoryBO.updateCategoryByNameAttr(checkName, categoryName, categoryAttr);
+		
+		
+		if (deleteCategory) {
+			result.put("code", 200);
+			result.put("result", "선택한 카테고리가 수정되었습니다.");
+		} else {
+			result.put("errorMessage", "카테고리 수정에 실패했습니다.");
+		}
+		
+		return result;
+	}
+	
 	// 선택한 카테고리의 내용물 insert
 	@PostMapping("/add_category_info")
 	public Map<String, Object> addCategoryInfo(
@@ -97,7 +121,7 @@ public class CategoryRestController {
 		
 		
 		
-		//String selectCategory = (String)map.get("selectCategory");
+//		String selectCategory = (String)map.get("selectCategory");
 //		if (selectCategory.equals("accomodation")) {
 //			int categoryId = 1;
 //			String name = (String)map.get("accomoName");

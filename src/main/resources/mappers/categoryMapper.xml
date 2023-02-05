@@ -44,6 +44,16 @@
  			`categoryName` = #{categoryName}
  	</delete>
  	
+ 	<update id="updateCategoryByNameAttr" parameterType="map">
+ 		UPDATE `category`
+		SET
+			`categoryName` = #{categoryName}
+			, `categoryAttr` = #{categoryAttr}
+			, `updatedAt` = NOW()
+		WHERE
+			`categoryName` = #{checkName}
+ 	</update>
+ 	
  	<insert id="addCategoryInfo" parameterType="map">
  		INSERT INTO `accomodation`
  		(

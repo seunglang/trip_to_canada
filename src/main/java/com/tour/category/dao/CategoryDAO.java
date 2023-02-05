@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.tour.category.model.Category;
 
@@ -24,6 +23,12 @@ public interface CategoryDAO {
 	
 	// 카테고리 삭제
 	public boolean deleteCategoryByAttr(String categoryName);
+	
+	// 카테고리 업데이트
+	public boolean updateCategoryByNameAttr(
+			@Param("checkName") String checkName,
+			@Param("categoryName") String categoryName,
+			@Param("categoryAttr") String categoryAttr);
 	
 	// 선택한 카테고리에 글 저장
 	public boolean addCategoryInfo(@Param("categoryId")int categoryId,

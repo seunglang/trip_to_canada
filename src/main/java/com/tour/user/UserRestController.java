@@ -13,7 +13,6 @@ import com.tour.common.EncryptUtils;
 import com.tour.user.bo.UserBO;
 import com.tour.user.model.User;
 
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 @RequestMapping("/user")

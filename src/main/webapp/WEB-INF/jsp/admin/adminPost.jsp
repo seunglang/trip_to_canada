@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div class="d-flex justify-content-center">
 	<div class="login-box">
-		<legend class="mt-5">글 작성</legend>
+		<legend class="mt-5">상품 추가란</legend>
 		<%-- 키보드 Enter키로 로그인이 될 수 있도록 form 태그를 만들어준다.(submit 타입의 버튼이 동작됨) --%>
 		<form id="loginForm" action="/category/add_category_info" method="post">
 			<div class="sign-up">
@@ -16,8 +16,19 @@
 						<input type="text" class="form-control col-5 ml-3" id="categoryAttr" name="categoryAttr">
 						<button type="button" class="btn btn-sm btn-primary ml-2" id="addCategoryBtn">추가</button>
 					</div>
+					<%-- 카테고리 수정 --%>
+					<div class="small mb-1 ml-1">카테고리 수정 *</div>
+					<div class="d-flex">
+						<select class="form-control col-5" id="updateCategoryByName" name="updateCategoryByName">
+							<option value="none">--선택--</option>
+							<c:forEach items="${categoryList}" var="list">
+								<option value="${list.categoryAttr}">${list.categoryName}</option>
+							</c:forEach>
+						</select>
+						<button type="button" id="updateCategoryBtn" data-backdrop="static" data-toggle="modal" data-target="#test" data-id-name="1" class="btn-modal btn btn-sm btn-danger ml-3">수정</button>
+					</div>
 					<%-- 카테고리 삭제 --%>
-					<div class="small mb-1 ml-1">카테고리 삭제 *</div>
+					<div class="small mb-1 ml-1 mt-2">카테고리 삭제 *</div>
 					<div class="d-flex">
 						<select class="form-control col-5" id="deleteCategoryByName" name="deleteCategoryByName">
 							<option value="none">--선택--</option>
@@ -28,6 +39,7 @@
 						<button type="button" id="deleteCategoryBtn" class="btn btn-sm btn-danger ml-3">삭제</button>
 					</div>
 					<br><hr>
+					<legend>글 작성</legend>
 					<%-- 카테고리 선택 시 input이 태그들이 바뀐다. --%>
 					<div class="small mt-4 ml-1">카테고리 선택 *</div>
 					<select class="form-control col-5 mt-1" id="selectCategory" name="selectCategory">
@@ -79,8 +91,44 @@
 	</div>
 </div>
 
+<!-- Modal -->
+<div class="modal fade" id="test"> <!--  data-post-id="" -->
+<form id="updateForm" action="/category/update_category" method="post">
+	<%-- modal-sm : 작은 모달 창 --%>
+	<%-- modal-dialog-centered : 수직으로 가운데 정렬 --%>
+  	<div class="modal-dialog modal-sm modal-dialog-centered"> <!-- modal-dialog-centered 모달창을 가운데로 뜨게 하는 코드 -->
+    	<div class="modal-content">
+      		<div class="py-3 border-bottom">
+      			<div class="d-flex">
+      				<legend class="ml-4">카테고리 수정</legend>
+	      			<a href="#"><img src="/static/image/xicon.png" width="30px" alt="cancleIcon" data-dismiss="modal" class="mr-4"></a>
+      			</div>
+	      		<div class="modal-body">
+		      		<div class="small ml-2 mb-1">선택한 카테고리명 *</div>
+	      			<input type="text" id="selected" name="selected" class="form-control col-11 ml-2" value="${selectedcategoryName}">
+	      		</div>
+      			<div class="small ml-4 mb-1">수정할 카테고리명 *</div>
+      			<input type="text" id="changeCategoryName" name="changeCategoryName" class="form-control col-10 ml-4">
+      			<div class="small ml-4 mb-1 mt-2">수정할 카테고리 속성 *</div>
+      			<input type="text" id="changeCategoryAttr" name="changeCategoryName" class="form-control col-10 ml-4">
+      			<div class="">
+      				<button type="submit" id="updateCategoryNameAttrBtn" class="btn btn-primary form-control col-10 ml-4 mt-3">수정하기</button>
+      			</div>
+      		</div>
+      		<%-- <div class="py-3">
+      		data-dismiss="modal" 을 추가하면 모달창이 닫힘
+      			<div class="text-center">
+      				<a href="#" data-dismiss="modal" class="text-center">취소하기</a> 
+      			</div>
+      		</div> --%>
+    	</div>
+ 	 </div>
+</form>
+</div>
+
 <script>
 	$(document).ready(function() {
+		
 		// 카테고리 추가 버튼
 		$('#addCategoryBtn').on('click', function() {
 			let categoryName = $('#categoryName').val().trim();
@@ -108,6 +156,62 @@
 				, success:function(data) {
 					if (data.code == 200) {
 						alert("카테고리 추가 성공");
+						location.reload();
+					} else {
+						alert(data.errorMessage);
+						location.reload();
+					}
+				}
+				, error:function(e) {
+					alert("에러 - 코드를 다시 한번 확인해보세요.");
+					location.reload();
+				}
+			});
+		});
+		
+		
+		// 모달창 input value 넘기기
+		$('#updateCategoryByName').on('change', function() {
+			var categoryName = $('#updateCategoryByName option:selected').text();
+			//alert(data);
+			
+			$(document).on("click", ".btn-modal", function () {
+				$(".modal-body #selected").val( categoryName );
+				
+			})
+		});
+		
+		
+		// 카테고리 수정 버튼
+		$('#updateForm').submit(function(e) {
+			e.preventDefault();
+				
+			let changeCategoryName = $('#changeCategoryName').val().trim();
+			let changeCategoryAttr = $('#changeCategoryAttr').val().trim();
+				
+			let categoryName = $('#updateCategoryByName option:selected').text();
+				
+			//alert(categoryName);
+				
+			if (changeCategoryName == "") {
+				alert("수정할 카테고리 이름을 입력해주세요.");
+				return;
+			}
+			if (changeCategoryAttr == "") {
+				alert("수정할 카테고리 속성을 입력해주세요.");
+				return;
+			}
+				
+			$.ajax({
+				// request
+				type:"POST"
+				, url:"/category/update_category"
+				, data: {"categoryName":changeCategoryName, "categoryAttr":changeCategoryAttr, "checkName":categoryName}
+					
+				// response
+				, success:function(data) {
+					if (data.code == 200) {
+						alert("카테고리 수정 성공!!");
 						location.reload();
 					} else {
 						alert(data.errorMessage);
@@ -159,6 +263,7 @@
 			let test = $(this).val(); // 카테고리 선택 attr 
 			
 			// 숙소 클래스 remove d-none or d-none
+			$('#accomoForm').addClass('d-none');
 			$('#accomoName').addClass('d-none');
 			$('#accomoMainAddress').addClass('d-none');
 			$('#accomoZipCode').addClass('d-none');
@@ -203,6 +308,7 @@
 			});
 			
 			if (test == "accomodation") {
+				$('#accomoForm').removeClass('d-none');
 				$('#accomoName').removeClass('d-none');
 				$('#accomoMainAddress').removeClass('d-none');
 				$('#accomoZipCode').removeClass('d-none');

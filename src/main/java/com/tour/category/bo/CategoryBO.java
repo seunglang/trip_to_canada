@@ -43,6 +43,11 @@ public class CategoryBO {
 		return categoryDAO.deleteCategoryByAttr(categoryName);
 	}
 	
+	// 카테고리 수정
+	public boolean updateCategoryByNameAttr(String checkName, String categoryName, String categoryAttr) {
+		return categoryDAO.updateCategoryByNameAttr(checkName, categoryName, categoryAttr);
+	}
+	
 	// 선택한 카테고리에 글 저장
 	public boolean addCategoryInfo(int categoryId, String loginId, String accomoName, String accomoMainAddress, String accomoZipCode, String accomoInfo
 			, String accomoPrice, String accomoEmail, String accomoPhoneNumber, MultipartFile accomoThumbnail) {
