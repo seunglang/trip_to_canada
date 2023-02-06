@@ -77,7 +77,6 @@ public class CategoryRestController {
 		
 		Map<String, Object> result = new HashMap<>();
 		
-		// 모달창으로 값을 넘기기 위한 ajax 호출 무시
 		boolean deleteCategory = categoryBO.updateCategoryByNameAttr(checkName, categoryName, categoryAttr);
 		
 		
@@ -91,53 +90,58 @@ public class CategoryRestController {
 		return result;
 	}
 	
+	// 카테고리 번호 가져오기
+	
 	// 선택한 카테고리의 내용물 insert
 	@PostMapping("/add_category_info")
 	public Map<String, Object> addCategoryInfo(
-			//@RequestParam Map<String ,Object> map,
-			@RequestParam("accomoName") String accomoName, 
-			@RequestParam("accomoMainAddress") String accomoMainAddress, 
-			@RequestParam("accomoZipCode") String accomoZipCode, 
-			@RequestParam("accomoPrice") String accomoPrice, 
-			@RequestParam("accomoInfo") String accomoInfo, 
-			@RequestParam("accomoPhoneNumber") String accomoPhoneNumber, 
-			@RequestParam("accomoEmail") String accomoEmail, 
+			@RequestParam(value="categoryAttr", required=false) String categoryAttr,
+			@RequestParam(value="name", required=false) String name, 
+			@RequestParam(value="address", required = false) String address, 
+			@RequestParam(value="zipCode", required=false) String zipCode, 
+			@RequestParam(value="price", required=false) String price, 
+			@RequestParam(value="intro", required=false) String intro, 
+			@RequestParam(value="phoneNumber", required=false) String phoneNumber, 
+			@RequestParam(value="email", required=false) String email, 
+			@RequestParam(value="operatingTime", required=false) String operatingTime,
+			@RequestParam(value="availableToServe", required=false) String availableToServe,
+			@RequestParam(value="type", required=false) String type,
+			@RequestParam(value="happyHour", required=false) String happyHour,
+			@RequestParam(value="durationTime", required=false) String durationTime,
+			@RequestParam(value="field", required=false) String field,
+			@RequestParam(value="vitalItem", required=false) String vitalItem,
+			@RequestParam(value="culture", required=false) String culture,
+			@RequestParam(value="commonSense", required=false) String commonSense,
+			@RequestParam(value="recommended", required=false) String recommended,
+			@RequestParam(value="warning", required=false) String warning,
 			@RequestParam("file") MultipartFile file,
 			HttpSession session) {
 		
+		// 세션 만료 혹은 관리자 이외 유저 접근 차단
 		int adminId = (int)session.getAttribute("adminId");
+		
+		// 관리자 로그인 아이디
 		String loginId = (String)session.getAttribute("userLoginId");
 		
 		Map<String, Object> result = new HashMap<>();
 		
-		int categoryId = 1;
-		boolean test = categoryBO.addCategoryInfo(categoryId, loginId, accomoName, accomoMainAddress, accomoZipCode, accomoPrice, accomoInfo, accomoPhoneNumber, accomoEmail, file);
-		if (test) {
+		// 카테고리 id
+		Integer categoryId = null;
+		
+		// 카테고리 insert 성공 여부
+		boolean insertCategoryInfo = false;
+		
+		
+		insertCategoryInfo = categoryBO.addCategoryInfo(categoryAttr, categoryId, loginId, name, address, zipCode,
+		intro, price, phoneNumber, email, operatingTime, availableToServe, type, happyHour, durationTime, field,
+		vitalItem, culture, commonSense, recommended, warning, file);
+		
+		
+		if (insertCategoryInfo) {
 			result.put("code", 200);
 		} else {
 			result.put("errorMessage", "게시물 저장 실패.");
 		}
-		
-		
-		
-		
-//		String selectCategory = (String)map.get("selectCategory");
-//		if (selectCategory.equals("accomodation")) {
-//			int categoryId = 1;
-//			String name = (String)map.get("accomoName");
-//			String address = (String)map.get("accomoMainAddress");
-//			String zipCode = (String)map.get("accomoZipCode");
-//			String price = (String)map.get("accomoPrice");
-//			String info = (String)map.get("accomoInfo");
-//			String number = (String)map.get("accomoPhoneNumber");
-//			String email = (String)map.get("accomoEmail");
-//			MultipartFile pic = (MultipartFile)map.get("file");
-//			
-//			boolean test = categoryBO.addCategoryInfo(loginId, categoryId, name, address, zipCode, price, info, number, email, pic);
-//			if (test) {
-//				result.put("code", 200);
-//			}
-//		}
 		
 		return result;
 	}

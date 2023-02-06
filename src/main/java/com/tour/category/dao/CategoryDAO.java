@@ -30,14 +30,30 @@ public interface CategoryDAO {
 			@Param("categoryName") String categoryName,
 			@Param("categoryAttr") String categoryAttr);
 	
+	// 카테고리 번호 가져오기
+	public int selectCategoryIdByAttr(String categoryAttr);
+	
 	// 선택한 카테고리에 글 저장
-	public boolean addCategoryInfo(@Param("categoryId")int categoryId,
-			@Param("name") String accomoName,
-			@Param("address") String accomoMainAddress,
-			@Param("zipCode") String accomoZipCode,
-			@Param("intro") String accomoInfo,
-			@Param("price") String accomoPrice,
-			@Param("phoneNumber") String accomoPhoneNumber,
-			@Param("email") String accomoEmail,
+	public boolean insertCategoryInfo(
+			@Param("categoryAttr") String categoryAttr,
+			@Param("categoryId") int categoryId,
+			@Param("name") String name,
+			@Param("address") String address,
+			@Param("zipCode") String zipCode,
+			@Param("intro") String intro,
+			@Param("price") String price,
+			@Param("phoneNumber") String phoneNumber,
+			@Param("email") String email,
+			@Param("operatingTime") String operatingTime,
+			@Param("availableToServe") String availableToServe,
+			@Param("type") String type,
+			@Param("happyHour") String happyHour,
+			@Param("durationTime") String durationTime,
+			@Param("field") String field,
+			@Param("vitalItem") String vitalItem,
+			@Param("culture") String culture,
+			@Param("commonSense") String commonSense,
+			@Param("recommended") String recommended,
+			@Param("warning") String warning,
 			@Param("thumbnailPic") String imagePath);
 }

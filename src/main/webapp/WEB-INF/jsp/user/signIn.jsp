@@ -27,7 +27,7 @@
 
 <div class="sign-up-width d-flex justify-content-start mt-1 pl-1">
 	<div><a href="/user/sign_up_view" class="sign-up-font-size">회원가입&nbsp;/</a></div>
-	<div><a href="#" class="sign-up-font-size">&nbsp;카카오 회원가입</a></div>
+	<div><a href="/user/kakao_login" class="sign-up-font-size">&nbsp;카카오 회원가입</a></div>
 </div>
 
 <script>

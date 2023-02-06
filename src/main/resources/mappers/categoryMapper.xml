@@ -54,34 +54,173 @@
 			`categoryName` = #{checkName}
  	</update>
  	
- 	<insert id="addCategoryInfo" parameterType="map">
- 		INSERT INTO `accomodation`
- 		(
-			`categoryId`
-			,`name`
-			,`address`
-			,`zipCode`
-			,`intro`
-			,`price`
-			,`phoneNumber`
-			,`email`
-			,`thumbnailPic`
-			,`createdAt`
-			,`updatedAt`
- 		)
- 		VALUES
- 		(
- 			#{categoryId}
- 			, #{name}
- 			, #{address}
- 			, #{zipCode}
- 			, #{intro}
- 			, #{price}
- 			, #{phoneNumber}
- 			, #{email}
- 			, #{thumbnailPic}
- 			, NOW()
- 			, NOW()
- 		)
+ 	<select id="selectCategoryIdByAttr" parameterType="String" resultType="int">
+ 		select
+ 			`id`
+ 		FROM
+ 			`category`
+ 		WHERE
+ 			`categoryAttr`= #{categoryAttr}
+ 	</select>
+ 	
+ 	<insert id="insertCategoryInfo" parameterType="map">
+ 		<choose>
+	 		<when test ="categoryAttr == 'accomodation'">
+		 		INSERT INTO `accomodation`
+		 		(
+					`categoryId`
+					,`name`
+					,`address`
+					,`zipCode`
+					,`intro`
+					,`price`
+					,`phoneNumber`
+					,`email`
+					,`thumbnailPic`
+					,`createdAt`
+					,`updatedAt`
+		 		)
+		 		VALUES
+		 		(
+		 			#{categoryId}
+		 			, #{name}
+		 			, #{address}
+		 			, #{zipCode}
+		 			, #{intro}
+		 			, #{price}
+		 			, #{phoneNumber}
+		 			, #{email}
+		 			, #{thumbnailPic}
+		 			, NOW()
+		 			, NOW()
+		 		)
+	 		</when>
+	 		<when test="categoryAttr == 'tourist'">
+	 			INSERT INTO `tourist`
+		 		(
+					`categoryId`
+					,`name`
+					,`address`
+					,`zipCode`
+					,`intro`
+					,`price`
+					,`phoneNumber`
+					,`email`
+					, `operatingTime`
+					,`thumbnailPic`
+					,`createdAt`
+					,`updatedAt`
+		 		)
+		 		VALUES
+		 		(
+		 			#{categoryId}
+		 			, #{name}
+		 			, #{address}
+		 			, #{zipCode}
+		 			, #{intro}
+		 			, #{price}
+		 			, #{phoneNumber}
+		 			, #{email}
+		 			, #{operatingTime}
+		 			, #{thumbnailPic}
+		 			, NOW()
+		 			, NOW()
+		 		)
+	 		</when>
+	 		<when test="categoryAttr == 'restaurant'">
+	 			INSERT INTO `restaurant`
+		 		(
+					`categoryId`
+					,`name`
+					,`address`
+					,`zipCode`
+					,`intro`
+					,`availableToServe`
+					,`type`
+					,`price`
+					,`phoneNumber`
+					,`operatingTime`
+					,`happyHour`
+					,`thumbnailPic`
+					,`createdAt`
+					,`updatedAt`
+		 		)
+		 		VALUES
+		 		(
+		 			#{categoryId}
+		 			, #{name}
+		 			, #{address}
+		 			, #{zipCode}
+		 			, #{intro}
+		 			, #{availableToServe}
+		 			, #{type}
+		 			, #{price}
+		 			, #{phoneNumber}
+		 			, #{operatingTime}
+		 			, #{happyHour}
+		 			, #{thumbnailPic}
+		 			, NOW()
+		 			, NOW()
+		 		)
+	 		</when>
+	 		<when test="categoryAttr == 'travleTip'">
+	 			INSERT INTO `travleTip`
+		 		(
+					`categoryId`
+					,`vitalItem`
+					,`culture`
+					,`commonSense`
+					,`recommended`
+					,`warning`
+					,`thumbnailPic`
+					,`createdAt`
+					,`updatedAt`
+		 		)
+		 		VALUES
+		 		(
+		 			#{categoryId}
+		 			, #{vitalItem}
+		 			, #{culture}
+		 			, #{commonSense}
+		 			, #{recommended}
+		 			, #{warning}
+		 			, #{thumbnailPic}
+		 			, NOW()
+		 			, NOW()
+		 		)
+	 		</when>
+	 		<when test="categoryAttr == 'package'">
+	 			INSERT INTO `package`
+		 		(
+					`categoryId`
+					,`name`
+					,`address`
+					,`zipCode`
+					,`intro`
+					,`price`
+					,`durationTime`
+					,`field`
+					,`operatingTime`
+					,`thumbnailPic`
+					,`createdAt`
+					,`updatedAt`
+		 		)
+		 		VALUES
+		 		(
+		 			#{categoryId}
+		 			, #{name}
+		 			, #{address}
+		 			, #{zipCode}
+		 			, #{intro}
+		 			, #{price}
+		 			, #{durationTime}
+		 			, #{field}
+		 			, #{operatingTime}
+		 			, #{thumbnailPic}
+		 			, NOW()
+		 			, NOW()
+		 		)
+	 		</when>
+ 		</choose>
  	</insert>
  </mapper>

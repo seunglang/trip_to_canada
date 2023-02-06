@@ -48,15 +48,38 @@ public class CategoryBO {
 		return categoryDAO.updateCategoryByNameAttr(checkName, categoryName, categoryAttr);
 	}
 	
+	// 카테고리 번호 가져오기
+	public int getCategoryIdByAttr(String categoryAttr) {
+		return categoryDAO.selectCategoryIdByAttr(categoryAttr);
+	}
+	
 	// 선택한 카테고리에 글 저장
-	public boolean addCategoryInfo(int categoryId, String loginId, String accomoName, String accomoMainAddress, String accomoZipCode, String accomoInfo
-			, String accomoPrice, String accomoEmail, String accomoPhoneNumber, MultipartFile accomoThumbnail) {
+	public boolean addCategoryInfo(String categoryAttr, Integer categoryId, String loginId, String name,
+			String address, String zipCode, String intro, String price, String phoneNumber, String email,
+			String operatingTime, String availableToServe, String type, String happyHour, String durationTime,
+			String field, String vitalItem, String culture, String commonSense, String recommended, 
+			String warning, MultipartFile thumbnail) {
 		
-		String imagePath = null;
-		if (accomoThumbnail != null) { // 파일이 있으면 순차적으로 기능 수행됨 - 파일 있을때만 수행하고 이미지 경로를 얻어낸다.
-			imagePath = fileManagerService.saveFile(loginId, accomoThumbnail); 
+		// 카테고리 분별 구문 추가 - 카테고리 id 가져오기
+		if (categoryAttr.equals("accomodation")) {
+			categoryId = getCategoryIdByAttr(categoryAttr);
+		} else if (categoryAttr.equals("tourist")) {
+			categoryId = getCategoryIdByAttr(categoryAttr);
+		} else if (categoryAttr.equals("restaurant")) {
+			categoryId = getCategoryIdByAttr(categoryAttr);
+		} else if (categoryAttr.equals("travleTip")) {
+			categoryId = getCategoryIdByAttr(categoryAttr);
+		} else if (categoryAttr.equals("package")) {
+			categoryId = getCategoryIdByAttr(categoryAttr);
 		}
 		
-		return categoryDAO.addCategoryInfo(categoryId, accomoName, accomoMainAddress, accomoZipCode, accomoInfo, accomoPrice, accomoPhoneNumber, accomoEmail, imagePath);
+		String imagePath = null;
+		if (thumbnail != null) { // 파일이 있으면 순차적으로 기능 수행됨 - 파일 있을때만 수행하고 이미지 경로를 얻어낸다.
+			imagePath = fileManagerService.saveFile(loginId, thumbnail); 
+		}
+		
+		return categoryDAO.insertCategoryInfo(categoryAttr, categoryId, name, address, zipCode, intro, price,
+				phoneNumber, email, operatingTime, availableToServe, type, happyHour, durationTime, field,
+				vitalItem, culture, commonSense, recommended, warning, imagePath);
 	}
 }
