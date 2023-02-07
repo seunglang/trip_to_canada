@@ -9,8 +9,9 @@ header {height:75px;}
 .contents {min-height:550px;}
 .admin-post-create {width:450px; margin:auto;}
 .products-box {border: 2px solid coral; padding:10px; width:350px; height:200px;}
-.test1 {flex-wrap:wrap;}
+.flex-wrap-set {flex-wrap:wrap;}
 .kakaoView {margin:auto; width:800px;}
+#accomoListBox {width:1000px; margin:auto;}
 .sign-up-shape {width:450px;}
 .sign-up-width {width:450px; margin:auto;}
 .sign-up-sen {font-size:23px;}
@@ -22,3 +23,20 @@ footer {height:100px;}
   left: 50%;
   transform: translate(-50%, -50%);
 } 
+
+figure {  
+  position: relative;
+}
+
+figcaption {
+  color: white;
+  position: absolute;
+  transform: translate(225px, 10%);
+  top: 0;
+  width: 20%;
+}
+
+#figureImg {
+  display: block;
+}
+.img-link {cursor:pointer;}

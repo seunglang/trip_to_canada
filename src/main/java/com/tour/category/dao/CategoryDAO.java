@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import com.tour.category.model.Accomodation;
 import com.tour.category.model.Category;
 
 @Repository
@@ -56,4 +57,10 @@ public interface CategoryDAO {
 			@Param("recommended") String recommended,
 			@Param("warning") String warning,
 			@Param("thumbnailPic") String imagePath);
+	
+	// 숙소 리스트 가져오기
+	public List<Accomodation> selectAccomodationList();
+	
+	// 숙소id로 객체 가져오기
+	public Accomodation selectAccomodationById(int accomodationId);
 }

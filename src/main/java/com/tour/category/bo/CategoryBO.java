@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.tour.category.dao.CategoryDAO;
+import com.tour.category.model.Accomodation;
 import com.tour.category.model.Category;
 import com.tour.common.FileManagerService;
 
@@ -81,5 +82,15 @@ public class CategoryBO {
 		return categoryDAO.insertCategoryInfo(categoryAttr, categoryId, name, address, zipCode, intro, price,
 				phoneNumber, email, operatingTime, availableToServe, type, happyHour, durationTime, field,
 				vitalItem, culture, commonSense, recommended, warning, imagePath);
+	}
+	
+	// 숙소 리스트 가져오기
+	public List<Accomodation> getAccomodationList() {
+		return categoryDAO.selectAccomodationList();
+	}
+	
+	// 숙소 id로 객체 가져오기
+	public Accomodation getAccomodationById(int accomodationId) {
+		return categoryDAO.selectAccomodationById(accomodationId);
 	}
 }

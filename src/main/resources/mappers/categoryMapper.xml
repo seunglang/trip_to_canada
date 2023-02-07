@@ -223,4 +223,41 @@
 	 		</when>
  		</choose>
  	</insert>
+ 	
+ 	<select id="selectAccomodationList" resultType="com.tour.category.model.Accomodation">
+ 		SELECT
+ 			`id`
+			,`categoryId`
+			,`name`
+			,`address`
+			,`zipCode`
+			,`intro`
+			,`price`
+			,`phoneNumber`
+			,`email`
+			,`thumbnailPic`
+			,`createdAt`
+			,`updatedAt`
+		FROM
+			`accomodation`
+	</select>
+ 	<select id="selectAccomodationById" resultType="com.tour.category.model.Accomodation">
+ 		SELECT
+ 			`id`
+			,`categoryId`
+			,`name`
+			,`address`
+			,`zipCode`
+			,`intro`
+			,`price`
+			,`phoneNumber`
+			,`email`
+			,`thumbnailPic`
+			,`createdAt`
+			,`updatedAt`
+		FROM
+			`accomodation`
+		WHERE
+			`id` = #{accomodationId}
+ 	</select>
  </mapper>

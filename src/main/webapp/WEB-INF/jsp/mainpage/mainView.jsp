@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<div class="d-flex justify-content-around test1">
+<div class="d-flex justify-content-around flex-wrap-set">
 	<div class="products-box mt-5">
 		
 	</div>

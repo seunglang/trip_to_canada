@@ -5,8 +5,9 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -50,7 +51,7 @@ public class CategoryRestController {
 	
 	
 	// 카테고리 삭제
-	@PostMapping("/delete_category")
+	@DeleteMapping("/delete_category")
 	public Map<String, Object> deleteCategory(
 			@RequestParam("categoryName") String categoryName,
 			HttpSession session) {
@@ -69,7 +70,7 @@ public class CategoryRestController {
 	}
 	
 	// 카테고리 업데이트
-	@PostMapping("/update_category")
+	@PutMapping("/update_category")
 	public Map<String, Object> updateCategory(
 			@RequestParam("categoryName") String categoryName,
 			@RequestParam("categoryAttr") String categoryAttr,
