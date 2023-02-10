@@ -13,7 +13,24 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         
+        <!-- 데이트 피커 -->
+     	<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        
+        <%-- 체크인 달력 테스트 --%>
+        <!-- <link href="css/themes/t-datepicker-bluegrey.css" rel="stylesheet" type="text/css">
+
+		<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT" crossorigin="anonymous"></script>
+
+		<script src="js/t-datepicker.min.js"></script> -->
+		
+		<!-- <link href="/path/to/hotel-datepicker.css" rel="stylesheet" />Optional
+		<script src="/path/to/fecha.js"></script>
+		<script src="/path/to/hotel-datepicker.min.js"></script> -->
+        
+        <%-- main css --%>
         <link rel="stylesheet" type="text/css" href="/static/css/mainStyle.css">
+        
 </head>
 <body>
 	<div id="wrap">

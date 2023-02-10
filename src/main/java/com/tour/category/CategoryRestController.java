@@ -97,11 +97,14 @@ public class CategoryRestController {
 	@PostMapping("/add_category_info")
 	public Map<String, Object> addCategoryInfo(
 			@RequestParam(value="categoryAttr", required=false) String categoryAttr,
-			@RequestParam(value="name", required=false) String name, 
+			@RequestParam(value="name", required=false) String name,
+			@RequestParam(value="englishName", required=false) String englishName,
 			@RequestParam(value="address", required = false) String address, 
 			@RequestParam(value="zipCode", required=false) String zipCode, 
 			@RequestParam(value="price", required=false) String price, 
 			@RequestParam(value="intro", required=false) String intro, 
+			@RequestParam(value="intro2", required=false) String intro2, 
+			@RequestParam(value="intro3", required=false) String intro3, 
 			@RequestParam(value="phoneNumber", required=false) String phoneNumber, 
 			@RequestParam(value="email", required=false) String email, 
 			@RequestParam(value="operatingTime", required=false) String operatingTime,
@@ -133,8 +136,8 @@ public class CategoryRestController {
 		boolean insertCategoryInfo = false;
 		
 		
-		insertCategoryInfo = categoryBO.addCategoryInfo(categoryAttr, categoryId, loginId, name, address, zipCode,
-		intro, price, phoneNumber, email, operatingTime, availableToServe, type, happyHour, durationTime, field,
+		insertCategoryInfo = categoryBO.addCategoryInfo(categoryAttr, categoryId, loginId, name, englishName, address, zipCode,
+		intro, intro2, intro3, price, phoneNumber, email, operatingTime, availableToServe, type, happyHour, durationTime, field,
 		vitalItem, culture, commonSense, recommended, warning, file);
 		
 		
@@ -146,4 +149,65 @@ public class CategoryRestController {
 		
 		return result;
 	}
+	
+	@PostMapping("/add_hotel_info")
+	public Map<String, Object> addHotelInfo(
+			@RequestParam("hotelId") int hotelId,
+			@RequestParam("accomoType") int accomoType,
+			@RequestParam(value="fitness", required=false) String fitness,
+			@RequestParam(value="barLounge", required=false) String barLounge,
+			@RequestParam(value="pool", required=false) String pool,
+			@RequestParam(value="valetParking", required=false) String valetParking,
+			@RequestParam(value="EVCS",required=false ) String EVCS,
+			@RequestParam(value="banquetHall", required=false) String banquetHall,
+			@RequestParam(value="petAllowed", required=false) String petAllowed,
+			@RequestParam(value="luggageStorage", required=false) String luggageStorage,
+			@RequestParam(value="wifi", required=false) String wifi,
+			@RequestParam(value="intro", required=false) String intro,
+			@RequestParam(value="roomType", required=false) String roomType,
+			@RequestParam(value="bedType", required=false) String bedType,
+			@RequestParam(value="floor", required=false) String floor,
+			@RequestParam(value="view", required=false) String view,
+			@RequestParam(value="checkIn", required=false) String checkIn,
+			@RequestParam(value="checkOut", required=false) String checkOut,
+			@RequestParam(value="breakfast", required=false) String breakfast,
+			@RequestParam(value="headCount", required=false) String headCount,
+			@RequestParam(value="smoke", required=false) String smoke,
+			@RequestParam(value="curtain", required=false) String curtain,
+			@RequestParam(value="roomService", required=false) String roomService,
+			@RequestParam(value="morningCall", required=false) String morningCall,
+			@RequestParam(value="refridge", required=false) String refridge,
+			@RequestParam(value="coffee", required=false) String coffee,
+			@RequestParam(value="TV", required=false) String TV,
+			@RequestParam(value="safe", required=false) String safe,
+			@RequestParam(value="telephone", required=false) String telephone,
+			@RequestParam(value="airConditioner", required=false) String airConditioner,
+			@RequestParam(value="kitchenette", required=false) String kitchenette,
+			@RequestParam(value="file", required=false) MultipartFile file,
+			HttpSession session
+			) {
+		
+		// 세션 만료 혹은 관리자 이외 유저 접근 차단
+		int adminId = (int)session.getAttribute("adminId");
+		// 관리자 로그인 아이디
+		String loginId = (String)session.getAttribute("userLoginId");
+		
+		Map<String, Object> result = new HashMap<>();
+		
+		boolean insertHotelInfo = false;
+		
+		insertHotelInfo = categoryBO.addHotelInfo(hotelId, loginId, accomoType, fitness, barLounge, pool, valetParking,EVCS, banquetHall, petAllowed,
+				luggageStorage, wifi, intro, roomType, bedType, floor, view, checkIn, checkOut, breakfast, headCount, smoke,
+				curtain, roomService, morningCall, refridge, coffee, TV, safe, telephone, airConditioner, kitchenette, file);
+		
+		if (insertHotelInfo) {
+			result.put("code", 200);
+		} else {
+			result.put("errorMessage", "호텔 정보 저장에 실패했습니다.");
+		}
+		
+		return result;
+		
+	}
+	
 }

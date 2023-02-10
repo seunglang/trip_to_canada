@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.tour.category.bo.CategoryBO;
+import com.tour.category.model.Accomodation;
 import com.tour.category.model.Category;
 
 @RequestMapping("/admin")
@@ -22,8 +23,11 @@ public class AdminController {
 	public String create(Model model) {
 		
 		List<Category> categoryList = categoryBO.getCategoryList();
+		List<Accomodation> accomodationList = categoryBO.getAccomodationList();
+		
 		
 		model.addAttribute("categoryList", categoryList);
+		model.addAttribute("accomodationList", accomodationList);
 		model.addAttribute("viewName", "admin/adminPost");
 		//model.addAttribute("viewName", "admin/adminPost");
 		

@@ -5,9 +5,9 @@
 	<div class="login-box">
 		<legend class="mt-5">상품 추가란</legend>
 		<%-- 키보드 Enter키로 로그인이 될 수 있도록 form 태그를 만들어준다.(submit 타입의 버튼이 동작됨) --%>
-		<form id="loginForm" action="/category/add_category_info" method="post">
-			<div class="sign-up">
-				<div class="border rounded p-3 sign-up-shape">
+		<div class="sign-up">
+			<div class="border rounded p-3 sign-up-shape">
+				<form id="loginForm" action="/category/add_category_info" method="post">
 					<%-- 카테고리 추가 --%>
 					<span class="small ml-1">카테고리 추가 * &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span>
 					<span class="small">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;속성 *</span>
@@ -49,155 +49,55 @@
 						</c:forEach>
 					</select>
 					<div class="d-flex d-none" id="accomoRadio">
-						<label for="accomoInput" class="small m-1 d-none" id="accomoInputId">숙소/예약</label><input type="radio" name="accomoType" value="1" id="accomoInput" class="mr-1 d-none" checked>
+						<label for="accomoInput" class="small m-1 d-none" id="accomoInputId">호텔/예약</label><input type="radio" name="accomoType" value="1" id="accomoInput" class="mr-1 d-none" checked>
 						<label for="accomoRoom" class="small m-1 d-none" id="accomoRoomId">호텔 방</label><input type="radio" name="accomoType" value="2" id="accomoRoom" class="mr-1 d-none">
 						<label for="accomoFacilities" class="small m-1 d-none" id="accomoFacilitiesId">편의시설</label><input type="radio" name="accomoType" value="3" id="accomoFacilities" class="d-none">
+						<label for="roomFacilities" class="small m-1 d-none" id="roomFacilitiesId">객실특징</label><input type="radio" name="accomoType" value="4" id="roomFacilities" class="d-none">
 					</div>
 					<div class="small text-danger mt-1 ml-1" id="selectCategoryWarn">※&nbsp;카테고리를 선택해주세요.</div>
 					
-					<%-- 숙소 정보 입력란 --%>
+					<%-- 호텔 정보 입력란 --%>
 					<div class="mt-3 d-none" id="accomoInputBox">
-						<legend class="mb-4 d-none" id="accomoForm">숙소 정보 입력란</legend>
-						<div class="small ml-1 mb-1">숙소 이름(영어로 기재) * </div>
+						<legend class="mb-4 d-none" id="accomoForm">호텔 정보 입력란</legend>
+						<div class="small ml-1 mb-1">호텔 이름 * </div>
 						<div class="d-flex align-items-center">
 							<input type="text" id="accomoName" name="accomoName" class="form-control col-12" placeholder="name of accomodation"/>
 						</div>
-						<div class="small ml-1 mb-1 mt-3">숙소 메인주소(영어로 기재) * </div>
+						<div class="small ml-1 mb-1 mt-3">호텔 영어 이름 * </div>
+						<div class="d-flex align-items-center">
+							<input type="text" id="accomoEnglishName" name="accomoEnglishName" class="form-control col-12" placeholder="name of accomodation"/>
+						</div>
+						<div class="small ml-1 mb-1 mt-3">호텔 메인주소(영어로 기재) * </div>
 						<div class="d-flex align-items-center">
 							<input type="text" id="accomoMainAddress" name="accomoMainAddress" class="form-control col-12 input-lg" placeholder="Main Street ex) 29th Avenue"/>
 						</div>
-						<div class="small ml-1 mb-1 mt-3">숙소 우편주소(영어로 기재) * </div>
+						<div class="small ml-1 mb-1 mt-3">호텔 우편주소(영어로 기재) * </div>
 						<div class="d-flex align-items-center">
 							<input type="text" id="accomoZipCode" name="accomoZipCode" class="form-control col-12 input-lg" placeholder="Zip Code ex) V7R 4J1"/>
 						</div>
-						<div class="small ml-1 mb-1 mt-3">숙소 소개 *</div>
+						<div class="small ml-1 mb-1 mt-3">호텔 소개 (1) *</div>
 						<div class="d-flex align-items-center">
-							<textarea class="form-control" id="accomoIntro" name="accomoIntro" placeholder="정보" rows="10"></textarea>
+							<textarea class="form-control" id="accomoIntro" name="accomoIntro" placeholder="정보" rows="5"></textarea>
 						</div>
-						<div class="small ml-1 mb-1 mt-3">숙소 가격 *</div>
+						<div class="small ml-1 mb-1 mt-3">호텔 소개 (2) *</div>
+						<div class="d-flex align-items-center">
+							<textarea class="form-control" id="accomoIntro2" name="accomoIntro2" placeholder="정보" rows="5"></textarea>
+						</div>
+						<div class="small ml-1 mb-1 mt-3">호텔 소개 (3) *</div>
+						<div class="d-flex align-items-center">
+							<textarea class="form-control" id="accomoIntro3" name="accomoIntro3" placeholder="정보" rows="5"></textarea>
+						</div>
+						<div class="small ml-1 mb-1 mt-3">호텔 가격 *</div>
 						<div class="d-flex align-items-center">
 							<input type="text" id="accomoPrice" name="accomoPrice" class="form-control col-6 input-lg" placeholder="ex) ￦130,000"/>
 						</div>
-						<div class="small ml-1 mb-1 mt-3">숙소 연락처 *</div>
+						<div class="small ml-1 mb-1 mt-3">호텔 연락처 *</div>
 						<div class="d-flex align-items-center">
 							<input type="text" id="accomoPhoneNumber" name="accomoPhoneNumber" class="form-control col-12 input-lg" placeholder="ex) 010-1234-4567"/>
 						</div>
-						<div class="small ml-1 mb-1 mt-3">숙소 이메일 *</div>
+						<div class="small ml-1 mb-1 mt-3">호텔 이메일 *</div>
 						<div class="d-flex align-items-center">
 							<input type="text" id="accomoEmail" name="accomoEmail" class="form-control col-12 input-lg" placeholder="email"/>
-						</div>
-					</div>
-					
-					<%-- 호텔 방 정보 입력란 --%>
-					<div class="mt-3 d-none" id="accomoRoomBox">
-						<legend class="mb-4 d-none" id="accomoRoomForm">호텔 방 정보 입력란</legend>
-						<div class="small ml-1 mb-1">객실 설명 * </div>
-						<div class="d-flex align-items-center">
-							<textarea class="form-control" id="roomIntro" name="roomIntro" placeholder="객실에 대한 설명을 작성해주세요." rows="10"></textarea>
-						</div>
-						<div class="small ml-1 mb-1 mt-3">객실 타입 * </div>
-						<div class="d-flex align-items-center">
-							<input type="text" id="roomType" name="roomType" class="form-control col-12 input-lg" placeholder="ex) 스위트 룸"/>
-						</div>
-						<div class="small ml-1 mb-1 mt-3">침대 타입 * </div>
-						<div class="d-flex align-items-center">
-							<input type="text" id="bedType" name="bedType" class="form-control col-12 input-lg" placeholder="ex) 더블베드"/>
-						</div>
-						<div class="small ml-1 mb-1 mt-3">층 *</div>
-						<div class="d-flex align-items-center">
-							<input type="text" id="floor" name="floor" class="form-control col-12 input-lg" placeholder="ex) 17층"/>
-						</div>
-						<div class="small ml-1 mb-1 mt-3">뷰(전망) *</div>
-						<div class="d-flex align-items-center">
-							<input type="text" id="view" name="view" class="form-control col-6 input-lg" placeholder="ex) 리버뷰"/>
-						</div>
-						<div class="small ml-1 mb-1 mt-3">체크인 시간 *</div>
-						<div class="d-flex align-items-center">
-							<input type="text" id="checkIn" name="checkIn" class="form-control col-6 input-lg" placeholder="ex) 5PM"/>
-						</div>
-						<div class="small ml-1 mb-1 mt-3">체크아웃 시간 *</div>
-						<div class="d-flex align-items-center">
-							<input type="text" id="checkOut" name="checkOut" class="form-control col-12 input-lg" placeholder="ex) 11AM"/>
-						</div>
-						<div class="small ml-1 mb-1 mt-3">조식여부 *</div>
-						<div class="d-flex align-items-center">
-							<input type="text" id="breakfast" name="breakfast" class="form-control col-12 input-lg" placeholder="ex) 조식포함"/>
-						</div>
-						<div class="small ml-1 mb-1 mt-3">정원 *</div>
-						<div class="d-flex align-items-center">
-							<input type="text" id="headCount" name="headCount" class="form-control col-12 input-lg" placeholder="ex) 최대 3명"/>
-						</div>
-						<div class="small ml-1 mb-1 mt-3">흡연여부 *</div>
-						<div class="d-flex align-items-center">
-							<input type="text" id="smoke" name="smoke" class="form-control col-12 input-lg" placeholder="ex) 금연 혹은 흡연"/>
-						</div>
-					</div>
-					
-					<%-- 편의시설 정보 입력란 --%>
-					<div class="mt-3 d-none" id="accomoFacilitiesBox">
-						<legend class="mb-4 d-none" id="accomoFacilitiesForm">호텔 편의시설 유무 체크</legend>
-						<div class="small ml-1 mb-1 mt-3">헬스장 * </div>
-						<div class="d-flex align-items-center">
-							<label for="fitnessY" class="small m-1">Yes</label>
-							<input type="radio" name="fitnessRadio" value="Y" id="fitnessY" class="mr-1">
-							<label for="fitnessN" class="small m-1">No</label>
-							<input type="radio" name="fitnessRadio" value="N" id="fitnessN" class="mr-1" checked>
-						</div>
-						<div class="small ml-1 mb-1 mt-3">바/라운지 * </div>
-						<div class="d-flex align-items-center">
-							<label for="barLoungeY" class="small m-1">Yes</label>
-							<input type="radio" name="barLoundeRadio" value="Y" id="barLoungeY" class="mr-1">
-							<label for="barLoungeN" class="small m-1">No</label>
-							<input type="radio" name="barLoundeRadio" value="N" id="barLoungeN" class="mr-1" checked>
-						</div>
-						<div class="small ml-1 mb-1 mt-3">수영장 * </div>
-						<div class="d-flex align-items-center">
-							<label for="poolY" class="small m-1">Yes</label>
-							<input type="radio" name="poolRadio" value="Y" id="poolY" class="mr-1">
-							<label for="poolN" class="small m-1">No</label>
-							<input type="radio" name="poolRadio" value="N" id="poolN" class="mr-1" checked>
-						</div>
-						<div class="small ml-1 mb-1 mt-3">발렛주차 *</div>
-						<div class="d-flex align-items-center">
-							<label for="valetParkingY" class="small m-1">Yes</label>
-							<input type="radio" name="valetParkingRadio" value="Y" id="valetParkingY" class="mr-1">
-							<label for="valetParkingN" class="small m-1">No</label>
-							<input type="radio" name="valetParkingRadio" value="N" id="valetParkingN" class="mr-1" checked>
-						</div>
-						<div class="small ml-1 mb-1 mt-3">전기자동차 충전소 *</div>
-						<div class="d-flex align-items-center">
-							<label for="EVCSY" class="small m-1">Yes</label>
-							<input type="radio" name="EVCSRadio" value="Y" id="EVCSY" class="mr-1">
-							<label for="EVCSN" class="small m-1">No</label>
-							<input type="radio" name="EVCSRadio" value="N" id="EVCSN" class="mr-1" checked>
-						</div>
-						<div class="small ml-1 mb-1 mt-3">연회장 *</div>
-						<div class="d-flex align-items-center">
-							<label for="banquetHallY" class="small m-1">Yes</label>
-							<input type="radio" name="banquetHallRadio" value="Y" id="banquetHallY" class="mr-1">
-							<label for="banquetHallN" class="small m-1">No</label>
-							<input type="radio" name="banquetHallRadio" value="N" id="banquetHallN" class="mr-1" checked>
-						</div>
-						<div class="small ml-1 mb-1 mt-3">반려동물 허용 *</div>
-						<div class="d-flex align-items-center">
-							<label for="petAllowedY" class="small m-1">Yes</label>
-							<input type="radio" name="petAllowedRadio" value="Y" id="petAllowedY" class="mr-1">
-							<label for="petAllowedN" class="small m-1">No</label>
-							<input type="radio" name="petAllowedRadio" value="N" id="petAllowedN" class="mr-1" checked>
-						</div>
-						<div class="small ml-1 mb-1 mt-3">수하물 보관소 *</div>
-						<div class="d-flex align-items-center">
-							<label for="luggageStorageY" class="small m-1">Yes</label>
-							<input type="radio" name="luggageStorageRadio" value="Y" id="luggageStorageY" class="mr-1">
-							<label for="luggageStorageN" class="small m-1">No</label>
-							<input type="radio" name="luggageStorageRadio" value="N" id="luggageStorageN" class="mr-1" checked>
-						</div>
-						<div class="small ml-1 mb-1 mt-3">무료 인터넷(와이파이) *</div>
-						<div class="d-flex align-items-center">
-							<label for="wifiY" class="small m-1">Yes</label>
-							<input type="radio" name="wifiRadio" value="Y" id="wifiY" class="mr-1">
-							<label for="wifiN" class="small m-1">No</label>
-							<input type="radio" name="wifiRadio" value="N" id="wifiN" class="mr-1" checked>
 						</div>
 					</div>
 					
@@ -352,10 +252,226 @@
 						<div id="fileName" class="ml-2 mt-4 d-none"></div>
 					</div>
 					<br>
-					<button class="btn form-control btn-primary" id="categoryFormBtn" type="submit">작성 완료</button>
+					<button class="btn form-control btn-primary d-none" id="categoryFormBtn" type="submit">작성 완료</button>
+				</form>
+				
+				<form  id="hotelForm" action="/category/add_hotel_info" method="post">
+				<%-- 호텔 방 선택 selectBox --%>
+				<div class="d-none mb-3" id="hotelSelectBox">
+					<div class="small ml-1 mt-3">호텔 선택 *</div>
+					<select class="form-control col-8" id="selectRoom" name="selectRoom">
+						<option value="none">--선택--</option>
+							<c:forEach items="${accomodationList}" var="list">
+								<option value="${list.id}">${list.name}</option>
+							</c:forEach>
+					</select>
 				</div>
+				<%-- 호텔 방 정보 입력란 --%>
+					<div class="d-none" id="accomoRoomBox">
+						<legend class="mb-4 d-none" id="accomoRoomForm">호텔 방 정보 입력란</legend>
+						<div class="small ml-1 mb-1">객실 설명 * </div>
+						<div class="d-flex align-items-center">
+							<textarea class="form-control" id="roomIntro" name="roomIntro" placeholder="객실에 대한 설명을 작성해주세요." rows="10"></textarea>
+						</div>
+						<div class="small ml-1 mb-1 mt-3">객실 타입 * </div>
+						<div class="d-flex align-items-center">
+							<input type="text" id="roomType" name="roomType" class="form-control col-12 input-lg" placeholder="ex) 스위트 룸"/>
+						</div>
+						<div class="small ml-1 mb-1 mt-3">침대 타입 * </div>
+						<div class="d-flex align-items-center">
+							<input type="text" id="bedType" name="bedType" class="form-control col-12 input-lg" placeholder="ex) 더블베드"/>
+						</div>
+						<div class="small ml-1 mb-1 mt-3">1박 요금 * </div>
+						<div class="d-flex align-items-center">
+							<input type="text" id="roomPrice" name="roomPrice" class="form-control col-12 input-lg" placeholder="ex) 175,000"/>
+						</div>
+						<div class="small ml-1 mb-1 mt-3">층 *</div>
+						<div class="d-flex align-items-center">
+							<input type="text" id="floor" name="floor" class="form-control col-12 input-lg" placeholder="ex) 17층"/>
+						</div>
+						<div class="small ml-1 mb-1 mt-3">뷰(전망) *</div>
+						<div class="d-flex align-items-center">
+							<input type="text" id="view" name="view" class="form-control col-6 input-lg" placeholder="ex) 리버뷰"/>
+						</div>
+						<div class="small ml-1 mb-1 mt-3">체크인 시간 *</div>
+						<div class="d-flex align-items-center">
+							<input type="text" id="checkIn" name="checkIn" class="form-control col-6 input-lg" placeholder="ex) 5PM"/>
+						</div>
+						<div class="small ml-1 mb-1 mt-3">체크아웃 시간 *</div>
+						<div class="d-flex align-items-center">
+							<input type="text" id="checkOut" name="checkOut" class="form-control col-12 input-lg" placeholder="ex) 11AM"/>
+						</div>
+						<div class="small ml-1 mb-1 mt-3">조식여부 *</div>
+						<div class="d-flex align-items-center">
+							<input type="text" id="breakfast" name="breakfast" class="form-control col-12 input-lg" placeholder="ex) 조식포함"/>
+						</div>
+						<div class="small ml-1 mb-1 mt-3">정원 *</div>
+						<div class="d-flex align-items-center">
+							<input type="text" id="headCount" name="headCount" class="form-control col-12 input-lg" placeholder="ex) 최대 3명"/>
+						</div>
+						<div class="small ml-1 mb-1 mt-3">흡연여부 *</div>
+						<div class="d-flex align-items-center">
+							<input type="text" id="smoke" name="smoke" class="form-control col-12 input-lg" placeholder="ex) 금연 혹은 흡연"/>
+						</div>
+						<%-- 호텔 방 썸네일 사진 --%>
+						<div class="small ml-1 mt-3" id="hotelthumbnailDivBox">썸네일 첨부 *</div>
+						<div class="file-upload d-flex">
+							<%-- file 태그는 숨겨두고 이미지를 클릭하면 file 태그를 클릭한 것처럼 이벤트를 줄 것이다. --%>
+							<input type="file" id="roomFile" name="roomFile" class="d-none" accept=".gif, .jpg, .png, .jpeg">
+							<%-- 이미지에 마우스 올리면 마우스커서가 링크 커서가 변하도록 a 태그 사용 --%>
+							<a href="#" id="roomFileUploadBtn"><img width="30" src="/static/image/thumbnail.png" class="mt-3" id="thumbnail"></a>
+							<%-- 업로드 된 임시 파일 이름 저장될 곳 --%>
+							<div id="roomFileName" class="ml-2 mt-4 d-none"></div>
+						</div>
+					</div>
+					
+					<%-- 편의시설 정보 입력란 --%>
+					<div class="d-none" id="accomoFacilitiesBox">
+						<legend class="mb-4 d-none" id="accomoFacilitiesForm">호텔 편의시설 유무 체크</legend>
+						<div class="small ml-1 mb-1 mt-3">헬스장 * </div>
+						<div class="d-flex align-items-center">
+							<label for="fitnessY" class="small m-1">Yes</label>
+							<input type="radio" name="fitnessRadio" value="Y" id="fitnessY" class="mr-1">
+							<label for="fitnessN" class="small m-1">No</label>
+							<input type="radio" name="fitnessRadio" value="N" id="fitnessN" class="mr-1" checked>
+						</div>
+						<div class="small ml-1 mb-1 mt-3">바/라운지 * </div>
+						<div class="d-flex align-items-center">
+							<label for="barLoungeY" class="small m-1">Yes</label>
+							<input type="radio" name="barLoundeRadio" value="Y" id="barLoungeY" class="mr-1">
+							<label for="barLoungeN" class="small m-1">No</label>
+							<input type="radio" name="barLoundeRadio" value="N" id="barLoungeN" class="mr-1" checked>
+						</div>
+						<div class="small ml-1 mb-1 mt-3">수영장 * </div>
+						<div class="d-flex align-items-center">
+							<label for="poolY" class="small m-1">Yes</label>
+							<input type="radio" name="poolRadio" value="Y" id="poolY" class="mr-1">
+							<label for="poolN" class="small m-1">No</label>
+							<input type="radio" name="poolRadio" value="N" id="poolN" class="mr-1" checked>
+						</div>
+						<div class="small ml-1 mb-1 mt-3">발렛주차 *</div>
+						<div class="d-flex align-items-center">
+							<label for="valetParkingY" class="small m-1">Yes</label>
+							<input type="radio" name="valetParkingRadio" value="Y" id="valetParkingY" class="mr-1">
+							<label for="valetParkingN" class="small m-1">No</label>
+							<input type="radio" name="valetParkingRadio" value="N" id="valetParkingN" class="mr-1" checked>
+						</div>
+						<div class="small ml-1 mb-1 mt-3">전기자동차 충전소 *</div>
+						<div class="d-flex align-items-center">
+							<label for="EVCSY" class="small m-1">Yes</label>
+							<input type="radio" name="EVCSRadio" value="Y" id="EVCSY" class="mr-1">
+							<label for="EVCSN" class="small m-1">No</label>
+							<input type="radio" name="EVCSRadio" value="N" id="EVCSN" class="mr-1" checked>
+						</div>
+						<div class="small ml-1 mb-1 mt-3">연회장 *</div>
+						<div class="d-flex align-items-center">
+							<label for="banquetHallY" class="small m-1">Yes</label>
+							<input type="radio" name="banquetHallRadio" value="Y" id="banquetHallY" class="mr-1">
+							<label for="banquetHallN" class="small m-1">No</label>
+							<input type="radio" name="banquetHallRadio" value="N" id="banquetHallN" class="mr-1" checked>
+						</div>
+						<div class="small ml-1 mb-1 mt-3">반려동물 허용 *</div>
+						<div class="d-flex align-items-center">
+							<label for="petAllowedY" class="small m-1">Yes</label>
+							<input type="radio" name="petAllowedRadio" value="Y" id="petAllowedY" class="mr-1">
+							<label for="petAllowedN" class="small m-1">No</label>
+							<input type="radio" name="petAllowedRadio" value="N" id="petAllowedN" class="mr-1" checked>
+						</div>
+						<div class="small ml-1 mb-1 mt-3">수하물 보관소 *</div>
+						<div class="d-flex align-items-center">
+							<label for="luggageStorageY" class="small m-1">Yes</label>
+							<input type="radio" name="luggageStorageRadio" value="Y" id="luggageStorageY" class="mr-1">
+							<label for="luggageStorageN" class="small m-1">No</label>
+							<input type="radio" name="luggageStorageRadio" value="N" id="luggageStorageN" class="mr-1" checked>
+						</div>
+						<div class="small ml-1 mb-1 mt-3">무료 인터넷(와이파이) *</div>
+						<div class="d-flex align-items-center">
+							<label for="wifiY" class="small m-1">Yes</label>
+							<input type="radio" name="wifiRadio" value="Y" id="wifiY" class="mr-1">
+							<label for="wifiN" class="small m-1">No</label>
+							<input type="radio" name="wifiRadio" value="N" id="wifiN" class="mr-1" checked>
+						</div>
+					</div>
+					
+					<%-- 객실 특징 정보 입력란 --%>
+					<div class="d-none" id="accomoRoomFacilitiesBox">
+						<legend class="mb-2" id="accomoFacilitiesForm">객실 특징 유무 체크</legend>
+						<div class="small ml-1 mb-1 mt-4">암막커튼 * </div>
+						<div class="d-flex align-items-center">
+							<label for="curtainY" class="small m-1">Yes</label>
+							<input type="radio" name="curtainRadio" value="Y" id="curtainY" class="mr-1">
+							<label for="curtainN" class="small m-1">No</label>
+							<input type="radio" name="curtainRadio" value="N" id="curtainN" class="mr-1" checked>
+						</div>
+						<div class="small ml-1 mb-1 mt-3">룸서비스 * </div>
+						<div class="d-flex align-items-center">
+							<label for="roomServiceY" class="small m-1">Yes</label>
+							<input type="radio" name="roomServiceRadio" value="Y" id="roomServiceY" class="mr-1">
+							<label for="roomServiceN" class="small m-1">No</label>
+							<input type="radio" name="roomServiceRadio" value="N" id="roomServiceN" class="mr-1" checked>
+						</div>
+						<div class="small ml-1 mb-1 mt-3">모닝콜 서비스 * </div>
+						<div class="d-flex align-items-center">
+							<label for="morningCallY" class="small m-1">Yes</label>
+							<input type="radio" name="morningCallRadio" value="Y" id="morningCallY" class="mr-1">
+							<label for="morningCallN" class="small m-1">No</label>
+							<input type="radio" name="morningCallRadio" value="N" id="morningCallN" class="mr-1" checked>
+						</div>
+						<div class="small ml-1 mb-1 mt-3">냉장고 *</div>
+						<div class="d-flex align-items-center">
+							<label for="refridgeY" class="small m-1">Yes</label>
+							<input type="radio" name="refridgeRadio" value="Y" id="refridgeY" class="mr-1">
+							<label for="refridgeN" class="small m-1">No</label>
+							<input type="radio" name="refridgeRadio" value="N" id="refridgeN" class="mr-1" checked>
+						</div>
+						<div class="small ml-1 mb-1 mt-3">차 커피메이커 *</div>
+						<div class="d-flex align-items-center">
+							<label for="coffeeY" class="small m-1">Yes</label>
+							<input type="radio" name="coffeeRadio" value="Y" id="coffeeY" class="mr-1">
+							<label for="coffeeN" class="small m-1">No</label>
+							<input type="radio" name="coffeeRadio" value="N" id="coffeeN" class="mr-1" checked>
+						</div>
+						<div class="small ml-1 mb-1 mt-3">TV *</div>
+						<div class="d-flex align-items-center">
+							<label for="TVY" class="small m-1">Yes</label>
+							<input type="radio" name="TVRadio" value="Y" id="TVY" class="mr-1">
+							<label for="TVN" class="small m-1">No</label>
+							<input type="radio" name="TVRadio" value="N" id="TVN" class="mr-1" checked>
+						</div>
+						<div class="small ml-1 mb-1 mt-3">안전금고 *</div>
+						<div class="d-flex align-items-center">
+							<label for="safeY" class="small m-1">Yes</label>
+							<input type="radio" name="safeRadio" value="Y" id="safeY" class="mr-1">
+							<label for="safeN" class="small m-1">No</label>
+							<input type="radio" name="safeRadio" value="N" id="safeN" class="mr-1" checked>
+						</div>
+						<div class="small ml-1 mb-1 mt-3">전화기 *</div>
+						<div class="d-flex align-items-center">
+							<label for="telephoneY" class="small m-1">Yes</label>
+							<input type="radio" name="telephoneRadio" value="Y" id="telephoneY" class="mr-1">
+							<label for="telephoneN" class="small m-1">No</label>
+							<input type="radio" name="telephoneRadio" value="N" id="telephoneN" class="mr-1" checked>
+						</div>
+						<div class="small ml-1 mb-1 mt-3">에어컨 *</div>
+						<div class="d-flex align-items-center">
+							<label for="airConditionerY" class="small m-1">Yes</label>
+							<input type="radio" name="airConditionerRadio" value="Y" id="airConditionerY" class="mr-1">
+							<label for="airConditionerN" class="small m-1">No</label>
+							<input type="radio" name="airConditionerRadio" value="N" id="airConditionerN" class="mr-1" checked>
+						</div>
+						<div class="small ml-1 mb-1 mt-3">간이주방 *</div>
+						<div class="d-flex align-items-center">
+							<label for="kitchenetteY" class="small m-1">Yes</label>
+							<input type="radio" name="kitchenetteRadio" value="Y" id="kitchenetteY" class="mr-1">
+							<label for="kitchenetteN" class="small m-1">No</label>
+							<input type="radio" name="kitchenetteRadio" value="N" id="kitchenetteN" class="mr-1" checked>
+						</div>
+					</div>
+					
+					<button class="btn mt-4 form-control btn-success d-none" id="hotelFormBtn" type="submit">작성 완료</button>
+				</form>
 			</div>
-		</form>
+		</div>
 	</div>
 </div>
 
@@ -569,37 +685,38 @@
 			$('#accomoInput').addClass('d-none');
 			$('#accomoRoom').addClass('d-none');
 			$('#accomoFacilities').addClass('d-none');
+			$('#roomFacilities').addClass('d-none');
 			$('#accomoInputId').addClass('d-none');
 			$('#accomoRoomId').addClass('d-none');
 			$('#accomoFacilitiesId').addClass('d-none');
-			
-			// 숙소 클래스 remove d-none or d-none
+			$('#roomFacilitiesId').addClass('d-none');
+			$('#categoryFormBtn').addClass('d-none');		
 			$('#accomoInputBox').addClass('d-none');
 			$('#accomoForm').addClass('d-none');
+			$('#hotelFormBtn').addClass('d-none');
+			// 호텔 선택 셀렉트 박스 d-none
+			$('#hotelSelectBox').addClass('d-none');
 			
-			// 숙소 호텔 룸 remove d-none or d-none
+			// 호텔 호텔 룸 remove d-none or d-none
 			$('#accomoRoomBox').addClass('d-none');
-			$('#accomoRoomForm').addClass('d-none');
 			
-			// 숙소 편의시설 remove d-none or d-none
+			// 호텔 편의시설 remove d-none or d-none
 			$('#accomoFacilitiesBox').addClass('d-none');
-			$('#accomoFacilitiesForm').addClass('d-none');
+			
+			// 객실 특징 remove d-none or d-none
+			$('#accomoRoomFacilitiesBox').addClass('d-none');
 			
 			// 관광지 클래스 remove d-none or d-none
 			$('#touristInputForm').addClass('d-none');
-			$('#touristForm').addClass('d-none');
 			
 			// 식당 클래스 remove d-none or d-none
 			$('#restaurantInputForm').addClass('d-none');
-			$('#restaurantForm').addClass('d-none');
 			
 			// 패키지 클래스 remove d-none or d-none
 			$('#packageInputForm').addClass('d-none');
-			$('#packageForm').addClass('d-none');
 			
 			// 여행 팁 클래스 remove d-none or d-none
 			$('#travleTipInputForm').addClass('d-none');
-			$('#travleTipForm').addClass('d-none');
 			
 			
 			// 다른 속성의 셀렉트 값을 선택했을 때 내용물 비우기
@@ -645,22 +762,29 @@
 				$('#accomoInputId').removeClass('d-none');
 				$('#accomoRoomId').removeClass('d-none');
 				$('#accomoFacilitiesId').removeClass('d-none');
+				$('#roomFacilities').removeClass('d-none');
+				$('#roomFacilitiesId').removeClass('d-none');
 				
-				// 숙소/예약 카테고리를 선택했을 때 디폴트 값으로 숙소 입력란에 대한 input 값들이 보여야한다.
+				// 호텔/예약 카테고리를 선택했을 때 디폴트 값으로 호텔 입력란에 대한 input 값들이 보여야한다.
 				$('#accomoInputBox').removeClass('d-none');
 				$('#accomoForm').removeClass('d-none');
 				$('#thumbnail').removeClass('d-none');
 				$('#fileName').removeClass('d-none');
 				$('#thumbnailDivBox').removeClass('d-none');
+				$('#categoryFormBtn').removeClass('d-none');
+				
+				 
+				var fileCount = 0;				
 				
 				// radio 버튼 change 동적 이벤트 
 				$('input[name="accomoType"]').on('change', function() {
-					// 숙소 정보 입력란 d-none
+					// 호텔 정보 입력란 d-none
 					$('#accomoInputBox').addClass('d-none');
 					$('#accomoForm').addClass('d-none');
 					$('#thumbnail').addClass('d-none');
 					$('#fileName').addClass('d-none');
 					$('#thumbnailDivBox').addClass('d-none');
+					$('#categoryFormBtn').addClass('d-none');
 					
 					// 호텔 방 입력란 d-none
 					$('#accomoRoomBox').addClass('d-none');
@@ -670,20 +794,87 @@
 					$('#accomoFacilitiesBox').addClass('d-none');
 					$('#accomoFacilitiesForm').addClass('d-none');
 					
+					// 객실특징 체크란 d-none, 호텔 셀렉트박스
+					$('#accomoRoomFacilitiesBox').addClass('d-none');
+					
+					// 호텔 폼 버튼 d-none
+					$('#hotelFormBtn').addClass('d-none');
+					
+					// 호텔 선택 셀렉트박스 d-none
+					$('#hotelSelectBox').addClass('d-none');
+					
+					
+					// 다른 속성의 라디오 값을 선택했을 때 내용물 비우기
+					fileCount++;
+					//alert(fileCount);
+					if (fileCount > 0) {
+						$('#roomFileName').text("");
+						fileCount = 0;
+					}
+					
+					// 파일업로드 이미지 클릭 => 숨겨져있는 file을 동작시킴
+					$('#roomFileUploadBtn').on('click', function(e) {
+						e.preventDefault(); // a 태그의 올라가는 현상 방지
+						$('#roomFile').click(); // input file을 클릭한 것과 같은 효과
+					});
+					
+					// 사용자가 이미지를 선택했을 때 유효성 확인 및 업로드 된 파일 이름 노출
+					$('#roomFile').on('change', function(e) {
+						//alert("파일 선택");
+						let fileName = e.target.files[0].name; // 07_30_01.png
+						//alert(fileName);
+						
+						// 확장자 유효성 확인
+						let ext = fileName.split(".").pop().toLowerCase();
+						if (ext != 'jpg' && ext != 'jpeg' && ext != 'gif' && ext != 'png') {
+							alert("이미지 파일만 업로드 할 수 있습니다.");
+							$('#roomFile').val(''); // 파일 태그에 실제 파일 제거
+							$("#roomFileName").text(''); // 파일 이름 비우기
+							return;
+						}
+						
+						// 유효성 통과한 이미지는 상자에 업로드 된 파일 이름 노출
+						$('#roomFileName').text(fileName);
+						
+					});
+					
 					
 					let accomoType = $(this).val();
 					if (accomoType == '1') {
 						$('#accomoInputBox').removeClass('d-none');
 						$('#accomoForm').removeClass('d-none');
+						$('#categoryFormBtn').removeClass('d-none');
 						$('#thumbnail').removeClass('d-none');
 						$('#fileName').removeClass('d-none');
 						$('#thumbnailDivBox').removeClass('d-none');
 					} else if (accomoType == 2) {
 						$('#accomoRoomBox').removeClass('d-none');
 						$('#accomoRoomForm').removeClass('d-none');
+						// 카테고리 폼 버튼 d-none
+						$('#categoryFormBtn').addClass('d-none');
+						// 호텔 폼 버튼 remove d-none
+						$('#hotelFormBtn').removeClass('d-none');
+						// 호텔 셀렉트 박스 remove d-none
+						$('#hotelSelectBox').removeClass('d-none');
+						// file 이름 박스 d-none
+						$('#roomFileName').removeClass('d-none');
 					} else if (accomoType == 3) {
 						$('#accomoFacilitiesBox').removeClass('d-none');
 						$('#accomoFacilitiesForm').removeClass('d-none');
+						// 카테고리 폼 버튼 d-none
+						$('#categoryFormBtn').addClass('d-none');
+						// 호텔 폼 버튼 remove d-none
+						$('#hotelFormBtn').removeClass('d-none');
+						// 호텔 셀렉트 박스 remove d-none
+						$('#hotelSelectBox').removeClass('d-none');
+					} else if (accomoType == 4) {
+						$('#accomoRoomFacilitiesBox').removeClass('d-none');
+						// 카테고리 폼 버튼 d-none
+						$('#categoryFormBtn').addClass('d-none');
+						// 호텔 폼 버튼 remove d-none
+						$('#hotelFormBtn').removeClass('d-none');
+						// 호텔 셀렉트 박스 remove d-none
+						$('#hotelSelectBox').removeClass('d-none');
 					}
 				});
 			}
@@ -697,18 +888,21 @@
 				$('#thumbnail').removeClass('d-none');
 				$('#fileName').removeClass('d-none');
 				$('#thumbnailDivBox').removeClass('d-none');
+				$('#categoryFormBtn').removeClass('d-none');
 			} else if (selectCategoryAttr == "restaurant") {
 				$('#restaurantInputForm').removeClass('d-none');
 				$('#restaurantForm').removeClass('d-none');
 				$('#thumbnail').removeClass('d-none');
 				$('#fileName').removeClass('d-none');
 				$('#thumbnailDivBox').removeClass('d-none');
+				$('#categoryFormBtn').removeClass('d-none');
 			} else if (selectCategoryAttr == "travleTip") {
 				$('#travleTipInputForm').removeClass('d-none');
 				$('#travleTipForm').removeClass('d-none');
 				$('#thumbnail').removeClass('d-none');
 				$('#fileName').removeClass('d-none');
 				$('#thumbnailDivBox').removeClass('d-none');
+				$('#categoryFormBtn').removeClass('d-none');
 			} else if (selectCategoryAttr == "publicTransport") {
 				
 			} else if (selectCategoryAttr == "package") {
@@ -717,6 +911,7 @@
 				$('#thumbnail').removeClass('d-none');
 				$('#fileName').removeClass('d-none');
 				$('#thumbnailDivBox').removeClass('d-none');
+				$('#categoryFormBtn').removeClass('d-none');
 			}
 		});
 		
@@ -730,12 +925,15 @@
 			// 썸네일 데이터
 			let file = $('#file').val();
 			
-			// 숙소 input 값들
+			// 호텔 input 값들
 			let accomoName = $('#accomoName').val();
+			let accomoEnglishName = $('#accomoEnglishName').val();
 			let accomoMainAddress = $('#accomoMainAddress').val();
 			let accomoZipCode = $('#accomoZipCode').val();
 			let accomoPrice = $('#accomoPrice').val();
 			let accomoIntro = $('#accomoIntro').val();
+			let accomoIntro2 = $('#accomoIntro2').val();
+			let accomoIntro3 = $('#accomoIntro3').val();
 			let accomoPhoneNumber = $('#accomoPhoneNumber').val();
 			let accomoEmail = $('#accomoEmail').val();
 			let accomoType = $('#accomoType').val();
@@ -787,34 +985,46 @@
 			let travleTipRecommended = $('#travleTipRecommended').val();
 			let travleTipWarning = $('#travleTipWarning').val();
 			
-			// 숙소 validation 구문
+			// 호텔 validation 구문
 			if (categoryAttr == "accomodation") {
 				if (accomoName == "") {
-					alert("숙소 이름을 입력하세요.");
+					alert("호텔 이름을 입력하세요.");
+					return;
+				}
+				if (accomoEnglishName == "") {
+					alert("호텔 영어 이름을 입력하세요.");
 					return;
 				}
 				if (accomoMainAddress == "") {
-					alert("숙소 메인 주소를 입력하세요.");
+					alert("호텔 메인 주소를 입력하세요.");
 					return;
 				}
 				if (accomoZipCode == "") {
-					alert("숙소 우편 주소를 입력하세요.");
+					alert("호텔 우편 주소를 입력하세요.");
 					return;
 				}
 				if (accomoPrice == "") {
-					alert("숙소 가격을 입력하세요.");
+					alert("호텔 가격을 입력하세요.");
 					return;
 				}
 				if (accomoIntro == "") {
-					alert("숙소 정보를 입력하세요.");
+					alert("호텔 정보를 입력하세요.");
+					return;
+				}
+				if (accomoIntro2 == "") {
+					alert("호텔 정보를 입력하세요.");
+					return;
+				}
+				if (accomoIntro3 == "") {
+					alert("호텔 정보를 입력하세요.");
 					return;
 				}
 				if (accomoPhoneNumber == "") {
-					alert("숙소 연락처를 입력하세요.");
+					alert("호텔 연락처를 입력하세요.");
 					return;
 				}
 				if (accomoEmail == "") {
-					alert("숙소 이메일을 입력하세요.");
+					alert("호텔 이메일을 입력하세요.");
 					return;
 				}
 				if (accomoType == "") {
@@ -965,10 +1175,13 @@
 			if (categoryAttr == "accomodation") {
 				formData.append("categoryAttr", categoryAttr);
 				formData.append("name", accomoName);
+				formData.append("englishName", accomoEnglishName);
 				formData.append("address", accomoMainAddress);
 				formData.append("zipCode", accomoZipCode);
 				formData.append("price", accomoPrice);
 				formData.append("intro", accomoIntro);
+				formData.append("intro2", accomoIntro2);
+				formData.append("intro3", accomoIntro3);
 				formData.append("phoneNumber", accomoPhoneNumber);
 				formData.append("email", accomoEmail);
 				formData.append("type", accomoType);
@@ -1062,6 +1275,184 @@
 					alert("글 작성 실패. 코드 확인 요망");
 				}
 			}); */
+		});
+		
+		// 호텔 폼 정보 저장
+		$('#hotelForm').submit(function(e) {
+			e.preventDefault();
+			
+			// 셀렉트 박스로 선택한 호텔 id
+			let hotelId = $('#selectRoom option:selected').val();
+			
+			// radio 
+			let accomoType = $('input[type=radio][name=accomoType]:checked').val();
+			
+			// 호텔 방 썸네일
+			let file = $('#roomFile').val();
+			
+			// 편의시설 Y or N value
+			let fitness = $("input[type=radio][name=fitnessRadio]:checked").val();
+			let barLounge = $("input[type=radio][name=barLoundeRadio]:checked").val();
+			let pool = $("input[type=radio][name=poolRadio]:checked").val();
+			let valetParking = $("input[type=radio][name=valetParkingRadio]:checked").val();
+			let EVCS = $("input[type=radio][name=EVCSRadio]:checked").val();
+			let banquetHall = $("input[type=radio][name=banquetHallRadio]:checked").val();
+			let petAllowed = $("input[type=radio][name=petAllowedRadio]:checked").val();
+			let luggageStorage = $("input[type=radio][name=luggageStorageRadio]:checked").val();
+			let wifi = $("input[type=radio][name=wifiRadio]:checked").val();
+		
+			// 객실 특징 Y or N value
+			let curtain = $("input[type=radio][name=curtainRadio]:checked").val();
+			let roomService = $("input[type=radio][name=roomServiceRadio]:checked").val();
+			let morningCall = $("input[type=radio][name=morningCallRadio]:checked").val();
+			let refridge = $("input[type=radio][name=refridgeRadio]:checked").val();
+			let coffee = $("input[type=radio][name=coffeeRadio]:checked").val();
+			let TV = $("input[type=radio][name=TVRadio]:checked").val();
+			let safe = $("input[type=radio][name=safeRadio]:checked").val();
+			let telephone = $("input[type=radio][name=telephoneRadio]:checked").val();
+			let airConditioner = $("input[type=radio][name=airConditionerRadio]:checked").val();
+			let kitchenette = $("input[type=radio][name=kitchenetteRadio]:checked").val();
+			
+			// 호텔 방 value - input box들로 채워주자
+			let intro = $('#roomIntro').val();
+			let roomType = $('#roomType').val();
+			let bedType = $('#bedType').val();
+			let roomPrice = $('#roomPrice').val();
+			let floor = $('#floor').val();
+			let view = $('#view').val();
+			let checkIn = $('#checkIn').val();
+			let checkOut = $('#checkOut').val();
+			let breakfast = $('#breakfast').val();
+			let headCount = $('#headCount').val();
+			let smoke = $('#smoke').val();
+			
+			// 호텔 방 validation 구문
+			if (accomoType == 2) {
+				if (intro == "") {
+					alert("방 소개를 입력하세요.");
+					return;
+				}
+				if (roomType == "") {
+					alert("방 타입을 입력하세요.");
+					return;
+				}
+				if (bedType == "") {
+					alert("침대 타입을 입력하세요.");
+					return;
+				}
+				if (roomPrice == "") {
+					alert("1박 요금을 입력하세요.");
+					return;
+				}
+				if (floor == "") {
+					alert("층을 입력하세요.");
+					return;
+				}
+				if (view == "") {
+					alert("뷰/전망을 입력하세요.");
+					return;
+				}
+				if (checkIn == "") {
+					alert("체크인 시간을 입력하세요.");
+					return;
+				}
+				if (checkOut == "") {
+					alert("체크아웃 시간을 입력하세요.");
+					return;
+				}
+				if (breakfast == "") {
+					alert("조식여부를 입력하세요.");
+					return;
+				}
+				if (headCount == "") {
+					alert("정원을 입력하세요.");
+					return;
+				}
+				if (smoke == "") {
+					alert("흡연여부를 입력하세요.");
+					return;
+				}
+				if (file == "") {
+					alert("사진을 선택해주세요");
+					return;
+				}
+			}
+			
+			if (hotelId == "none") {
+				alert("호텔을 선택해주세요");
+				return;
+			}
+			
+			let formData = new FormData();
+			if (accomoType == 2) {
+				formData.append("accomoType", accomoType);
+				formData.append("hotelId", hotelId);
+				formData.append("intro", intro);
+				formData.append("roomType", roomType);
+				formData.append("bedType", bedType);
+				formData.append("floor", floor);
+				formData.append("view", view);
+				formData.append("checkIn", checkIn);
+				formData.append("checkOut", checkOut);
+				formData.append("breakfast", breakfast);
+				formData.append("headCount", headCount);
+				formData.append("smoke", smoke);
+				formData.append("file", $('#roomFile')[0].files[0])
+			} else if (accomoType == 3) {
+				formData.append("accomoType", accomoType);
+				formData.append("hotelId", hotelId);
+				formData.append("fitness", fitness);
+				formData.append("barLounge", barLounge);
+				formData.append("pool", pool);
+				formData.append("valetParking", valetParking);
+				formData.append("EVCS", EVCS);
+				formData.append("banquetHall", banquetHall);
+				formData.append("petAllowed", petAllowed);
+				formData.append("luggageStorage", luggageStorage);
+				formData.append("wifi", wifi);
+			} else if (accomoType == 4) {
+				formData.append("accomoType", accomoType);
+				formData.append("hotelId", hotelId);
+				formData.append("curtain", curtain);
+				formData.append("roomService", roomService);
+				formData.append("morningCall", morningCall);
+				formData.append("refridge", refridge);
+				formData.append("coffee", coffee);
+				formData.append("TV", TV);
+				formData.append("safe", safe);
+				formData.append("telephone", telephone);
+				formData.append("airConditioner", airConditioner);
+				formData.append("kitchenette", kitchenette);
+			}
+			
+			// ajax 통신으로 formData에 있는 데이터 전송
+			$.ajax({
+				// request
+				type:"POST"
+				, url:"/category/add_hotel_info"
+				, data:formData  // 폼객체를 통째로
+				//, contentType: false
+		       // , processData: false
+				, enctype:"multipart/form-data" // 파일 업로드를 위한 필수 설정
+				, processData:false  // 파일 업로드를 위한 필수 설정
+				, contentType:false  // 파일 업로드를 위한 필수 설정
+				
+				// response
+				, success:function(data) {
+					if (data.code == 200) {
+						// 성공
+						alert("메모가 저장되었습니다.");
+						location.href = "/admin/create";
+					} else {
+						// 실패
+						alert(data.errorMessage);
+					}
+				}
+				, error:function(e) {
+					alert("ajax쪽 코드를 다시 확인하세요.");
+					//document.location.reload();
+				}
+			});
 		});
 	});
 </script>

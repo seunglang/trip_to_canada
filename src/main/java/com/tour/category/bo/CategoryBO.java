@@ -9,6 +9,9 @@ import org.springframework.web.multipart.MultipartFile;
 import com.tour.category.dao.CategoryDAO;
 import com.tour.category.model.Accomodation;
 import com.tour.category.model.Category;
+import com.tour.category.model.Facilities;
+import com.tour.category.model.Room;
+import com.tour.category.model.RoomFacilities;
 import com.tour.common.FileManagerService;
 
 @Service
@@ -55,8 +58,8 @@ public class CategoryBO {
 	}
 	
 	// 선택한 카테고리에 글 저장
-	public boolean addCategoryInfo(String categoryAttr, Integer categoryId, String loginId, String name,
-			String address, String zipCode, String intro, String price, String phoneNumber, String email,
+	public boolean addCategoryInfo(String categoryAttr, Integer categoryId, String loginId, String name, String englishName,
+			String address, String zipCode, String intro, String intro2, String intro3, String price, String phoneNumber, String email,
 			String operatingTime, String availableToServe, String type, String happyHour, String durationTime,
 			String field, String vitalItem, String culture, String commonSense, String recommended, 
 			String warning, MultipartFile thumbnail) {
@@ -79,18 +82,50 @@ public class CategoryBO {
 			imagePath = fileManagerService.saveFile(loginId, thumbnail); 
 		}
 		
-		return categoryDAO.insertCategoryInfo(categoryAttr, categoryId, name, address, zipCode, intro, price,
-				phoneNumber, email, operatingTime, availableToServe, type, happyHour, durationTime, field,
+		return categoryDAO.insertCategoryInfo(categoryAttr, categoryId, name, englishName, address, zipCode, intro, intro2,
+				intro3, price, phoneNumber, email, operatingTime, availableToServe, type, happyHour, durationTime, field,
 				vitalItem, culture, commonSense, recommended, warning, imagePath);
 	}
 	
-	// 숙소 리스트 가져오기
+	// 호텔 리스트 가져오기
 	public List<Accomodation> getAccomodationList() {
 		return categoryDAO.selectAccomodationList();
 	}
 	
-	// 숙소 id로 객체 가져오기
+	// 호텔 id로 객체 가져오기
 	public Accomodation getAccomodationById(int accomodationId) {
 		return categoryDAO.selectAccomodationById(accomodationId);
 	}
+	
+	// 호텔 id로 편의시설 가져오기
+	public Facilities getFacilitiestById(int accomodationId) {
+		return categoryDAO.selectFacilitiestById(accomodationId);
+	}
+	
+	// 호텔 id로 객실 특징 가져오기
+	public RoomFacilities getRoomFacilitiesById(int accomodationId) {
+		return categoryDAO.selectRoomFacilitiesById(accomodationId);
+	}
+	
+	// 호텔 id로 호텔방들 가져오기
+	public List<Room> getRoomById(int accomodationId) {
+		return categoryDAO.selectRoomById(accomodationId);
+	}
+	
+	// 호텔 정보 저장 구문
+	public boolean addHotelInfo(int hotelId, String loginId, int accomoType, String fitness, String barLounge, String pool, String valetParking, String EVCS,
+			String banquetHall, String petAllowed, String luggageStorage, String wifi, String intro, String roomType,
+			String bedType, String floor, String view, String checkIn, String checkOut, String breakfast, String headCount,
+			String smoke, String curtain, String roomService, String morningCall, String refridge, String coffee, String TV,
+			String safe, String telephone, String airConditioner, String kitchenette, MultipartFile roomThumbnail) {
+		
+		String imagePath = null;
+		if (roomThumbnail != null) { // 파일이 있으면 순차적으로 기능 수행됨 - 파일 있을때만 수행하고 이미지 경로를 얻어낸다.
+			imagePath = fileManagerService.saveFile(loginId, roomThumbnail); 
+		}
+		
+		return categoryDAO.insertHotelInfo(hotelId, accomoType, fitness, barLounge, pool, valetParking, EVCS, banquetHall, petAllowed,
+				luggageStorage, wifi, intro, roomType, bedType, floor, view, checkIn, checkOut, breakfast, headCount, smoke,
+				curtain, roomService, morningCall, refridge, coffee, TV, safe, telephone, airConditioner, kitchenette, imagePath);
+}
 }

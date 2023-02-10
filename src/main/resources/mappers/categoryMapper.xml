@@ -70,9 +70,12 @@
 		 		(
 					`categoryId`
 					,`name`
+					,`englishName`
 					,`address`
 					,`zipCode`
 					,`intro`
+					,`intro2`
+					,`intro3`
 					,`price`
 					,`phoneNumber`
 					,`email`
@@ -84,9 +87,12 @@
 		 		(
 		 			#{categoryId}
 		 			, #{name}
+		 			, #{englishName}
 		 			, #{address}
 		 			, #{zipCode}
 		 			, #{intro}
+		 			, #{intro2}
+		 			, #{intro3}
 		 			, #{price}
 		 			, #{phoneNumber}
 		 			, #{email}
@@ -229,9 +235,12 @@
  			`id`
 			,`categoryId`
 			,`name`
+			,`englishName`
 			,`address`
 			,`zipCode`
 			,`intro`
+			,`intro2`
+			,`intro3`
 			,`price`
 			,`phoneNumber`
 			,`email`
@@ -246,9 +255,12 @@
  			`id`
 			,`categoryId`
 			,`name`
+			,`englishName`
 			,`address`
 			,`zipCode`
 			,`intro`
+			,`intro2`
+			,`intro3`
 			,`price`
 			,`phoneNumber`
 			,`email`
@@ -259,5 +271,181 @@
 			`accomodation`
 		WHERE
 			`id` = #{accomodationId}
+ 	</select>
+ 	
+ 	<insert id="insertHotelInfo" parameterType="map">
+ 		<choose>
+ 			<when test="accomoType == 2">
+ 				INSERT INTO `room`
+ 				(
+ 					`accomoId`
+					,`roomIntro`
+					,`roomType`
+					,`bedType`
+					,`roomPrice`
+					,`floor`
+					,`view`
+					,`checkIn`
+					,`checkOut`
+					,`breakfast`
+					,`headcount`
+					,`smoke`
+					,`thumbnailPic`
+					,`createdAt`
+					,`updatedAt`
+ 				)
+ 				VALUES
+ 				(
+ 					#{accomoId}
+ 					, #{roomIntro}
+ 					, #{roomType}
+ 					, #{bedType}
+ 					, #{roomPrice}
+ 					, #{floor}
+ 					, #{view}
+ 					, #{checkIn}
+ 					, #{checkOut}
+ 					, #{breakfast}
+ 					, #{headcount}
+ 					, #{smoke}
+ 					, #{thumbnailPic}
+ 					, NOW()
+ 					, NOW()
+ 				)
+ 			</when>
+ 			<when test="accomoType == 3">
+		 		INSERT INTO `Facilities`
+		 		(
+					`accomoId`
+					,`fitness`
+					,`barLounge`
+					,`pool`
+					,`valetParking`
+					,`EVCS`
+					,`banquetHall`
+					,`petAllowed`
+					,`luggageStorage`
+					,`wifi`
+					,`createdAt`
+					,`updatedAt`
+		 		)
+		 		VALUES
+		 		(
+		 			#{accomoId}
+		 			, #{fitness}
+		 			, #{barLounge}
+		 			, #{pool}
+		 			, #{valetParking}
+		 			, #{EVCS}
+		 			, #{banquetHall}
+		 			, #{petAllowed}
+		 			, #{luggageStorage}
+		 			, #{wifi}
+		 			, NOW()
+		 			, NOW()
+		 		)
+ 			</when>
+ 			<when test="accomoType == 4">
+		 		INSERT INTO `roomFacilities`
+		 		(
+					`accomoId`
+					,`blackoutCurtain`
+					,`roomService`
+					,`morningCall`
+					,`refridge`
+					,`coffeeMaker`
+					,`TV`
+					,`safe`
+					,`telephone`
+					,`airConditioner`
+					,`kitchenette`
+					,`createdAt`
+					,`updatedAt`
+		 		)
+		 		VALUES
+		 		(
+		 			#{accomoId}
+		 			, #{blackoutCurtain}
+		 			, #{roomService}
+		 			, #{morningCall}
+		 			, #{refridge}
+		 			, #{coffeeMaker}
+		 			, #{TV}
+		 			, #{safe}
+		 			, #{telephone}
+		 			, #{airConditioner}
+		 			, #{kitchenette}
+		 			, NOW()
+		 			, NOW()
+		 		)
+ 			</when>
+ 		</choose>
+ 	</insert>
+ 	
+ 	<select id="selectFacilitiestById" parameterType="int" resultType="com.tour.category.model.Facilities">
+ 		SELECT
+ 			`id`	
+ 			,`accomoId`
+			,`fitness`
+			,`barLounge`
+			,`pool`
+			,`valetParking`
+			,`EVCS`
+			,`banquetHall`
+			,`petAllowed`
+			,`luggageStorage`
+			,`wifi`
+			,`createdAt`
+			,`updatedAt`
+		FROM
+			`Facilities`
+		WHERE
+			`accomoId` = #{accomodationId}
+ 	</select>
+ 	
+ 	<select id="selectRoomFacilitiesById" parameterType="int" resultType="com.tour.category.model.RoomFacilities">
+ 		SELECT
+ 			`id`
+			,`accomoId`
+			,`blackoutCurtain`
+			,`roomService`
+			,`morningCall`
+			,`refridge`
+			,`coffeeMaker`
+			,`TV`
+			,`safe`
+			,`telephone`
+			,`airConditioner`
+			,`kitchenette`
+			,`createdAt`
+			,`updatedAt`
+		FROM
+			`roomFacilities`
+		WHERE
+			`accomoId` = #{accomodationId}
+ 	</select>
+ 	
+ 	<select id="selectRoomById" parameterType="int" resultType="com.tour.category.model.Room">
+ 		SELECT
+ 			`id`
+			,`accomoId`
+			,`roomIntro`
+			,`roomType`
+			,`bedType`
+			,`roomPrice`
+			,`floor`
+			,`view`
+			,`checkIn`
+			,`checkOut`
+			,`breakfast`
+			,`headcount`
+			,`smoke`
+			,`thumbnailPic`
+			,`createdAt`
+			,`updatedAt`
+		FROM
+			`room`
+		WHERE
+			`accomoId` = #{accomodationId}
  	</select>
  </mapper>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="com.tour.booking.dao.BookingDAO">
+ 	 <insert id="reserveRoom" parameterType="map">
+ 	 	 INSERT INTO `roomReserve`
+ 	 	 (
+			`accomoId`
+			,`roomId`
+			,`date`
+			,`createdAt`
+			,`updatedAt`
+ 	 	 )
+ 	 	 VALUES
+ 	 	 (
+ 	 	 	#{accomoId}
+ 	 	 	, #{roomId}
+ 	 	 	, #{startDate}
+ 	 	 	, NOW()
+ 	 	 	, NOW()
+ 	 	 )
+ 	 </insert>
+ </mapper>

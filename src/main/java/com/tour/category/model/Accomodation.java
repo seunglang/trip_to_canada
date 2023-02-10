@@ -6,16 +6,18 @@ public class Accomodation {
 	private int id;
 	private int categoryId;
 	private String name;
+	private String englishName;
 	private String address;
 	private String zipCode;
 	private String intro;
+	private String intro2;
+	private String intro3;
 	private String price;
 	private String phoneNumber;
 	private String email;
 	private String thumbnailPic;
 	private Date createdAt;
 	private Date updatedAt;
-	
 	public int getId() {
 		return id;
 	}
@@ -34,6 +36,12 @@ public class Accomodation {
 	public void setName(String name) {
 		this.name = name;
 	}
+	public String getEnglishName() {
+		return englishName;
+	}
+	public void setEnglishName(String englishName) {
+		this.englishName = englishName;
+	}
 	public String getAddress() {
 		return address;
 	}
@@ -51,6 +59,18 @@ public class Accomodation {
 	}
 	public void setIntro(String intro) {
 		this.intro = intro;
+	}
+	public String getIntro2() {
+		return intro2;
+	}
+	public void setIntro2(String intro2) {
+		this.intro2 = intro2;
+	}
+	public String getIntro3() {
+		return intro3;
+	}
+	public void setIntro3(String intro3) {
+		this.intro3 = intro3;
 	}
 	public String getPrice() {
 		return price;
@@ -88,4 +108,5 @@ public class Accomodation {
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
 	}
+	
 }

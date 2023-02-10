@@ -7,6 +7,9 @@ import org.springframework.stereotype.Repository;
 
 import com.tour.category.model.Accomodation;
 import com.tour.category.model.Category;
+import com.tour.category.model.Facilities;
+import com.tour.category.model.Room;
+import com.tour.category.model.RoomFacilities;
 
 @Repository
 public interface CategoryDAO {
@@ -39,9 +42,12 @@ public interface CategoryDAO {
 			@Param("categoryAttr") String categoryAttr,
 			@Param("categoryId") int categoryId,
 			@Param("name") String name,
+			@Param("englishName") String englishName,
 			@Param("address") String address,
 			@Param("zipCode") String zipCode,
 			@Param("intro") String intro,
+			@Param("intro2") String intro2,
+			@Param("intro3") String intro3,
 			@Param("price") String price,
 			@Param("phoneNumber") String phoneNumber,
 			@Param("email") String email,
@@ -58,9 +64,54 @@ public interface CategoryDAO {
 			@Param("warning") String warning,
 			@Param("thumbnailPic") String imagePath);
 	
-	// 숙소 리스트 가져오기
+	// 호텔 리스트 가져오기
 	public List<Accomodation> selectAccomodationList();
 	
-	// 숙소id로 객체 가져오기
+	// 호텔id로 객체 가져오기
 	public Accomodation selectAccomodationById(int accomodationId);
+	
+	// 호텔 id로 해당 호텔 편의 시설 가져오기
+	public Facilities selectFacilitiestById(int accomodationId);
+	
+	// 호텔 id로 해당 호텔 객실 특징 가져오기
+	public RoomFacilities selectRoomFacilitiesById(int accomodationId);
+	
+	// 호텔 id로 해당 호텔 방들 가져오기
+	public List<Room> selectRoomById(int accomodationId);
+	
+	// 호텔 정보 저장 구문
+	public boolean insertHotelInfo(
+			@Param("accomoId") int hotelId,
+			@Param("accomoType") int accomoType,
+			@Param("fitness") String fitness,
+			@Param("barLounge") String barLounge,
+			@Param("pool") String pool,
+			@Param("valetParking") String valetParking,
+			@Param("EVCS") String EVCS,
+			@Param("banquetHall") String banquetHall,
+			@Param("petAllowed") String petAllowed,
+			@Param("luggageStorage") String luggageStorage,
+			@Param("wifi") String wifi,
+			@Param("roomIntro") String intro,
+			@Param("roomType") String roomType,
+			@Param("bedType") String bedType,
+			@Param("floor") String floor,
+			@Param("view") String view,
+			@Param("checkIn") String checkIn,
+			@Param("checkOut") String checkOut,
+			@Param("breakfast") String breakfast,
+			@Param("headcount") String headCount,
+			@Param("smoke") String smoke,
+			@Param("blackoutCurtain") String curtain,
+			@Param("roomService") String roomService,
+			@Param("morningCall") String morningCall,
+			@Param("refridge") String refridge,
+			@Param("coffeeMaker") String coffee,
+			@Param("TV") String TV,
+			@Param("safe") String safe,
+			@Param("telephone") String telephone,
+			@Param("airConditioner") String airConditioner,
+			@Param("kitchenette") String kitchenette,
+			@Param("thumbnailPic") String imagePath
+			);
 }
