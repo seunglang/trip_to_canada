@@ -3,6 +3,7 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
  <mapper namespace="com.tour.booking.dao.BookingDAO">
+ 
  	 <insert id="reserveRoom" parameterType="map">
  	 	 INSERT INTO `roomReserve`
  	 	 (
@@ -27,6 +28,49 @@
  	 	 	, NOW()
  	 	 )
  	 </insert>
+ 	 
+ 	<!--  <select id="searchReserveRoomByUserIdAccomoId" parameterType="map" resultType="int">
+ 	 	SELECT
+ 	 		`id`
+	 	 	,`accomoId`
+			,`roomId`
+			,`userId`
+			,`headCount`
+			,`checkIn`
+			,`checkOut`
+			,`createdAt`
+			,`updatedAt`
+		FROM
+			`roomReserve`
+		WHERE
+			`accomoId` = #{accomoId}
+			AND
+			`userId` = #{userId}
+			AND
+			<![CDATA[
+			`checkOut` < #{now}
+			]]>
+ 	 </select> -->
+ 	 
+ 	 <select id="getReserveRoomByUserIdAccomoId" parameterType="map" resultType="com.tour.booking.model.ReserveRoom">
+ 	 		SELECT
+ 	 		`id`
+	 	 	,`accomoId`
+			,`roomId`
+			,`userId`
+			,`headCount`
+			,`checkIn`
+			,`checkOut`
+			,`createdAt`
+			,`updatedAt`
+		FROM
+			`roomReserve`
+		WHERE
+			`userId` = #{userId}
+			AND
+			`accomoId` = #{accomoId}
+		ORDER BY `id` DESC LIMIT 1
+ 	 </select>
  	 
  	 <select id="selectReserveRoomList" resultType="com.tour.booking.model.ReserveRoom">
  	 	SELECT

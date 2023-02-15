@@ -10,6 +10,12 @@ import com.tour.booking.model.ReserveRoom;
 @Repository
 public interface BookingDAO {
 	
+	
+	// 이용 내역 확인하기 위한 단일 행 가져오기
+	public ReserveRoom getReserveRoomByUserIdAccomoId(
+			@Param("userId") int userId,
+			@Param("accomoId") int accomoId);
+	
 	// 방 예약
 	public int reserveRoom(
 			@Param("checkIn") String checkIn,

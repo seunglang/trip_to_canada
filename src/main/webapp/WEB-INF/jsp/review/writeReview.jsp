@@ -3,9 +3,17 @@
 <div class="d-flex justify-content-center">
 	<div class="login-box">
 		<h3 class="mt-5 mb-3">귀하의 경험에 대해 평가해주세요.</h3>
+		<div class="border rounded d-flex">
+			<img src="${accomodation.thumbnailPic}" width="250px">
+			<div>
+				<div class="ml-2 mt-2 font-weight-bold">${accomodation.name}</div>
+				<div class="ml-2 small">${accomodation.address}</div>
+				<div class="ml-2 small">${accomodation.zipCode}</div>
+			</div>
+		</div>
 		<%-- 키보드 Enter키로 로그인이 될 수 있도록 form 태그를 만들어준다.(submit 타입의 버튼이 동작됨) --%>
 		<form id="myform" name="myform" action="/review/add_review" method="post">
-			<div class="sign-up">
+			<div class="sign-up mt-3">
 				<div class="border rounded p-3 sign-up-shape">
 					<div class="sign-up-sen mb-3">숙박하신 시설은 만족스러우셨나요?</div>
 						<div class="row">
@@ -34,7 +42,7 @@
 					        <input type="radio" name="rating" value="1" id="rate5"><label for="rate5">⭐</label>
 					    </fieldset>
 						<br>
-					<button class="btn form-control btn-primary" id="addReview" type="submit">리뷰 제출</button>
+					<button class="btn form-control btn-primary mt-3" id="addReview" type="submit" data-accomo-id="${accomodation.id}">리뷰 제출</button>
 				</div>
 			</div>
 		</form>
@@ -84,7 +92,40 @@
 			let star = $('input:radio[name=rating]:checked').val();
 			let reviewContent = $('#reviewContent').val();
 			let reviewTitle = $('#reviewTitle').val();
-			//alert(reviewTitle);
+			let accomoId = $('#addReview').data('accomo-id');
+			//alert(accomoId);
+			if (reviewContent == "") {
+				alert("리뷰 내용을 입력해주세요 !");
+				return;
+			}
+			if (reviewTitle == "") {
+				alert("리뷰 제목을 입력해주세요 !");
+				return;
+			}
+			if (star == null) {
+				alert("별점을 선택해주세요 !");
+				return;
+			}
+			
+			$.ajax({
+				// request
+				type:"POST"
+				, url:"/review/add_review"
+				, data:{"star":star, "reviewContent":reviewContent, "reviewTitle":reviewTitle, "accomoId":accomoId}
+				
+				// response
+				, success:function(data) {
+					if(data.code == 200) {
+						alert("리뷰 작성에 성공하셨습니다.");
+						location.href = "/category/accomodation_detail_view?accomodationId=" + accomoId;
+					} else {
+						alert(data.errorMessage);
+					}
+				}
+				, error:function(e) {
+					alert("오류");
+				}
+			});
 		});
 	});
 </script>

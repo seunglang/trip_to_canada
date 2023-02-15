@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="com.tour.review.dao.ReviewDAO">
+ 	
+ 	<insert id="insertReview" parameterType="map">
+ 		INSERT INTO `accomoReview`
+ 		(
+ 			`accomoId`
+			,`userId`
+			,`userName`
+			,`reviewTitle`
+			,`reviewContent`
+			,`point`
+			,`createdAt`
+			,`updatedAt`
+ 		)
+ 		VALUES
+ 		(
+ 			#{accomoId}
+ 			, #{userId}
+ 			, #{userName}
+ 			, #{reviewTitle}
+ 			, #{reviewContent}
+ 			, #{point}
+ 			, NOW()
+ 			, NOW()
+ 		)
+ 	</insert>
+ 	
+ 	<select id="selectAccomoReviewList" resultType="com.tour.review.model.AccomoReview">
+ 		SELECT
+ 			`id`
+ 			,`accomoId`
+ 			,`userId`
+			,`userName`
+			,`reviewTitle`
+			,`reviewContent`
+			,`point`
+			,`createdAt`
+			,`updatedAt`
+		FROM
+			`accomoReview`
+		WHERE
+			`accomoId` = #{accomodationId}
+ 	</select>
+ 	
+ </mapper>

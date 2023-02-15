@@ -15,6 +15,22 @@ public class BookingBO {
 
 	@Autowired
 	private BookingDAO bookingDAO;
+	
+//	// 사용자 id로 리뷰 작성을 위한 이용 확인하기
+	public int searchReserveRoomByUserIdAccomoId(int userId, int accomoId) {
+		
+		//int experienced = bookingDAO.searchReserveRoomByUserIdAccomoId(userId, accomoId, now);
+		// userid와 accomoId로 이용했던 내역 행을 가져와서 여기서 비교를 해주자
+		ReserveRoom reserveRoom = getReserveRoomByUserIdAccomoId(userId, accomoId);
+		
+		LocalDate parseCheckOut = LocalDate.parse(reserveRoom.getCheckOut());
+		LocalDate now = LocalDate.now();
+		
+		if (parseCheckOut.isBefore(now)) {
+			return 1;
+		}
+		return 0;
+	}
 
 	// 검색 버튼 클릭 시 예약 가능한 방 띄우기
 	public int searchAvailableHotel(String checkIn, String checkOut, Integer headCount, int accomoId, int roomId) {
@@ -86,5 +102,10 @@ public class BookingBO {
 
 	public List<ReserveRoom> getReserveRoomList() {
 		return bookingDAO.selectReserveRoomList();
+	}
+	
+	// 이용 내역 확인하기 위한 단일 행 가져오기
+	public ReserveRoom getReserveRoomByUserIdAccomoId(int userId, int accomoId) {
+		return bookingDAO.getReserveRoomByUserIdAccomoId(userId, accomoId);
 	}
 }

@@ -1,5 +1,6 @@
 package com.tour.review;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +17,7 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 public class ReviewController {
 	
+	@Autowired
 	private CategoryBO categoryBO;
 	
 	@GetMapping("/review_form_view")
@@ -24,11 +26,14 @@ public class ReviewController {
 			Model model,
 			HttpSession session) {
 		
-		int userId = (int)session.getAttribute("userId");
+		Integer userId = (Integer)session.getAttribute("userId");
+		if (userId == null) {
+			return "redirect:/user/sign_in_view";
+		}
 		
-//		Accomodation accomodation = categoryBO.getAccomodationById(accomodationId);
-//		
-//		model.addAttribute("accomodation", accomodation);
+		Accomodation accomodation = categoryBO.getAccomodationById(accomodationId);
+		
+		model.addAttribute("accomodation", accomodation);
 		model.addAttribute("viewName", "review/writeReview");
 		return "template/layout";
 	}

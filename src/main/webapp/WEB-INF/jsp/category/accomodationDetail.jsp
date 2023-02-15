@@ -221,7 +221,12 @@
 		</c:forEach>
 		<div id="reviewBox" class="mt-4">
 			<h3>${accomodation.englishName} 실제 투숙객 작성 후기</h3>
-			
+			<c:forEach items="${accomoReview}" var="review">
+				<div>
+					<div>${review.reviewTitle}</div>
+					<div>${review.userName}</div>
+				</div>
+			</c:forEach>
 		</div>
 	</div>
 </div>

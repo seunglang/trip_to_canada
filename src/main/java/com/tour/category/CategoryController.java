@@ -10,12 +10,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tour.booking.bo.BookingBO;
-import com.tour.booking.model.ReserveRoom;
 import com.tour.category.bo.CategoryBO;
 import com.tour.category.model.Accomodation;
 import com.tour.category.model.Facilities;
 import com.tour.category.model.Room;
 import com.tour.category.model.RoomFacilities;
+import com.tour.review.bo.ReviewBO;
+import com.tour.review.model.AccomoReview;
 
 @RequestMapping("/category")
 @Controller
@@ -26,6 +27,9 @@ public class CategoryController {
 	
 	@Autowired
 	private BookingBO bookingBO;
+	
+	@Autowired
+	private ReviewBO reviewBO;
 	
 	// 호텔/예약 페이지 호출
 	@GetMapping("/accomodation_list_view")
@@ -80,10 +84,14 @@ public class CategoryController {
 		// 클릭된 호텔 방 가져오기
 		List<Room> rooms = categoryBO.getRoomById(accomodationId);
 		
+		// 클릭된 호텔 리뷰 가져오기
+		List<AccomoReview> accomoReview = reviewBO.getAccomoReviewList(accomodationId);
+		
 		model.addAttribute("accomodation", accomodation);
 		model.addAttribute("facilities", facilities);
 		model.addAttribute("roomFacilities", roomFacilities);
 		model.addAttribute("rooms", rooms);
+		model.addAttribute("accomoReview", accomoReview);
 		model.addAttribute("viewName", "category/accomodationDetail");
 		
 		return "template/layout";
