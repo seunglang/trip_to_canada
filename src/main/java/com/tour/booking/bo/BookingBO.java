@@ -17,7 +17,7 @@ public class BookingBO {
 	private BookingDAO bookingDAO;
 
 	// 검색 버튼 클릭 시 예약 가능한 방 띄우기
-	public List<ReserveRoom> searchAvailableHotel(String checkIn, String checkOut, Integer headCount, int accomoId) {
+	public int searchAvailableHotel(String checkIn, String checkOut, Integer headCount, int accomoId, int roomId) {
 		
 		// String to LocalData 파싱
 		LocalDate checkInDate = LocalDate.parse(checkIn, DateTimeFormatter.ISO_LOCAL_DATE);
@@ -26,26 +26,29 @@ public class BookingBO {
 		
 		// 에약된 방 리스트
 		List<ReserveRoom> roomReserve = getReserveRoomList();
-		int count = roomReserve.size();
+		int count = 0;
 		
 		// List<ReserveRoom> avaliableToReserveRoom = null;
 		
 		
-		for (int i = 0; i < count; i++) {
+		for (int i = 0; i < roomReserve.size(); i++) {
 			String startDate = roomReserve.get(i).getCheckIn();
 			String endDate = roomReserve.get(i).getCheckOut();
+			int ReservedroomId = roomReserve.get(i).getRoomId();
 			LocalDate parseStartDate = LocalDate.parse(startDate, DateTimeFormatter.ISO_LOCAL_DATE);
 			LocalDate parseEndDate = LocalDate.parse(endDate, DateTimeFormatter.ISO_LOCAL_DATE);
 			// 데이터베이스로 기간 중복 쿼리 혹은 조건문으로 중복 되는 날짜를 걸러보자
-			if (parseStartDate.isBefore(checkOutDate) && parseEndDate.isAfter(checkInDate)) { //(checkInDate.isAfter(parseDate) && checkInDate.isBefore(checkOutDate)) && checkOutDate.compareTo(parseDate) != 0
+			if (parseStartDate.isBefore(checkOutDate) && parseEndDate.isAfter(checkInDate) && ReservedroomId == roomId) { //(checkInDate.isAfter(parseDate) && checkInDate.isBefore(checkOutDate)) && checkOutDate.compareTo(parseDate) != 0
+				count++;
 				// 중복되는 날짜가 있으면 들어온다.
-				roomReserve.remove(i);
-				count--;
-				i--;
+				//roomReserve.remove(i);
+				//roomReserve.set(i, null);
+//				count--;
+//				i--;
 			}
 		}
 
-		return roomReserve;
+		return count;
 	}
 
 	// 방 예약 테스트

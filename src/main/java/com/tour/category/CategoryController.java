@@ -1,8 +1,6 @@
 package com.tour.category;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.tour.booking.bo.BookingBO;
 import com.tour.booking.model.ReserveRoom;
 import com.tour.category.bo.CategoryBO;
 import com.tour.category.model.Accomodation;
@@ -24,6 +23,9 @@ public class CategoryController {
 	
 	@Autowired
 	private CategoryBO categoryBO;
+	
+	@Autowired
+	private BookingBO bookingBO;
 	
 	// 호텔/예약 페이지 호출
 	@GetMapping("/accomodation_list_view")

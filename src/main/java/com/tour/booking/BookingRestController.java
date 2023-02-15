@@ -42,17 +42,21 @@ public class BookingRestController {
 		
 		
 		if (roomId != null) {
-			int test = bookingBO.reserveRoom(startDate, endDate, accomoId, roomId, userId, headCount);
-			
-			if (test > 0) {
-				result.put("code", 200);
+			int count = bookingBO.searchAvailableHotel(startDate, endDate, headCount, accomoId, roomId);
+			if (count > 0) {
+				result.put("code", 500);
+				result.put("errorMessage", "해당 날짜에 방이 이미 예약되었습니다.");
+			} else {
+				int test = bookingBO.reserveRoom(startDate, endDate, accomoId, roomId, userId, headCount);
+				if (test > 0) {
+					result.put("code", 200);
+				}
 			}
-		} else if (roomId == null) {
-			List<ReserveRoom> roomReserveList = bookingBO.searchAvailableHotel(startDate, endDate, headCount, accomoId);
-			model.addAttribute("roomReserveList", roomReserveList);
-			result.put("code", 200);
-		}
-
+		} //else if (roomId == null) {
+//			int roomReserveList = bookingBO.searchAvailableHotel(startDate, endDate, headCount, accomoId);
+//			model.addAttribute("roomReserveList", roomReserveList);
+//			result.put("code", 200);
+//		}
 		return result;
 	}
 }

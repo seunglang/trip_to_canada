@@ -182,8 +182,8 @@
 		<div class="mt-1 d-flex align-items-center" id="datepickerBox">
 			<input class="form-control col-2" id="startDate" placeholder="체크인">
 			<input class="form-control col-2 ml-2" id="endDate" placeholder="체크아웃">
-			<input type="number" class="form-control col-2 ml-2" id="roomHeadCount" placeholder="인원 수">
-			<button type="button" class="btn btn-secondary form-control col-1 ml-2" id="searchAvailableRoom" data-accomo-id="${accomodation.id}" data-room-id="${room.id}">검색</button>
+			<input type="number" class="form-control col-2 ml-2" id="roomHeadCount" placeholder="인원 수" min="2">
+			<%-- <button type="button" class="btn btn-secondary form-control col-1 ml-2" id="searchAvailableRoom" data-accomo-id="${accomodation.id}" data-room-id="${room.id}">검색</button> --%>
 		</div>
 		<%-- room에 썸네일 추가해서 방 대표 사진 받아와야 한다. --%>
 		<c:forEach items="${rooms}" var="room">
@@ -206,12 +206,12 @@
 						<div class="room-intro-font">정원: ${room.headcount}명</div>
 						<div class="room-intro-font mt-1 breakfast">${room.breakfast}</div>
 						<div class="oneNightCost mt-5">1박 요금: ￦${room.roomPrice}</div>
-						<c:forEach items="${roomReserveList}" var="avaliableRoom">
-							<button type="button" class="btn reserve-btn form-control mt-1" data-headcount="${room.headcount}" data-accomo-id="${accomodation.id}" data-room-id="${room.id}">예약하기</button>
+						<%-- <c:forEach items="${roomReserveList}" var="avaliableRoom">
 							<button type="button">테스트</button>
-						</c:forEach>
-						<button type="button">파이널테스트</button>
-						<div class="small text-danger warningText">체크인 날짜를 선택해주세요 !</div>
+							<div>테스트</div>
+						</c:forEach> --%>
+						<button type="button" class="btn reserve-btn form-control mt-1" data-headcount="${room.headcount}" data-accomo-id="${accomodation.id}" data-room-id="${room.id}">예약하기</button>
+						<div class="small text-danger warningText">예약하실 날짜를 선택해주세요 !</div>
 				</div>
 				<div>
 					<%-- 여기에도 방 예약에 유용한 다른 내용들을 넣어주자 --%>
@@ -279,9 +279,9 @@
 			
 			$.ajax({
 				// request
-				type:"POST"
-				, url:"/booking/room"
-				, data:{"startDate":startDate, "endDate":endDate, "accomoId":accomoId, "roomHeadCount":roomHeadCount}
+				type:"GET"
+				, url:"/category/accomodation_detail_view"
+				, data:{"accomodationId":accomoId, "startDate":startDate, "endDate":endDate, "accomoId":accomoId, "roomHeadCount":roomHeadCount}
 			
 				// response
 				, success:function(data) {
@@ -289,7 +289,7 @@
 						alert("검색 성공");
 						//$(".reserve-btn").attr("disabled", false);
 						//$('.warningText').addClass('d-none');
-						location.reload();
+						document.location.reload();
 					}
 				}
 				, error:function(e) {
@@ -298,7 +298,10 @@
 			});
 		});
 		
-		
+		// 체크아웃 날짜 선택되면 경고문 제거
+		$('#endDate').on('change', function() {
+			$('.warningText').addClass('d-none');
+		});
 		// disabled된 버튼을 스케줄을 선택했을 때 클릭 가능하게 
 		$('.reserve-btn').on('click', function() {
 			let startDate = $('#startDate').val();
@@ -309,6 +312,7 @@
 			//alert(headcount);
 			//alert(startDate);
 			//alert(endDate);
+			
 			if (startDate == "") {
 				alert("체크인 날짜를 선택해주세요.");
 				return
@@ -341,6 +345,9 @@
 				, success:function(data) {
 					if (data.code == 200) {
 						alert("예약에 성공하셨습니다.");
+						location.reload();
+					} else {
+						alert(data.errorMessage);
 						location.reload();
 					}
 				}
