@@ -12,6 +12,12 @@ public class Accomodation {
 	private String intro;
 	private String intro2;
 	private String intro3;
+	private String accomoPlace;
+	private String accomoPlace2;
+	private String accomoPlace3;
+	private String accomoPlace4;
+	private String latitude;
+	private String longitude;
 	private String price;
 	private String phoneNumber;
 	private String email;
@@ -71,6 +77,43 @@ public class Accomodation {
 	}
 	public void setIntro3(String intro3) {
 		this.intro3 = intro3;
+	}
+	
+	public String getAccomoPlace() {
+		return accomoPlace;
+	}
+	public void setAccomoPlace(String accomoPlace) {
+		this.accomoPlace = accomoPlace;
+	}
+	public String getAccomoPlace2() {
+		return accomoPlace2;
+	}
+	public void setAccomoPlace2(String accomoPlace2) {
+		this.accomoPlace2 = accomoPlace2;
+	}
+	public String getAccomoPlace3() {
+		return accomoPlace3;
+	}
+	public void setAccomoPlace3(String accomoPlace3) {
+		this.accomoPlace3 = accomoPlace3;
+	}
+	public String getAccomoPlace4() {
+		return accomoPlace4;
+	}
+	public void setAccomoPlace4(String accomoPlace4) {
+		this.accomoPlace4 = accomoPlace4;
+	}
+	public String getLatitude() {
+		return latitude;
+	}
+	public void setLatitude(String latitude) {
+		this.latitude = latitude;
+	}
+	public String getLongitude() {
+		return longitude;
+	}
+	public void setLongitude(String longitude) {
+		this.longitude = longitude;
 	}
 	public String getPrice() {
 		return price;

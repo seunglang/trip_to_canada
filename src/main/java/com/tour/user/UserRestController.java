@@ -74,10 +74,10 @@ public class UserRestController {
 			result.put("result", "성공");
 			
 			// 세션에 유저 정보를 담는다
-			//session.setAttribute("userId", user.getId());
 			session.setAttribute("userName", user.getName());
 			session.setAttribute("adminId", user.getAdminId());
 			session.setAttribute("userLoginId", user.getLoginId());
+			session.setAttribute("userId", user.getId());
 		} else {
 			result.put("code", 500);
 			result.put("errorMessage", "존재하지 않는 사용자입니다.");

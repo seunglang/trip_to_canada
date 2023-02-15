@@ -76,6 +76,12 @@
 					,`intro`
 					,`intro2`
 					,`intro3`
+					,`accomoPlace`
+					,`accomoPlace2`
+					,`accomoPlace3`
+					,`accomoPlace4`
+					,`latitude`
+					,`longitude`
 					,`price`
 					,`phoneNumber`
 					,`email`
@@ -93,6 +99,12 @@
 		 			, #{intro}
 		 			, #{intro2}
 		 			, #{intro3}
+		 			, #{accomoPlace}
+		 			, #{accomoPlace2}
+		 			, #{accomoPlace3}
+		 			, #{accomoPlace4}
+		 			, #{latitude}
+		 			, #{longitude}
 		 			, #{price}
 		 			, #{phoneNumber}
 		 			, #{email}
@@ -112,7 +124,7 @@
 					,`price`
 					,`phoneNumber`
 					,`email`
-					, `operatingTime`
+					,`operatingTime`
 					,`thumbnailPic`
 					,`createdAt`
 					,`updatedAt`
@@ -241,6 +253,12 @@
 			,`intro`
 			,`intro2`
 			,`intro3`
+			,`accomoPlace`
+			,`accomoPlace2`
+			,`accomoPlace3`
+			,`accomoPlace4`
+			,`latitude`
+			,`longitude`
 			,`price`
 			,`phoneNumber`
 			,`email`
@@ -261,6 +279,12 @@
 			,`intro`
 			,`intro2`
 			,`intro3`
+			,`accomoPlace`
+			,`accomoPlace2`
+			,`accomoPlace3`
+			,`accomoPlace4`
+			,`latitude`
+			,`longitude`
 			,`price`
 			,`phoneNumber`
 			,`email`

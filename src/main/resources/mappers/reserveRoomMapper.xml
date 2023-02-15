@@ -8,7 +8,10 @@
  	 	 (
 			`accomoId`
 			,`roomId`
-			,`date`
+			,`userId`
+			,`headCount`
+			,`checkIn`
+			,`checkOut`
 			,`createdAt`
 			,`updatedAt`
  	 	 )
@@ -16,9 +19,27 @@
  	 	 (
  	 	 	#{accomoId}
  	 	 	, #{roomId}
- 	 	 	, #{startDate}
+ 	 	 	, #{userId}
+ 	 	 	, #{headCount}
+ 	 	 	, #{checkIn}
+ 	 	 	, #{checkOut}
  	 	 	, NOW()
  	 	 	, NOW()
  	 	 )
  	 </insert>
+ 	 
+ 	 <select id="selectReserveRoomList" resultType="com.tour.booking.model.ReserveRoom">
+ 	 	SELECT
+ 	 		`id`
+	 	 	,`accomoId`
+			,`roomId`
+			,`userId`
+			,`headCount`
+			,`checkIn`
+			,`checkOut`
+			,`createdAt`
+			,`updatedAt`
+		FROM
+			`roomReserve`
+ 	 </select>
  </mapper>

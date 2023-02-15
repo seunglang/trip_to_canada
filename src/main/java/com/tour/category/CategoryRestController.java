@@ -104,7 +104,13 @@ public class CategoryRestController {
 			@RequestParam(value="price", required=false) String price, 
 			@RequestParam(value="intro", required=false) String intro, 
 			@RequestParam(value="intro2", required=false) String intro2, 
-			@RequestParam(value="intro3", required=false) String intro3, 
+			@RequestParam(value="intro3", required=false) String intro3,
+			@RequestParam(value="accomoPlace", required=false) String accomoPlace,
+			@RequestParam(value="accomoPlace2", required=false) String accomoPlace2,
+			@RequestParam(value="accomoPlace3", required=false) String accomoPlace3,
+			@RequestParam(value="accomoPlace4", required=false) String accomoPlace4,
+			@RequestParam(value="accomolatitude", required=false) String latitude,
+			@RequestParam(value="accomolongitude", required=false) String longitude,
 			@RequestParam(value="phoneNumber", required=false) String phoneNumber, 
 			@RequestParam(value="email", required=false) String email, 
 			@RequestParam(value="operatingTime", required=false) String operatingTime,
@@ -137,7 +143,8 @@ public class CategoryRestController {
 		
 		
 		insertCategoryInfo = categoryBO.addCategoryInfo(categoryAttr, categoryId, loginId, name, englishName, address, zipCode,
-		intro, intro2, intro3, price, phoneNumber, email, operatingTime, availableToServe, type, happyHour, durationTime, field,
+		intro, intro2, intro3, accomoPlace, accomoPlace2, accomoPlace3, accomoPlace4, latitude, longitude,  price, phoneNumber, email,
+		operatingTime, availableToServe, type, happyHour, durationTime, field,
 		vitalItem, culture, commonSense, recommended, warning, file);
 		
 		

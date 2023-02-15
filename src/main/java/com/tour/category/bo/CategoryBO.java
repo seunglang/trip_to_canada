@@ -1,11 +1,16 @@
 package com.tour.category.bo;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.tour.booking.bo.BookingBO;
+import com.tour.booking.model.ReserveRoom;
 import com.tour.category.dao.CategoryDAO;
 import com.tour.category.model.Accomodation;
 import com.tour.category.model.Category;
@@ -19,6 +24,9 @@ public class CategoryBO {
 	
 	@Autowired
 	private CategoryDAO categoryDAO;
+	
+	@Autowired
+	private BookingBO bookingBO;
 	
 	@Autowired
 	private FileManagerService fileManagerService;
@@ -59,7 +67,8 @@ public class CategoryBO {
 	
 	// 선택한 카테고리에 글 저장
 	public boolean addCategoryInfo(String categoryAttr, Integer categoryId, String loginId, String name, String englishName,
-			String address, String zipCode, String intro, String intro2, String intro3, String price, String phoneNumber, String email,
+			String address, String zipCode, String intro, String intro2, String intro3, String accomoPlace,
+			String accomoPlace2, String accomoPlace3, String accomoPlace4, String latitude, String longitude, String price, String phoneNumber, String email,
 			String operatingTime, String availableToServe, String type, String happyHour, String durationTime,
 			String field, String vitalItem, String culture, String commonSense, String recommended, 
 			String warning, MultipartFile thumbnail) {
@@ -83,7 +92,7 @@ public class CategoryBO {
 		}
 		
 		return categoryDAO.insertCategoryInfo(categoryAttr, categoryId, name, englishName, address, zipCode, intro, intro2,
-				intro3, price, phoneNumber, email, operatingTime, availableToServe, type, happyHour, durationTime, field,
+				intro3, accomoPlace, accomoPlace2, accomoPlace3, accomoPlace4, latitude, longitude, price, phoneNumber, email, operatingTime, availableToServe, type, happyHour, durationTime, field,
 				vitalItem, culture, commonSense, recommended, warning, imagePath);
 	}
 	
@@ -127,5 +136,6 @@ public class CategoryBO {
 		return categoryDAO.insertHotelInfo(hotelId, accomoType, fitness, barLounge, pool, valetParking, EVCS, banquetHall, petAllowed,
 				luggageStorage, wifi, intro, roomType, bedType, floor, view, checkIn, checkOut, breakfast, headCount, smoke,
 				curtain, roomService, morningCall, refridge, coffee, TV, safe, telephone, airConditioner, kitchenette, imagePath);
-}
+	}
+	
 }

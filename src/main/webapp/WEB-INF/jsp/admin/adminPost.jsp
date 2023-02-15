@@ -87,6 +87,30 @@
 						<div class="d-flex align-items-center">
 							<textarea class="form-control" id="accomoIntro3" name="accomoIntro3" placeholder="정보" rows="5"></textarea>
 						</div>
+						<div class="small ml-1 mb-1 mt-3">인근 명소 (1) *</div>
+						<div class="d-flex align-items-center">
+							<input type="text" id="accomoPlace" name="accomoPlace" class="form-control col-10 input-lg" placeholder="Royal Alexandra Theatre - 도보 5분"/>
+						</div>
+						<div class="small ml-1 mb-1 mt-3">인근 명소 (2) *</div>
+						<div class="d-flex align-items-center">
+							<input type="text" id="accomoPlace2" name="accomoPlace2" class="form-control col-10 input-lg" placeholder="''"/>
+						</div>
+						<div class="small ml-1 mb-1 mt-3">인근 명소 (3) *</div>
+						<div class="d-flex align-items-center">
+							<input type="text" id="accomoPlace3" name="accomoPlace3" class="form-control col-10 input-lg" placeholder="''"/>
+						</div>
+						<div class="small ml-1 mb-1 mt-3">인근 명소 (4) *</div>
+						<div class="d-flex align-items-center">
+							<input type="text" id="accomoPlace4" name="accomoPlace4" class="form-control col-10 input-lg" placeholder="''"/>
+						</div>
+						<div class="small ml-1 mb-1 mt-3">위도(구글맵api) *</div>
+						<div class="d-flex align-items-center">
+							<input type="text" id="accomolatitude" name="accomolatitude" class="form-control col-10 input-lg" placeholder="43.64705552448648"/>
+						</div>
+						<div class="small ml-1 mb-1 mt-3">경도(구글맵api) *</div>
+						<div class="d-flex align-items-center">
+							<input type="text" id="accomolongitude" name="accomolongitude" class="form-control col-10 input-lg" placeholder="-79.39181461534038"/>
+						</div>
 						<div class="small ml-1 mb-1 mt-3">호텔 가격 *</div>
 						<div class="d-flex align-items-center">
 							<input type="text" id="accomoPrice" name="accomoPrice" class="form-control col-6 input-lg" placeholder="ex) ￦130,000"/>
@@ -934,6 +958,12 @@
 			let accomoIntro = $('#accomoIntro').val();
 			let accomoIntro2 = $('#accomoIntro2').val();
 			let accomoIntro3 = $('#accomoIntro3').val();
+			let accomoPlace = $('#accomoPlace').val();
+			let accomoPlace2 = $('#accomoPlace2').val();
+			let accomoPlace3 = $('#accomoPlace3').val();
+			let accomoPlace4 = $('#accomoPlace4').val();
+			let accomolatitude = $('#accomolatitude').val();
+			let accomolongitude = $('#accomolongitude').val();
 			let accomoPhoneNumber = $('#accomoPhoneNumber').val();
 			let accomoEmail = $('#accomoEmail').val();
 			let accomoType = $('#accomoType').val();
@@ -1017,6 +1047,29 @@
 				}
 				if (accomoIntro3 == "") {
 					alert("호텔 정보를 입력하세요.");
+					return;
+				}
+				if (accomoPlace == "") {
+					alert("인근 명소를 입력하세요.");
+					return;
+				}
+				if (accomoPlace2 == "") {
+					alert("인근 명소를 입력하세요.");
+					return;
+				}
+				if (accomoPlace3 == "") {
+					alert("인근 명소를 입력하세요.");
+					return;
+				}
+				if (accomoPlace4 == "") {
+					alert("인근 명소를 입력하세요.");
+				}
+				if (accomolatitude == "") {
+					alert("위도를 입력하세요.");
+					return;
+				}
+				if (accomolongitude == "") {
+					alert("경도를 입력하세요.");
 					return;
 				}
 				if (accomoPhoneNumber == "") {
@@ -1182,6 +1235,12 @@
 				formData.append("intro", accomoIntro);
 				formData.append("intro2", accomoIntro2);
 				formData.append("intro3", accomoIntro3);
+				formData.append("accomoPlace", accomoPlace);
+				formData.append("accomoPlace2", accomoPlace2);
+				formData.append("accomoPlace3", accomoPlace3);
+				formData.append("accomoPlace4", accomoPlace4);
+				formData.append("accomolatitude", accomolatitude);
+				formData.append("accomolongitude", accomolongitude);
 				formData.append("phoneNumber", accomoPhoneNumber);
 				formData.append("email", accomoEmail);
 				formData.append("type", accomoType);

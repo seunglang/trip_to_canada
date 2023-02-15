@@ -46,7 +46,7 @@ figcaption {
 .symbol {color:#DFD9D9;}
 #hotelDetailBackGroundColor {width:100vw;  margin-left: calc(-50vw + 50%); background-color:#f2f2f2; min-height:500px;}
 #hotelDetailContentsBox {width:1200px; margin:auto;}
-#hotelDetailCalendar {width:300px; min-height:400px; background-color:#FFFFFF;}
+#hotelDetailCalendar {width:300px; min-height:400px;}
 #hotelDetailThumbnail {width:815px; min-height:400px; background-color:#FFFFFF;}
 #hotelDetailFacilitiesAndRoom {width:800px; min-height:600px; background-color:#FFFFFF;}
 #roomInfo {font-size:13px; color:#918C8C; padding-top:12px; text-decoration-line: underline; text-decoration-style: dotted;}
@@ -60,11 +60,11 @@ figcaption {
 .roomType-hover:hover {color:#555; text-decoration-style: underline;}
 .breakfast {text-decoration:underline;}
 .reserve-btn {background-color:#80C1F4;}
-.oneNightCost {font-size:15px; padding-top:25px;}
+.oneNightCost {font-size:15px; padding-top:8px;}
 .move-to-hotel-rooms {text-decoration:none; color:#918C8C;}
-
-
-
+.smallText {padding-top:40px;}
+#googleMapBox {width:1050px; min-height:300px; background-color:#FFFFFF;}
+#googleMap {width:350px; height:300px;}
 input {
   padding:10px;
 	font-family: FontAwesome, "Open Sans", Verdana, sans-serif;
@@ -74,9 +74,11 @@ input {
   border-radius: 0 !important;
 }
 
+
 .form-control {
   border-radius: 0 !important;
   font-size: 12x;
 }
 
 .clickable { cursor: pointer; }
+#datepickerBox {height:35px;}

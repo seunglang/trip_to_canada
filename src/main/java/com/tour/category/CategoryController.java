@@ -1,7 +1,8 @@
 package com.tour.category;
 
+import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.tour.booking.model.ReserveRoom;
 import com.tour.category.bo.CategoryBO;
 import com.tour.category.model.Accomodation;
 import com.tour.category.model.Facilities;
@@ -27,13 +29,36 @@ public class CategoryController {
 	@GetMapping("/accomodation_list_view")
 	public String accomodationView(Model model) {
 		
-		// 호텔 리스트
 		List<Accomodation> accomodationList = categoryBO.getAccomodationList(); 
+		model.addAttribute("viewName", "category/accomodationList");
 		model.addAttribute("accomodationList", accomodationList);
 		model.addAttribute("viewName", "category/accomodationList");
 		
 		return "template/layout";
 	}
+	
+	// 호텔/예약 페이지 호텔 노출
+//	@GetMapping("/accomodation_test")
+//	public String accomodationListView(
+//			@RequestParam(value="checkIn", required=false) String checkIn,
+//			@RequestParam(value="checkOut", required=false) String checkOut,
+//			@RequestParam(value="headCount", required=false) Integer headCount,
+//			Model model) {
+//		Map<String, Object> result = new HashMap<>();
+//		if(checkIn != null) {
+//			//List<Accomodation> availableHotelList = categoryBO.searchAvailableHotel(checkIn, checkOut, headCount);
+//			//model.addAttribute("availableRoomList", availableHotelList);
+//			// 호텔 리스트
+//			result.put("code", 200);
+//		}
+//		
+//		
+//		List<Accomodation> accomodationList = categoryBO.getAccomodationList(); 
+//		model.addAttribute("accomodationList", accomodationList);
+//		model.addAttribute("viewName", "category/accomodationList");
+//		model.addAttribute("result", result);
+//		return "template/layout";
+//	}
 	
 	// 호텔 상세페이지 호출
 	@GetMapping("/accomodation_detail_view")

@@ -6,7 +6,9 @@ public class ReserveRoom {
 	private int id;
 	private int accomoId;
 	private int roomId;
-	private Date date;
+	private int headCount;
+	private String checkIn;
+	private String checkOut;
 	private Date createdAt;
 	private Date updatedAt;
 	public int getId() {
@@ -27,11 +29,24 @@ public class ReserveRoom {
 	public void setRoomId(int roomId) {
 		this.roomId = roomId;
 	}
-	public Date getDate() {
-		return date;
+	
+	public int getHeadCount() {
+		return headCount;
 	}
-	public void setDate(Date date) {
-		this.date = date;
+	public void setHeadCount(int headCount) {
+		this.headCount = headCount;
+	}
+	public String getCheckIn() {
+		return checkIn;
+	}
+	public void setCheckIn(String checkIn) {
+		this.checkIn = checkIn;
+	}
+	public String getCheckOut() {
+		return checkOut;
+	}
+	public void setCheckOut(String checkOut) {
+		this.checkOut = checkOut;
 	}
 	public Date getCreatedAt() {
 		return createdAt;
