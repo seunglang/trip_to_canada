@@ -7,7 +7,7 @@
 	<h2 class="hotel-name-font-margin">${accomodation.englishName}</h2>
 	<div>★★★★☆ 4,346건의 리뷰 (임시)</div>
 	<img src="/static/image/map.png" width="16px" class="mr-1" alt="mapIcon"><span>${accomodation.address}</span>&nbsp; <span class="symbol">|</span> &nbsp;<span><img src="/static/image/phoneNumber.png" width="16px" alt="phoneIcon">${accomodation.phoneNumber}</span>&nbsp; <span class="symbol">|</span> &nbsp; <span><img src="/static/image/email.png" width="16px" alt="email"> ${accomodation.email}</span>
-	<span class="hotel-detail-info-box"><img src="/static/image/review.png" class="mr-1" width="16px" alt="reviewIcon">리뷰</span>&nbsp;<span class="symbol">|</span>&nbsp;<span><img src="/static/image/heart.png" class="mx-1" width="16px" alt="saveIcon">저장</span>&nbsp; <span class="symbol">|</span> &nbsp;<span><img src="/static/image/share.png" class="mr-1" width="16px" alt="shareIcon">공유</span>
+	<span class="hotel-detail-info-box"><a href="/review/review_form_view?accomodationId=${accomodation.id}" class="review-hover"><img src="/static/image/review.png" class="mr-1" width="16px" alt="reviewIcon">리뷰</a></span>&nbsp;<span class="symbol">|</span>&nbsp;<span><img src="/static/image/heart.png" class="mx-1" width="16px" alt="saveIcon">저장</span>&nbsp; <span class="symbol">|</span> &nbsp;<span><img src="/static/image/share.png" class="mr-1" width="16px" alt="shareIcon">공유</span>
 </div>
 <div id="hotelDetailBackGroundColor">
 	<%-- 달력과 호텔 사진들 --%>
@@ -178,11 +178,11 @@
 			</div>
 		</div>
 		<%-- 체크인 데이트피커 --%>
-		<h3 class="mt-3">객실 선택</h3>
-		<div class="mt-1 d-flex align-items-center" id="datepickerBox">
+		<h3 class="mt-3">객실을 선택하세요</h3>
+		<div class="mt-4 d-flex align-items-center" id="datepickerBox">
 			<input class="form-control col-2" id="startDate" placeholder="체크인">
 			<input class="form-control col-2 ml-2" id="endDate" placeholder="체크아웃">
-			<input type="number" class="form-control col-2 ml-2" id="roomHeadCount" placeholder="인원 수" min="2">
+			<input type="number" class="form-control col-2 ml-2" id="roomHeadCount" placeholder="인원 수" min="2" max="4">
 			<%-- <button type="button" class="btn btn-secondary form-control col-1 ml-2" id="searchAvailableRoom" data-accomo-id="${accomodation.id}" data-room-id="${room.id}">검색</button> --%>
 		</div>
 		<%-- room에 썸네일 추가해서 방 대표 사진 받아와야 한다. --%>
@@ -219,6 +219,10 @@
 				</div>
 			</div>
 		</c:forEach>
+		<div id="reviewBox" class="mt-4">
+			<h3>${accomodation.englishName} 실제 투숙객 작성 후기</h3>
+			
+		</div>
 	</div>
 </div>
 
@@ -298,6 +302,7 @@
 			});
 		});
 		
+		
 		// 체크아웃 날짜 선택되면 경고문 제거
 		$('#endDate').on('change', function() {
 			$('.warningText').addClass('d-none');
@@ -328,6 +333,10 @@
 			// 방 정원수와 선택한 인원수 validation
 			if(headcount < roomHeadCount) {
 				alert("인원수 초과입니다. 다른 방을 선택해주세요.");
+				return;
+			}
+			if (roomHeadCount <= 1) {
+				alert("숙박 인원은 최소 2명입니다.");
 				return;
 			}
 			
