@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <div id="hotelDetailInfoBox" class="pt-3">
 	<h2 class="hotel-name-font-margin">${accomodation.name}</h2>
 	<h2 class="hotel-name-font-margin">${accomodation.englishName}</h2>
@@ -29,7 +30,7 @@
 		<div id="roomInfo"><a href="#moveToHotelRooms" class="move-to-hotel-rooms">객실을 살펴보고 싶다면 스크롤을 밑으로 내려보세요 ! 다양한 객실 유형이 준비되어있습니다.</a></div>
 		
 		<%-- 호텔시설 및 객실 특징 --%>	
-		<div id="hotelDetailFacilitiesAndRoom" class="mt-4">	
+		<div id="hotelDetailFacilitiesAndRoom" class="mt-4 border rounded">	
 			<h2 class="pt-3 pl-4 intro-padding">소개</h2>
 			<hr align="center" class="hr-width">
 			<%-- 호텔 소개 --%>
@@ -158,7 +159,7 @@
 			</div>
 		</div>
 		<%-- 구글맵 지도 --%>
-		<div id="googleMapBox" class="mt-4">
+		<div id="googleMapBox" class="mt-4 border rounded">
 			<h2 class="pt-3 pl-4 intro-padding">위치</h2>
 			<hr align="center" class="hr-width">
 			<div class="d-flex">
@@ -187,7 +188,7 @@
 		</div>
 		<%-- room에 썸네일 추가해서 방 대표 사진 받아와야 한다. --%>
 		<c:forEach items="${rooms}" var="room">
-			<div id="hotelRoomInfoAndPic" class="mt-3 d-flex">
+			<div id="hotelRoomInfoAndPic" class="mt-3 d-flex border rounded">
 				<img src="${room.thumbnailPic}" alt="roomPic" width="270px" height="200px" class="">
 				<div class="pl-3 test123" id="roomIntroBox">
 					<div class="pt-2" id="moveToHotelRooms"><a href="#" class="roomType-hover">${room.roomType}</a></div>
@@ -220,11 +221,51 @@
 			</div>
 		</c:forEach>
 		<div id="reviewBox" class="mt-4">
-			<h3>${accomodation.englishName} 실제 투숙객 작성 후기</h3>
+			<h3 class="mb-3">${accomodation.englishName} 실제 투숙객 작성 후기</h3>
 			<c:forEach items="${accomoReview}" var="review">
-				<div>
-					<div>${review.reviewTitle}</div>
-					<div>${review.userName}</div>
+			<c:set var="customerName" value="${review.userName}" />
+				<div class="reviewDetailBox border rounded">
+					<div class="name-margin-custom"><span class="name-custom ml-2"><span class="font-weight-bold">${fn:substring(customerName, 0, 2)}*</span>님이 이 리뷰를 작성하셨습니다.</span><span class="ml-2"><fmt:formatDate value="${review.createdAt}" pattern="yyyy년 MM월"/></span></div>
+					<div class="ml-3">
+						<c:choose>
+							<c:when test="${review.point == 5}">
+								⭐⭐⭐⭐⭐<span class="small ml-1">매우만족</span>
+							</c:when>
+							<c:when test="${review.point == 4}">
+								⭐⭐⭐⭐<span class="small ml-1">만족</span>
+							</c:when>
+							<c:when test="${review.point == 3}">
+								⭐⭐⭐<span class="small ml-1">보통</span>
+							</c:when>
+							<c:when test="${review.point == 2}">
+								⭐⭐<span class="small ml-1">불만</span>
+							</c:when>
+							<c:when test="${review.point == 1}">
+								⭐<span class="small ml-1">매우불만</span>
+							</c:when>
+						</c:choose>
+					</div>
+					<div class="title-custom font-weight-bold mx-5 mt-4">“${review.reviewTitle}”</div>
+					<div class="mx-5 mt-2 content-custom">${review.reviewContent}</div>
+					<c:set var="checkIn" value="${review.checkIn}" />
+					<div class="mx-5 stay-custom"><span class="font-weight-bold">숙박날짜:</span> ${fn:substring(checkIn, 0, 4)}년&nbsp;${fn:substring(checkIn, 5, 7)}월</div>
+					<hr class="mx-5">
+					<div class="mt-3 mb-3 mx-5 small text-secondary"><i>이 리뷰는 트립투캐나다 LLC의 의견이 아닌 트립투캐나다 회원의 주관적인 의견입니다. 트립투캐나다에서는 리뷰를 확인합니다.</i></div>
+					<div>
+						<a href="" class="help-thumb" onclick="return false" data-review-id="${review.id}" data-user-id="${userId}">
+							<img src="/static/image/thumbUpWhite.png" width="17px" id="unfilledThumbLike" height="17px" alt="helped" class="unfilledThumbLike ml-5 mb-2 mr-1">
+							<span class="helped-custom small font-weight-bold text-dark">도움이 됨</span>
+							
+							<%-- <c:choose>
+								<c:when test="${thumbLike eq true}">
+									<img src="/static/image/thumbUp.png" id="filledThumbLike" width="18" height="18" alt="filledThumbLike">
+								</c:when>
+								<c:when test="${thumbLike == false}">
+									<img src="/static/image/thumbUpWhite.png" id="unfilledThumbLike" width="18" height="18" alt="unfilledThumbLike">
+								</c:when>
+							</c:choose> --%>
+						</a>
+					</div>
 				</div>
 			</c:forEach>
 		</div>
@@ -263,6 +304,35 @@
 	 }
  
 	$(document).ready(function() {
+		
+		// 도움이 된 버튼 클릭
+		$('.help-thumb').on('click', function(e) {
+			//e.preventDefault();
+			let reviewId = $(this).data('review-id');
+			let userId = $(this).data('user-id');
+			//alert(userId);
+			if (userId == null) {
+				alert("로그인이 필요한 서비스입니다.");
+				return;
+			}
+			var imgTag = "<img src='/static/image/thumbUp.png'>";
+			$.ajax({
+				 url:"/thumbLike/" + reviewId
+				
+				, success:function(data) {
+					if (data.code) {
+						$('#unfilledThumbLike').attr("src", "/static/image/thumbUp.png");
+						//document.location.reload();
+					} else {
+						$('#unfilledThumbLike').attr("src", "/static/image/thumbUpWhite.png");
+						//document.location.reload();
+					}
+				}
+				, error:function(e) {
+					alert("오류");
+				}
+			});
+		});
 		
 		// 체크인 체크아웃 인원수 선택 후 검색 버튼 눌렀을 때
 		$('#searchAvailableRoom').on('click', function() {

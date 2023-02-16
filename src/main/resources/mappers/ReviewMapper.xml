@@ -13,6 +13,7 @@
 			,`reviewTitle`
 			,`reviewContent`
 			,`point`
+			,`checkIn`
 			,`createdAt`
 			,`updatedAt`
  		)
@@ -24,6 +25,7 @@
  			, #{reviewTitle}
  			, #{reviewContent}
  			, #{point}
+ 			, #{checkIn}
  			, NOW()
  			, NOW()
  		)
@@ -38,6 +40,7 @@
 			,`reviewTitle`
 			,`reviewContent`
 			,`point`
+			,`checkIn`
 			,`createdAt`
 			,`updatedAt`
 		FROM

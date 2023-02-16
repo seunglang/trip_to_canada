@@ -17,6 +17,9 @@ import com.tour.category.model.Room;
 import com.tour.category.model.RoomFacilities;
 import com.tour.review.bo.ReviewBO;
 import com.tour.review.model.AccomoReview;
+import com.tour.thumbLike.bo.ThumbLikeBO;
+
+import jakarta.servlet.http.HttpSession;
 
 @RequestMapping("/category")
 @Controller
@@ -30,6 +33,9 @@ public class CategoryController {
 	
 	@Autowired
 	private ReviewBO reviewBO;
+	
+	@Autowired
+	private ThumbLikeBO thumbLikeBO;
 	
 	// 호텔/예약 페이지 호출
 	@GetMapping("/accomodation_list_view")
@@ -70,7 +76,8 @@ public class CategoryController {
 	@GetMapping("/accomodation_detail_view")
 	public String accomodationDetailView(
 			@RequestParam("accomodationId") int accomodationId,
-			Model model) {
+			Model model,
+			HttpSession session) {
 		
 		// 클릭된 호텔 객체 가져오기
 		Accomodation accomodation = categoryBO.getAccomodationById(accomodationId);

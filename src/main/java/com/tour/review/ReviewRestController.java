@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tour.booking.bo.BookingBO;
+import com.tour.booking.model.ReserveRoom;
 import com.tour.review.bo.ReviewBO;
 
 import jakarta.servlet.http.HttpSession;
@@ -38,14 +39,23 @@ public class ReviewRestController {
 		int userId = (int)session.getAttribute("userId");
 		String userName = (String)session.getAttribute("userName");
 		
+		ReserveRoom reserveRoom = bookingBO.getReserveRoomByUserIdAccomoId(userId, accomoId);
+		String checkedIn = reserveRoom.getCheckIn();
+		
 		int experienced = bookingBO.searchReserveRoomByUserIdAccomoId(userId, accomoId);
-		if (experienced > 0) {
-			int count = reviewBO.addReview(star, reviewContent, reviewTitle, accomoId, userId, userName);
+		if (experienced == 2) {
+			int count = reviewBO.addReview(star, reviewContent, reviewTitle, accomoId, userId, userName, checkedIn);
 			if (count > 0) {
 				result.put("code", 200);
 			} else {
 				result.put("errorMessage", "해당 호텔을 이용했던 고객님만 리뷰 작성이 가능합니다.");
 			}
+		} else if (experienced == 1) {
+			result.put("code", 500);
+			result.put("errorMessage", "호텔 이용 후 30일이 지나 작성하실 수 없습니다.");
+		}
+		else {
+			result.put("errorMessage", "해당 호텔을 이용했던 고객님만 리뷰 작성이 가능합니다.");
 		}
 		
 		return result;

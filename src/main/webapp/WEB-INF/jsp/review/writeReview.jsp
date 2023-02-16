@@ -19,10 +19,10 @@
 						<div class="row">
 							<div class="col-xs-12 col-md-12">
 								<span>리뷰 작성</span>
-								<textarea id="reviewContent" name="reviewContent" maxlength="200" class="form-control input-lg mt-2" placeholder="역시 호텔베개는 최고네요.." rows="9"></textarea>
+								<textarea id="reviewContent" name="reviewContent" maxlength="300" class="form-control input-lg mt-2" placeholder="역시 호텔베개는 최고네요.." rows="9"></textarea>
 								<span id="textBox" class="textLengthWrap d-flex justify-content-end mt-1">
 									<span class="textCount small">0</span>
-									<span class="textTotal small">/200자</span>
+									<span class="textTotal small">/300자</span>
 								</span>
 							</div>
 							<div class="col-xs-12 col-md-12 mt-4">
@@ -63,11 +63,11 @@
 		    }
 		    
 		    // 글자수 제한
-		    if (content.length > 200) {
+		    if (content.length > 300) {
 		    	// 200자 부터는 타이핑 되지 않도록
-		        content = content.substring(0, 50);
+		        content = content.substring(0, 30);
 		        // 200자 넘으면 알림창 뜨도록
-		        alert('글자수는 200자까지 입력 가능합니다.');
+		        alert('글자수는 300자까지 입력 가능합니다.');
 		    };
 		});
 		
@@ -118,8 +118,12 @@
 					if(data.code == 200) {
 						alert("리뷰 작성에 성공하셨습니다.");
 						location.href = "/category/accomodation_detail_view?accomodationId=" + accomoId;
+					} else if (data.code == 500) {
+						alert(data.errorMessage);
+						location.href = "/category/accomodation_detail_view?accomodationId=" + accomoId;
 					} else {
 						alert(data.errorMessage);
+						location.href= "/category/accomodation_detail_view?accomodationId=" + accomoId;
 					}
 				}
 				, error:function(e) {

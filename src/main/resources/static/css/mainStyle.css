@@ -67,6 +67,13 @@ figcaption {
 #googleMap {width:350px; height:300px;}
 .review-hover {color:#555;}
 .review-hover:hover {color:#555; text-decoration:none;}
+.reviewDetailBox {width:1000px; height:345px; background-color:#FFFFFF;}
+.name-custom {font-size:14px;}
+.title-custom {font-size:23px;}
+.content-custom {font-size:15px;}
+.stay-custom {margin-top:32px;}
+.name-margin-custom {padding-top:10px; margin-left:10px;}
+.link-thumb:hover {color:#000;}
 input {
   padding:10px;
 	font-family: FontAwesome, "Open Sans", Verdana, sans-serif;

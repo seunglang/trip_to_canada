@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="com.tour.thumbLike.dao.ThumbLikeDAO">
+ 	<insert id="insertThumbLike" parameterType="map">
+ 		INSERT INTO `thumbLike`
+ 		(
+ 			`userId`
+			,`reviewId`
+			,`createdAt`
+ 		)
+ 		VALUES
+ 		(
+ 			#{userId}
+ 			, #{reviewId}
+ 			, NOW()
+ 		)
+ 	</insert>
+ 	
+ 	<select id="existThumbLikeByUserIdPostId" parameterType="map" resultType="int">
+ 		SELECT
+ 			COUNT(*)
+		FROM
+			`thumbLike`
+		WHERE
+			`userId` = #{userId}
+			AND
+			`reviewId` = #{reviewId}
+ 	</select>
+ 	
+ 	<delete id="deleteThumbLikeByUserIdPostId" parameterType="map">
+ 		DELETE
+ 		FROM
+ 			`thumbLike`
+ 		WHERE
+ 			`userId` = #{userId}
+ 		AND
+ 			`reviewId` = #{reviewId}
+ 	</delete>
+ </mapper>

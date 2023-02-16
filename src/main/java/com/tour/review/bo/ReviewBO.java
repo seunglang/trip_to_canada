@@ -16,8 +16,8 @@ public class ReviewBO {
 	private ReviewDAO reviewDAO;
 
 	// 리뷰 작성
-	public int addReview(int star, String reviewContent, String reviewTitle, int accomoId, int userId, String userName) {
-		return reviewDAO.insertReview(star, reviewContent, reviewTitle, accomoId, userId, userName);
+	public int addReview(int star, String reviewContent, String reviewTitle, int accomoId, int userId, String userName, String checkIn) {
+		return reviewDAO.insertReview(star, reviewContent, reviewTitle, accomoId, userId, userName, checkIn);
 	}
 	
 	public List<AccomoReview> getAccomoReviewList(int accomodationId) {

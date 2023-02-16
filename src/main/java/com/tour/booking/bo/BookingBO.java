@@ -2,6 +2,7 @@ package com.tour.booking.bo;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,12 +23,18 @@ public class BookingBO {
 		//int experienced = bookingDAO.searchReserveRoomByUserIdAccomoId(userId, accomoId, now);
 		// userid와 accomoId로 이용했던 내역 행을 가져와서 여기서 비교를 해주자
 		ReserveRoom reserveRoom = getReserveRoomByUserIdAccomoId(userId, accomoId);
+		if (reserveRoom == null) {
+			return 0;
+		}
 		
 		LocalDate parseCheckOut = LocalDate.parse(reserveRoom.getCheckOut());
 		LocalDate now = LocalDate.now();
-		
+		int limitedDays = (int)ChronoUnit.DAYS.between(parseCheckOut, now);
 		if (parseCheckOut.isBefore(now)) {
-			return 1;
+			if (limitedDays > 30) {
+				return 1;
+			}
+			return 2;
 		}
 		return 0;
 	}

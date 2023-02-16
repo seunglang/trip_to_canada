@@ -17,7 +17,8 @@ public interface ReviewDAO {
 			@Param("reviewTitle") String reviewTitle,
 			@Param("accomoId") int accomoId,
 			@Param("userId") int userId,
-			@Param("userName") String userName);
+			@Param("userName") String userName,
+			@Param("checkIn") String checkIn);
 	
 	// 리뷰 리스트 가져오기
 	public List<AccomoReview> selectAccomoReviewList(int accomodationId);

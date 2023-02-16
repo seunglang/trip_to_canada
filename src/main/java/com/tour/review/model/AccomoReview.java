@@ -11,6 +11,7 @@ public class AccomoReview {
 	private String reviewTitle;
 	private String reviewContent;
 	private int point;
+	private String checkIn;
 	private Date createdAt;
 	private Date updatedAt;
 	
@@ -56,6 +57,12 @@ public class AccomoReview {
 	}
 	public void setPoint(int point) {
 		this.point = point;
+	}
+	public String getCheckIn() {
+		return checkIn;
+	}
+	public void setCheckIn(String checkIn) {
+		this.checkIn = checkIn;
 	}
 	public Date getCreatedAt() {
 		return createdAt;
