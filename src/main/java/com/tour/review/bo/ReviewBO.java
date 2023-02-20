@@ -20,7 +20,19 @@ public class ReviewBO {
 		return reviewDAO.insertReview(star, reviewContent, reviewTitle, accomoId, userId, userName, checkIn);
 	}
 	
+	// 리뷰 가져오기
 	public List<AccomoReview> getAccomoReviewList(int accomodationId) {
 		return reviewDAO.selectAccomoReviewList(accomodationId);
 	}
+	
+	// 리뷰 평균 점수 가져오기
+	public int getAccomoReviewAVGPoint(int accomodationId) {
+		return reviewDAO.selectAccomoAvgPoint(accomodationId);
+	}
+	
+	// 리뷰 개수 가져오기
+	public int getAccomoReviewRowCount(int accomodationId) {
+		return reviewDAO.selectAccomoReviewRowCount(accomodationId);
+	}
+	
 }

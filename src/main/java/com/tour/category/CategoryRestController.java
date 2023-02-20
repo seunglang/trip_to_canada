@@ -6,6 +6,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.tour.category.bo.CategoryBO;
+import com.tour.thumbLike.bo.ThumbLikeBO;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -101,6 +104,7 @@ public class CategoryRestController {
 			@RequestParam(value="englishName", required=false) String englishName,
 			@RequestParam(value="address", required = false) String address, 
 			@RequestParam(value="zipCode", required=false) String zipCode, 
+			@RequestParam(value="recommendTime", required=false) String recommendTime, 
 			@RequestParam(value="price", required=false) String price, 
 			@RequestParam(value="intro", required=false) String intro, 
 			@RequestParam(value="intro2", required=false) String intro2, 
@@ -109,8 +113,9 @@ public class CategoryRestController {
 			@RequestParam(value="accomoPlace2", required=false) String accomoPlace2,
 			@RequestParam(value="accomoPlace3", required=false) String accomoPlace3,
 			@RequestParam(value="accomoPlace4", required=false) String accomoPlace4,
-			@RequestParam(value="accomolatitude", required=false) String latitude,
-			@RequestParam(value="accomolongitude", required=false) String longitude,
+			@RequestParam(value="latitude", required=false) String latitude,
+			@RequestParam(value="longitude", required=false) String longitude,
+			@RequestParam(value="website", required=false) String website,
 			@RequestParam(value="phoneNumber", required=false) String phoneNumber, 
 			@RequestParam(value="email", required=false) String email, 
 			@RequestParam(value="operatingTime", required=false) String operatingTime,
@@ -143,8 +148,8 @@ public class CategoryRestController {
 		
 		
 		insertCategoryInfo = categoryBO.addCategoryInfo(categoryAttr, categoryId, loginId, name, englishName, address, zipCode,
-		intro, intro2, intro3, accomoPlace, accomoPlace2, accomoPlace3, accomoPlace4, latitude, longitude,  price, phoneNumber, email,
-		operatingTime, availableToServe, type, happyHour, durationTime, field,
+		recommendTime, intro, intro2, intro3, accomoPlace, accomoPlace2, accomoPlace3, accomoPlace4, latitude, longitude, website,
+		price, phoneNumber, email, operatingTime, availableToServe, type, happyHour, durationTime, field,
 		vitalItem, culture, commonSense, recommended, warning, file);
 		
 		

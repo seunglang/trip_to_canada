@@ -118,13 +118,19 @@
 		 		(
 					`categoryId`
 					,`name`
+					,`englishName`
 					,`address`
 					,`zipCode`
 					,`intro`
+					,`intro2`
+					,`recommendTime`
 					,`price`
 					,`phoneNumber`
 					,`email`
 					,`operatingTime`
+					,`latitude`
+					,`longitude`
+					,`website`
 					,`thumbnailPic`
 					,`createdAt`
 					,`updatedAt`
@@ -133,13 +139,19 @@
 		 		(
 		 			#{categoryId}
 		 			, #{name}
+		 			, #{englishName}
 		 			, #{address}
 		 			, #{zipCode}
 		 			, #{intro}
+		 			, #{intro2}
+		 			, #{recommendTime}
 		 			, #{price}
 		 			, #{phoneNumber}
 		 			, #{email}
 		 			, #{operatingTime}
+		 			, #{latitude}
+		 			, #{longitude}
+		 			, #{website}
 		 			, #{thumbnailPic}
 		 			, NOW()
 		 			, NOW()
@@ -471,5 +483,66 @@
 			`room`
 		WHERE
 			`accomoId` = #{accomodationId}
+ 	</select>
+ 	
+ 	<select id="selectTouristList" resultType="com.tour.category.model.Tourist">
+ 		SELECT
+ 			`id`
+ 			,`categoryId`
+			,`name`
+			,`englishName`
+			,`address`
+			,`zipCode`
+			,`intro`
+			,`intro2`
+			,`recommendTime`
+			,`price`
+			,`phoneNumber`
+			,`email`
+			,`operatingTime`
+			,`latitude`
+			,`longitude`
+			,`website`
+			,`thumbnailPic`
+			,`createdAt`
+			,`updatedAt`
+		FROM
+			`tourist`
+ 	</select>
+ 	
+ 	<select id="selectTouristById" resultType="com.tour.category.model.Tourist">
+ 		SELECT
+ 			`id`
+ 			,`categoryId`
+			,`name`
+			,`englishName`
+			,`address`
+			,`zipCode`
+			,`intro`
+			,`intro2`
+			,`recommendTime`
+			,`price`
+			,`phoneNumber`
+			,`email`
+			,`operatingTime`
+			,`latitude`
+			,`longitude`
+			,`website`
+			,`thumbnailPic`
+			,`createdAt`
+			,`updatedAt`
+		FROM
+			`tourist`
+		WHERE
+			`id` = #{touristId}
+ 	</select>
+ 	
+ 	<select id="selectTouristPicById" resultType="String">
+ 		 SELECT
+ 		 	`imagePath`
+ 		 FROM
+ 		 	`touristPic`
+ 		 WHERE
+ 		 	`touristId` = #{touristId}
  	</select>
  </mapper>

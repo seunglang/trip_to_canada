@@ -128,9 +128,13 @@
 					<%-- 관광지 정보 입력란 --%>
 					<div class="d-none mt-3" id="touristInputForm">
 						<legend class="mb-4 d-none" id="touristForm">관광지 정보 입력란</legend>
+						<div class="small ml-1 mb-1 mt-3">관광지 이름 * </div>
+						<div class="d-flex align-items-center">
+							<input type="text" id="touristName" name="touristName" class="form-control col-12" placeholder="name of tourists(Korean)"/>
+						</div>
 						<div class="small ml-1 mb-1 mt-3">관광지 이름(영어로 기재) * </div>
 						<div class="d-flex align-items-center">
-							<input type="text" id="touristName" name="touristName" class="form-control col-12" placeholder="name of tourists"/>
+							<input type="text" id="touristEnglishName" name="touristEnglishName" class="form-control col-12" placeholder="name of tourists"/>
 						</div>
 						<div class="small ml-1 mb-1 mt-3">관광지 메인주소(영어로 기재) * </div>
 						<div class="d-flex align-items-center">
@@ -142,7 +146,19 @@
 						</div>
 						<div class="small ml-1 mb-1 mt-3">관광지 정보 *</div>
 						<div class="d-flex align-items-center">
-							<textarea class="form-control" id="touristIntro" name="touristIntro" placeholder="정보" rows="10"></textarea>
+							<textarea class="form-control" id="touristIntro" name="touristIntro" placeholder="정보" rows="7"></textarea>
+						</div>
+						<div class="small ml-1 mb-1 mt-3">관광지 정보 *</div>
+						<div class="d-flex align-items-center">
+							<textarea class="form-control" id="touristIntro2" name="touristIntro2" placeholder="정보" rows="7"></textarea>
+						</div>
+						<div class="small ml-1 mb-1 mt-3">관광지 웹사이트 *</div>
+						<div class="d-flex align-items-center">
+							<input type="text" id="touristWebsite" name="touristWebsite" class="form-control col-6 input-lg" placeholder="ex) http://..."/>
+						</div>
+						<div class="small ml-1 mb-1 mt-3">추천 관광시간 *</div>
+						<div class="d-flex align-items-center">
+							<input type="text" id="touristRecommendTime" name="touristRecommendTime" class="form-control col-6 input-lg" placeholder="ex) 1~2hour"/>
 						</div>
 						<div class="small ml-1 mb-1 mt-3">관광지 입장료 *</div>
 						<div class="d-flex align-items-center">
@@ -159,6 +175,14 @@
 						<div class="small ml-1 mb-1 mt-3">관광지 운영시간 *</div>
 						<div class="d-flex align-items-center">
 							<input type="text" id="touristOperatingTime" name="touristOperatingTime" class="form-control col-12 input-lg" placeholder="10am~9pm"/>
+						</div>
+						<div class="small ml-1 mb-1 mt-3">위도(구글맵api) *</div>
+						<div class="d-flex align-items-center">
+							<input type="text" id="touristlatitude" name="touristlatitude" class="form-control col-10 input-lg" placeholder="43.64705552448648"/>
+						</div>
+						<div class="small ml-1 mb-1 mt-3">경도(구글맵api) *</div>
+						<div class="d-flex align-items-center">
+							<input type="text" id="touristlongitude" name="touristlongitude" class="form-control col-10 input-lg" placeholder="-79.39181461534038"/>
 						</div>
 					</div>
 					<%-- 식당 정보 입력란 --%>
@@ -971,13 +995,19 @@
 			
 			// 관광지 input 값들
 			let touristName = $('#touristName').val();
+			let touristEnglishName = $('#touristEnglishName').val();
 			let touristMainAddress = $('#touristMainAddress').val();
 			let touristZipCode= $('#touristZipCode').val();
 			let touristPrice = $('#touristPrice').val();
 			let touristIntro = $('#touristIntro').val();
+			let touristIntro2 = $('#touristIntro2').val();
+			let touristWebsite = $('#touristWebsite').val();
+			let touristRecommendTime = $('#touristRecommendTime').val();
 			let touristPhoneNumber = $('#touristPhoneNumber').val();
 			let touristEmail = $('#touristEmail').val();
 			let touristOperatingTime = $('#touristOperatingTime').val();
+			let touristlatitude = $('#touristlatitude').val();
+			let touristlongitude = $('#touristlongitude').val();
 			let touristThumbnail = $('#touristThumbnail').val();
 			
 			// 식당 input 값들
@@ -1100,6 +1130,10 @@
 					alert("관광지 이름을 입력하세요.");
 					return;
 				}
+				if (touristEnglishName == "") {
+					alert("관광지 영어 이름을 입력하세요.");
+					return;
+				}
 				if (touristMainAddress == "") {
 					alert("관광지 메인 주소를 입력하세요.");
 					return;
@@ -1110,6 +1144,18 @@
 				}
 				if (touristIntro == "") {
 					alert("관광지 정보를 입력하세요.");
+					return;
+				}
+				if (touristIntro2 == "") {
+					alert("관광지 정보를 입력하세요.");
+					return;
+				}
+				if (touristWebsite == "") {
+					alert("관광지 주소를 입력하세요.");
+					return;
+				}
+				if (touristRecommendTime == "") {
+					alert("추천 관광시간을 입력하세요.");
 					return;
 				}
 				if (touristPrice == "") {
@@ -1126,6 +1172,14 @@
 				}
 				if (touristOperatingTime == "") {
 					alert("관광지 운영시간을 입력하세요.");
+					return;
+				}
+				if (touristlatitude == "") {
+					alert("관광지 위도를 입력하세요.");
+					return;
+				}
+				if (touristlongitude == "") {
+					alert("관광지 경도를 입력하세요.");
 					return;
 				}
 				if (file == "") {
@@ -1239,8 +1293,8 @@
 				formData.append("accomoPlace2", accomoPlace2);
 				formData.append("accomoPlace3", accomoPlace3);
 				formData.append("accomoPlace4", accomoPlace4);
-				formData.append("accomolatitude", accomolatitude);
-				formData.append("accomolongitude", accomolongitude);
+				formData.append("latitude", accomolatitude);
+				formData.append("longitude", accomolongitude);
 				formData.append("phoneNumber", accomoPhoneNumber);
 				formData.append("email", accomoEmail);
 				formData.append("type", accomoType);
@@ -1249,13 +1303,19 @@
 			} else if (categoryAttr == "tourist") {
 				formData.append("categoryAttr", categoryAttr);
 				formData.append("name", touristName);
+				formData.append("englishName", touristEnglishName);
 				formData.append("address", touristMainAddress);
 				formData.append("zipCode", touristZipCode);
 				formData.append("price", touristPrice);
 				formData.append("intro", touristIntro);
+				formData.append("intro2", touristIntro2);
+				formData.append("website", touristWebsite);
+				formData.append("recommendTime", touristRecommendTime);
 				formData.append("phoneNumber", touristPhoneNumber);
 				formData.append("email", touristEmail);
 				formData.append("operatingTime", touristOperatingTime);
+				formData.append("latitude", touristlatitude);
+				formData.append("longitude", touristlongitude);
 				formData.append("file", $('#file')[0].files[0]);
 			} else if (categoryAttr == "restaurant") {
 				formData.append("categoryAttr", categoryAttr);

@@ -22,4 +22,10 @@ public interface ReviewDAO {
 	
 	// 리뷰 리스트 가져오기
 	public List<AccomoReview> selectAccomoReviewList(int accomodationId);
+	
+	// 리뷰 평균 구하기
+	public int selectAccomoAvgPoint(int accomodationId);
+	
+	// 리뷰 갯수 가져오기
+	public int selectAccomoReviewRowCount(int accomodationId);
 }

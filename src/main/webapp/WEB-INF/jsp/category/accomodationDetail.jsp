@@ -6,11 +6,30 @@
 <div id="hotelDetailInfoBox" class="pt-3">
 	<h2 class="hotel-name-font-margin">${accomodation.name}</h2>
 	<h2 class="hotel-name-font-margin">${accomodation.englishName}</h2>
-	<div>★★★★☆ 4,346건의 리뷰 (임시)</div>
+	<div>
+		<c:choose>
+			<c:when test="${accomoReviewAVGPoint == 5}">
+				⭐⭐⭐⭐⭐
+			</c:when>
+			<c:when test="${accomoReviewAVGPoint == 4}">
+				⭐⭐⭐⭐
+			</c:when>
+			<c:when test="${accomoReviewAVGPoint == 3}">
+				⭐⭐⭐
+			</c:when>
+			<c:when test="${accomoReviewAVGPoint == 2}">
+				⭐⭐
+			</c:when>
+			<c:when test="${accomoReviewAVGPoint == 1}">
+				⭐
+			</c:when>
+		</c:choose>
+		<span class="small">${accomoReviewRowCount}건의 리뷰</span>
+	</div>
 	<img src="/static/image/map.png" width="16px" class="mr-1" alt="mapIcon"><span>${accomodation.address}</span>&nbsp; <span class="symbol">|</span> &nbsp;<span><img src="/static/image/phoneNumber.png" width="16px" alt="phoneIcon">${accomodation.phoneNumber}</span>&nbsp; <span class="symbol">|</span> &nbsp; <span><img src="/static/image/email.png" width="16px" alt="email"> ${accomodation.email}</span>
 	<span class="hotel-detail-info-box"><a href="/review/review_form_view?accomodationId=${accomodation.id}" class="review-hover"><img src="/static/image/review.png" class="mr-1" width="16px" alt="reviewIcon">리뷰</a></span>&nbsp;<span class="symbol">|</span>&nbsp;<span><img src="/static/image/heart.png" class="mx-1" width="16px" alt="saveIcon">저장</span>&nbsp; <span class="symbol">|</span> &nbsp;<span><img src="/static/image/share.png" class="mr-1" width="16px" alt="shareIcon">공유</span>
 </div>
-<div id="hotelDetailBackGroundColor">
+<div id="hotelDetailBackGroundColor" class="border rounded">
 	<%-- 달력과 호텔 사진들 --%>
 	<div id="hotelDetailContentsBox">
 		<div class="d-flex">
@@ -224,7 +243,7 @@
 			<h3 class="mb-3">${accomodation.englishName} 실제 투숙객 작성 후기</h3>
 			<c:forEach items="${accomoReview}" var="review">
 			<c:set var="customerName" value="${review.userName}" />
-				<div class="reviewDetailBox border rounded">
+				<div class="reviewDetailBox border rounded mt-3">
 					<div class="name-margin-custom"><span class="name-custom ml-2"><span class="font-weight-bold">${fn:substring(customerName, 0, 2)}*</span>님이 이 리뷰를 작성하셨습니다.</span><span class="ml-2"><fmt:formatDate value="${review.createdAt}" pattern="yyyy년 MM월"/></span></div>
 					<div class="ml-3">
 						<c:choose>
@@ -310,23 +329,26 @@
 			//e.preventDefault();
 			let reviewId = $(this).data('review-id');
 			let userId = $(this).data('user-id');
-			//alert(userId);
+			//alert(reviewId);
 			if (userId == null) {
 				alert("로그인이 필요한 서비스입니다.");
 				return;
 			}
 			var imgTag = "<img src='/static/image/thumbUp.png'>";
 			$.ajax({
-				 url:"/thumbLike/" + reviewId
+				 url:"/category/accomodation_detail_view"
+				 , data: {"reviewId":reviewId}
 				
 				, success:function(data) {
-					if (data.code) {
-						$('#unfilledThumbLike').attr("src", "/static/image/thumbUp.png");
+					//alert("성공");
+					/* if (data.code) {
+						//$('#unfilledThumbLike').attr("src", "/static/image/thumbUp.png");
+						
 						//document.location.reload();
 					} else {
 						$('#unfilledThumbLike').attr("src", "/static/image/thumbUpWhite.png");
 						//document.location.reload();
-					}
+					} */
 				}
 				, error:function(e) {
 					alert("오류");

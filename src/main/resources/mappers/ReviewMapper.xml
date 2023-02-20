@@ -49,4 +49,21 @@
 			`accomoId` = #{accomodationId}
  	</select>
  	
+ 	<select id="selectAccomoAvgPoint" resultType="int">
+ 		SELECT
+ 			AVG(`point`)
+ 		FROM
+ 			`accomoReview`
+ 		WHERE
+ 			`accomoId` = #{accomodationId}
+ 	</select>
+ 	
+ 	<select id="selectAccomoReviewRowCount" resultType="int">
+ 		SELECT
+ 			COUNT(*)
+ 		FROM
+ 			`accomoReview`
+ 		WHERE
+ 			`accomoId` = #{accomodationId}
+ 	</select>
  </mapper>

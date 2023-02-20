@@ -17,7 +17,8 @@
      	<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         
-        
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
 
         <%-- 체크인 달력 테스트 --%>
         <!-- <link href="css/themes/t-datepicker-bluegrey.css" rel="stylesheet" type="text/css">

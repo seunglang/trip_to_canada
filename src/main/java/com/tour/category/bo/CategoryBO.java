@@ -1,8 +1,5 @@
 package com.tour.category.bo;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,13 +7,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.tour.booking.bo.BookingBO;
-import com.tour.booking.model.ReserveRoom;
 import com.tour.category.dao.CategoryDAO;
 import com.tour.category.model.Accomodation;
 import com.tour.category.model.Category;
 import com.tour.category.model.Facilities;
 import com.tour.category.model.Room;
 import com.tour.category.model.RoomFacilities;
+import com.tour.category.model.Tourist;
 import com.tour.common.FileManagerService;
 
 @Service
@@ -30,6 +27,7 @@ public class CategoryBO {
 	
 	@Autowired
 	private FileManagerService fileManagerService;
+	
 	
 	// 카테고리 추가
 	public boolean addCategory(String categoryName, String categoryAttr) {
@@ -67,8 +65,8 @@ public class CategoryBO {
 	
 	// 선택한 카테고리에 글 저장
 	public boolean addCategoryInfo(String categoryAttr, Integer categoryId, String loginId, String name, String englishName,
-			String address, String zipCode, String intro, String intro2, String intro3, String accomoPlace,
-			String accomoPlace2, String accomoPlace3, String accomoPlace4, String latitude, String longitude, String price, String phoneNumber, String email,
+			String address, String zipCode, String recommendTime, String intro, String intro2, String intro3, String accomoPlace,
+			String accomoPlace2, String accomoPlace3, String accomoPlace4, String latitude, String longitude, String website, String price, String phoneNumber, String email,
 			String operatingTime, String availableToServe, String type, String happyHour, String durationTime,
 			String field, String vitalItem, String culture, String commonSense, String recommended, 
 			String warning, MultipartFile thumbnail) {
@@ -91,8 +89,8 @@ public class CategoryBO {
 			imagePath = fileManagerService.saveFile(loginId, thumbnail); 
 		}
 		
-		return categoryDAO.insertCategoryInfo(categoryAttr, categoryId, name, englishName, address, zipCode, intro, intro2,
-				intro3, accomoPlace, accomoPlace2, accomoPlace3, accomoPlace4, latitude, longitude, price, phoneNumber, email, operatingTime, availableToServe, type, happyHour, durationTime, field,
+		return categoryDAO.insertCategoryInfo(categoryAttr, categoryId, name, englishName, address, zipCode, recommendTime, intro, intro2,
+				intro3, accomoPlace, accomoPlace2, accomoPlace3, accomoPlace4, latitude, longitude, website, price, phoneNumber, email, operatingTime, availableToServe, type, happyHour, durationTime, field,
 				vitalItem, culture, commonSense, recommended, warning, imagePath);
 	}
 	
@@ -138,4 +136,18 @@ public class CategoryBO {
 				curtain, roomService, morningCall, refridge, coffee, TV, safe, telephone, airConditioner, kitchenette, imagePath);
 	}
 	
+	// 관광지 리스트 가져오기
+	public List<Tourist> getTouristList() {
+		return categoryDAO.selectTouristList();
+	}
+	
+	// 관광지 객체 가져오기
+	public Tourist getTouristById(int getTouristById) {
+		return categoryDAO.selectTouristById(getTouristById);
+	}
+	
+	// 관광지 사진들 가져오기
+	public List<Tourist> getTouristPicById(int getTouristById) {
+		return categoryDAO.selectTouristPicById(getTouristById);
+	}
 }

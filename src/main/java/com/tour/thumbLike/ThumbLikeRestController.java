@@ -17,30 +17,30 @@ import jakarta.servlet.http.HttpSession;
 @RestController
 public class ThumbLikeRestController {
 	
-	@Autowired
-	private ThumbLikeBO thumbLikeBO;
-	
-	@GetMapping("/thumbLike/{reviewId}")
-	public Map<String, Object> thumbLike(
-			HttpSession session,
-			@PathVariable int reviewId,
-			Model model) {
-		
-		Map<String, Object> result = new HashMap<>();
-		Integer userId = (Integer)session.getAttribute("userId");
-		if (userId == null) {
-			result.put("code", 500);
-			result.put("error", "로그인이 필요합니다.");
-		}
-		
-		boolean thumbLike = thumbLikeBO.existThumbLikeByUserIdPostId(userId, reviewId);
-		
-		if (thumbLike) {
-			result.put("code", true);
-		} else {
-			result.put("code", false);
-		}
-		model.addAttribute("thumbLike", thumbLike);
-		return result;
-	}
-}
+//	@Autowired
+//	private ThumbLikeBO thumbLikeBO;
+//	
+//	@GetMapping("/thumbLike/{reviewId}")
+//	public Map<String, Object> thumbLike(
+//			HttpSession session,
+//			@PathVariable int reviewId,
+//			Model model) {
+//		
+//		Map<String, Object> result = new HashMap<>();
+//		Integer userId = (Integer)session.getAttribute("userId");
+//		if (userId == null) {
+//			result.put("code", 500);
+//			result.put("error", "로그인이 필요합니다.");
+//		}
+//		
+//		boolean thumbLike = thumbLikeBO.existThumbLikeByUserIdPostId(userId, reviewId);
+//		
+//		if (thumbLike) {
+//			result.put("code", true);
+//		} else {
+//			result.put("code", false);
+//		}
+//		model.addAttribute("thumbLike", thumbLike);
+//		return result;
+//	}
+  }

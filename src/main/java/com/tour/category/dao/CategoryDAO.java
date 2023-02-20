@@ -10,6 +10,7 @@ import com.tour.category.model.Category;
 import com.tour.category.model.Facilities;
 import com.tour.category.model.Room;
 import com.tour.category.model.RoomFacilities;
+import com.tour.category.model.Tourist;
 
 @Repository
 public interface CategoryDAO {
@@ -45,6 +46,7 @@ public interface CategoryDAO {
 			@Param("englishName") String englishName,
 			@Param("address") String address,
 			@Param("zipCode") String zipCode,
+			@Param("recommendTime") String recommendTime,
 			@Param("intro") String intro,
 			@Param("intro2") String intro2,
 			@Param("intro3") String intro3,
@@ -54,6 +56,7 @@ public interface CategoryDAO {
 			@Param("accomoPlace4") String accomoPlace4,
 			@Param("latitude") String latitude,
 			@Param("longitude") String longitude,
+			@Param("website") String website,
 			@Param("price") String price,
 			@Param("phoneNumber") String phoneNumber,
 			@Param("email") String email,
@@ -120,4 +123,13 @@ public interface CategoryDAO {
 			@Param("kitchenette") String kitchenette,
 			@Param("thumbnailPic") String imagePath
 			);
+	
+	// 관광지 리스트 가져오기
+	public List<Tourist> selectTouristList();
+	
+	// 관광지 객체 가져오기
+	public Tourist selectTouristById(int getTouristById);
+	
+	// 관광지 사진들 가져오기
+	public List<Tourist> selectTouristPicById(int getTouristById);
 }
