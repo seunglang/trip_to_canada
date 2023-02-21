@@ -60,4 +60,29 @@ public class ReviewRestController {
 		
 		return result;
 	}
+	
+	@PostMapping("/add_tourist_review")
+	public Map<String, Object> addTouristReview(
+			@RequestParam("star") int star,
+			@RequestParam("reviewContent") String reviewContent,
+			@RequestParam("reviewTitle") String reviewTitle,
+			@RequestParam("visitDay") String visitDay,
+			@RequestParam("touristId") int touristId,
+			HttpSession session,
+			Model model) {
+		
+		Map<String, Object> result = new HashMap<>();
+		int userId = (int)session.getAttribute("userId");
+		String userName = (String)session.getAttribute("userName");
+		
+		int count = reviewBO.addTouristReview(star, reviewContent, reviewTitle, visitDay, touristId, userId, userName);
+		
+		if (count > 0) {
+			result.put("code", 200);
+		} else {
+			result.put("errorMessage", "리뷰 작성에 실패하셨습니다.");
+		}
+		
+		return result;
+	}
 }

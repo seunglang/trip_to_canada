@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.tour.category.model.Accomodation;
 import com.tour.category.model.Category;
@@ -132,4 +133,9 @@ public interface CategoryDAO {
 	
 	// 관광지 사진들 가져오기
 	public List<Tourist> selectTouristPicById(int getTouristById);
+	
+	// 관광지 사진들 넣기
+	public int insertTouristImages(
+			@Param("touristId") int touristId,
+			@Param("imagePath") String imagePath);
 }

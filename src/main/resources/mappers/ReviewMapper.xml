@@ -66,4 +66,86 @@
  		WHERE
  			`accomoId` = #{accomodationId}
  	</select>
+ 	
+ 	<insert id="insertTouristReview" parameterType="map">
+ 		INSERT INTO `touristReview`
+ 		(
+ 			`touristId`
+			,`userId`
+			,`userName`
+			,`reviewTitle`
+			,`reviewContent`
+			,`point`
+			,`visitDay`
+			,`createdAt`
+			,`updatedAt`
+ 		)
+ 		VALUES
+ 		(
+ 			#{touristId}
+ 			, #{userId}
+ 			, #{userName}
+ 			, #{reviewTitle}
+ 			, #{reviewContent}
+ 			, #{point}
+ 			, #{visitDay}
+ 			, NOW()
+ 			, NOW()
+ 		)
+ 	</insert>
+ 	
+ 	<select id="selectTouristReviewList" resultType="com.tour.review.model.TouristReview">
+ 		SELECT
+ 			`id`
+ 			,`touristId`
+ 			,`userId`
+			,`userName`
+			,`reviewTitle`
+			,`reviewContent`
+			,`point`
+			,`visitDay`
+			,`createdAt`
+			,`updatedAt`
+		FROM
+			`touristReview`
+		WHERE
+			`touristId` = #{touristId}
+ 	</select>
+ 	
+ 	<select id="selectTouristAvgPoint" resultType="int">
+ 		SELECT
+ 			AVG(`point`)
+ 		FROM
+ 			`touristReview`
+ 		WHERE
+ 			`touristId` = #{touristId}
+ 	</select>
+ 	
+ 	<select id="selectTouristReviewRowCount" resultType="int">
+ 		SELECT
+ 			COUNT(*)
+ 		FROM
+ 			`touristReview`
+ 		WHERE
+ 			`touristId` = #{touristId}
+ 	</select>
+ 	
+ 	<select id="selectTouristReviewLatestById" resultType="com.tour.review.model.TouristReview">
+ 		SELECT
+ 			`id`
+ 			,`touristId`
+ 			,`userId`
+			,`userName`
+			,`reviewTitle`
+			,`reviewContent`
+			,`point`
+			,`visitDay`
+			,`createdAt`
+			,`updatedAt`
+		FROM
+			`touristReview`
+		WHERE
+			`touristId` = #{touristId}
+		ORDER BY `id` DESC
+ 	</select>
  </mapper>

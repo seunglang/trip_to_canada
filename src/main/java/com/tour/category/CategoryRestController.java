@@ -1,13 +1,13 @@
 package com.tour.category;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.tour.category.bo.CategoryBO;
-import com.tour.thumbLike.bo.ThumbLikeBO;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -222,4 +221,26 @@ public class CategoryRestController {
 		
 	}
 	
+	
+	@PostMapping("/add_tourist_images")
+	public Map<String, Object> addTouristImages(
+			@RequestParam("touristId") int touristId,
+			@RequestParam("file") List<MultipartFile> fileList,
+			HttpSession session) {
+		
+		Map<String, Object> result = new HashMap<>();
+		
+		// 세션 만료 혹은 관리자 이외 유저 접근 차단
+		int adminId = (int)session.getAttribute("adminId");
+		// 관리자 로그인 아이디
+		String loginId = (String)session.getAttribute("userLoginId");
+		
+		
+		int insertTouirstImages = categoryBO.addTouristImages(touristId, fileList, loginId);
+		
+		if (insertTouirstImages >= 5) {
+			result.put("code", 200);
+		}
+		return result;
+	}
 }

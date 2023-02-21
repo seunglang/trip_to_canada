@@ -54,6 +54,10 @@
 						<label for="accomoFacilities" class="small m-1 d-none" id="accomoFacilitiesId">편의시설</label><input type="radio" name="accomoType" value="3" id="accomoFacilities" class="d-none">
 						<label for="roomFacilities" class="small m-1 d-none" id="roomFacilitiesId">객실특징</label><input type="radio" name="accomoType" value="4" id="roomFacilities" class="d-none">
 					</div>
+					<div class="d-flex d-none" id="touristRadio">
+						<label for="touristInput" class="small m-1 d-none" id="touristInputId">관광지/추천</label><input type="radio" name="touristType" value="1" id="touristInput" class="mr-1 d-none" checked>
+						<label for="touristImage" class="small m-1 d-none" id="touristImageId">관광지 사진 추가</label><input type="radio" name="touristType" value="2" id="touristImage" class="mr-1 d-none">
+					</div>
 					<div class="small text-danger mt-1 ml-1" id="selectCategoryWarn">※&nbsp;카테고리를 선택해주세요.</div>
 					
 					<%-- 호텔 정보 입력란 --%>
@@ -518,6 +522,34 @@
 					
 					<button class="btn mt-4 form-control btn-success d-none" id="hotelFormBtn" type="submit">작성 완료</button>
 				</form>
+				
+				<%-- 관광지 이미지 추가 --%>
+				<form id="touristAjaxForm" action="/category/add_tourist_info" method="post">
+					<%-- 관광지 선택 selectBox --%>
+					<div class="d-none mb-3" id="touristSelectBox">
+						<div class="small ml-1">관광지 선택 *</div>
+						<select class="form-control col-8" id="selectTourist" name="selectTourist">
+							<option value="none">--선택--</option>
+								<c:forEach items="${touristList}" var="list">
+									<option value="${list.id}">${list.name}</option>
+								</c:forEach>
+						</select>
+					</div>
+					<%-- 관광지 이미지 추가 부분 --%>
+					<div class="d-none" id="touristRoomBox">
+						<legend class="mb-4 d-none" id="touristRoomForm">관광지 사진 추가란</legend>
+						
+						<%-- 관광지 사진 --%>
+						 <input type="file" id="image1" name="file_path" class="files">
+						 <input type="file" id="image2" name="file_path" class="files">
+						 <input type="file" id="image3" name="file_path" class="files">
+						 <input type="file" id="image4" name="file_path" class="files">
+						 <input type="file" id="image5" name="file_path" class="files">
+					</div>
+					
+					<button class="btn mt-4 form-control btn-success d-none" id="touristFormBtn" type="submit">작성 완료</button>
+				</form>
+				<%-- 경계선 --%>
 			</div>
 		</div>
 	</div>
@@ -742,6 +774,12 @@
 			$('#accomoInputBox').addClass('d-none');
 			$('#accomoForm').addClass('d-none');
 			$('#hotelFormBtn').addClass('d-none');
+			$('#touristRadio').addClass('d-none');
+			$('#touristInput').addClass('d-none');
+			$('#touristImage').addClass('d-none');
+			$('#touristInputId').addClass('d-none');
+			$('#touristImageId').addClass('d-none');
+			$('#touristFormBtn').addClass('d-none');
 			// 호텔 선택 셀렉트 박스 d-none
 			$('#hotelSelectBox').addClass('d-none');
 			
@@ -756,6 +794,13 @@
 			
 			// 관광지 클래스 remove d-none or d-none
 			$('#touristInputForm').addClass('d-none');
+			
+			// 관광지 선택 셀렉트 박스 d-none
+			$('#touristSelectBox').addClass('d-none');
+			
+			// 관광지 사진 추가란 d-none
+			$('#touristRoomBox').addClass('d-none');
+			$('#touristRoomForm').addClass('d-none');
 			
 			// 식당 클래스 remove d-none or d-none
 			$('#restaurantInputForm').addClass('d-none');
@@ -927,16 +972,146 @@
 				});
 			}
 			
-			if (selectCategoryAttr == "none") {
-				$('#selectCategoryWarn').removeClass('d-none');
-				$('#postLegend').removeClass('d-none');
-			}  else if (selectCategoryAttr == "tourist") {
+			if (selectCategoryAttr == "tourist") {
+				
+				// 관광지/추천 카테고리 선택했을 때 디폴트 값으로 관광지 입력한에 대한 input 값 표시 
 				$('#touristInputForm').removeClass('d-none');
 				$('#touristForm').removeClass('d-none');
 				$('#thumbnail').removeClass('d-none');
 				$('#fileName').removeClass('d-none');
 				$('#thumbnailDivBox').removeClass('d-none');
 				$('#categoryFormBtn').removeClass('d-none');
+				
+				// radio 버튼 show
+				$('#touristRadio').removeClass('d-none');
+				$('#touristInput').removeClass('d-none');
+				$('#touristImage').removeClass('d-none');
+				$('#touristInputId').removeClass('d-none');
+				$('#touristImageId').removeClass('d-none');
+				
+				// radio 버튼 change 동적 이벤트 
+				$('input[name="touristType"]').on('change', function() {
+					// 관광지 정보 입력란 d-none
+					$('#touristInputForm').addClass('d-none');
+					$('#touristForm').addClass('d-none');
+					$('#thumbnail').addClass('d-none');
+					$('#fileName').addClass('d-none');
+					$('#thumbnailDivBox').addClass('d-none');
+					$('#categoryFormBtn').addClass('d-none');
+					
+					// 관광지 사진 추가란 d-none
+					$('#touristRoomBox').addClass('d-none');
+					$('#touristRoomForm').addClass('d-none');
+					
+					// 관광지 폼 버튼 d-none
+					$('#touristFormBtn').addClass('d-none');
+					
+					// 관광지 선택 셀렉트박스 d-none
+					$('#touristSelectBox').addClass('d-none');
+					
+					// 사용자가 이미지를 선택했을 때 유효성 확인 및 업로드 된 파일 이름 노출
+					$('#image1').on('change', function(e) {
+						//alert("파일 선택");
+						let fileName = e.target.files[0].name; // 07_30_01.png
+						//alert(fileName);
+						
+						// 확장자 유효성 확인
+						let ext = fileName.split(".").pop().toLowerCase();
+						if (ext != 'jpg' && ext != 'jpeg' && ext != 'gif' && ext != 'png') {
+							alert("이미지 파일만 업로드 할 수 있습니다.");
+							$('#image1').val(''); // 파일 태그에 실제 파일 제거
+							return;
+						}
+						
+					});
+					// 사용자가 이미지를 선택했을 때 유효성 확인 및 업로드 된 파일 이름 노출
+					$('#image2').on('change', function(e) {
+						//alert("파일 선택");
+						let fileName = e.target.files[0].name; // 07_30_01.png
+						//alert(fileName);
+						
+						// 확장자 유효성 확인
+						let ext = fileName.split(".").pop().toLowerCase();
+						if (ext != 'jpg' && ext != 'jpeg' && ext != 'gif' && ext != 'png') {
+							alert("이미지 파일만 업로드 할 수 있습니다.");
+							$('#image2').val(''); // 파일 태그에 실제 파일 제거
+							return;
+						}
+						
+					});
+					// 사용자가 이미지를 선택했을 때 유효성 확인 및 업로드 된 파일 이름 노출
+					$('#image3').on('change', function(e) {
+						//alert("파일 선택");
+						let fileName = e.target.files[0].name; // 07_30_01.png
+						//alert(fileName);
+						
+						// 확장자 유효성 확인
+						let ext = fileName.split(".").pop().toLowerCase();
+						if (ext != 'jpg' && ext != 'jpeg' && ext != 'gif' && ext != 'png') {
+							alert("이미지 파일만 업로드 할 수 있습니다.");
+							$('#image3').val(''); // 파일 태그에 실제 파일 제거
+							return;
+						}
+						
+					});
+					// 사용자가 이미지를 선택했을 때 유효성 확인 및 업로드 된 파일 이름 노출
+					$('#image4').on('change', function(e) {
+						//alert("파일 선택");
+						let fileName = e.target.files[0].name; // 07_30_01.png
+						//alert(fileName);
+						
+						// 확장자 유효성 확인
+						let ext = fileName.split(".").pop().toLowerCase();
+						if (ext != 'jpg' && ext != 'jpeg' && ext != 'gif' && ext != 'png') {
+							alert("이미지 파일만 업로드 할 수 있습니다.");
+							$('#image4').val(''); // 파일 태그에 실제 파일 제거
+							return;
+						}
+						
+					});
+					// 사용자가 이미지를 선택했을 때 유효성 확인 및 업로드 된 파일 이름 노출
+					$('#image5').on('change', function(e) {
+						//alert("파일 선택");
+						let fileName = e.target.files[0].name; // 07_30_01.png
+						//alert(fileName);
+						
+						// 확장자 유효성 확인
+						let ext = fileName.split(".").pop().toLowerCase();
+						if (ext != 'jpg' && ext != 'jpeg' && ext != 'gif' && ext != 'png') {
+							alert("이미지 파일만 업로드 할 수 있습니다.");
+							$('#image5').val(''); // 파일 태그에 실제 파일 제거
+							return;
+						}
+						
+					});
+					
+					
+					let touristType = $(this).val();
+					if (touristType == '1') {
+						$('#touristInputForm').removeClass('d-none');
+						$('#touristForm').removeClass('d-none');
+						$('#categoryFormBtn').removeClass('d-none');
+						$('#thumbnail').removeClass('d-none');
+						$('#fileName').removeClass('d-none');
+						$('#thumbnailDivBox').removeClass('d-none');
+					} else if (touristType == 2) {
+						$('#touristRoomBox').removeClass('d-none');
+						$('#touristRoomForm').removeClass('d-none');
+						// 카테고리 폼 버튼 d-none
+						$('#categoryFormBtn').addClass('d-none');
+						// 관광지 폼 버튼 remove d-none
+						$('#touristFormBtn').removeClass('d-none');
+						// 관광지 셀렉트 박스 remove d-none
+						$('#touristSelectBox').removeClass('d-none');
+						// file 이름 박스 d-none
+						$('#touristFile').removeClass('d-none');
+					} 
+				});
+			}
+			
+			if (selectCategoryAttr == "none") {
+				$('#selectCategoryWarn').removeClass('d-none');
+				$('#postLegend').removeClass('d-none');
 			} else if (selectCategoryAttr == "restaurant") {
 				$('#restaurantInputForm').removeClass('d-none');
 				$('#restaurantForm').removeClass('d-none');
@@ -1349,6 +1524,8 @@
 				formData.append("recommended", travleTipRecommended);
 				formData.append("warning", travleTipWarning);
 				formData.append("file", $('#file')[0].files[0]);
+				formData.append("fileTwo", $('#fileTwo')[0].files[1]);
+				formData.append("fileThree", $('#fileThree')[0].files[2]);
 			}
 			
 			// ajax 통신으로 formData에 있는 데이터 전송
@@ -1573,5 +1750,95 @@
 				}
 			});
 		});
+		
+		// 관광지 사진들 추가 구문
+		$('#touristAjaxForm').on('submit', function(e) {
+			e.preventDefault();
+			
+			// 셀렉트 박스로 선택한 관광지 id
+			let touristId = $('#selectTourist option:selected').val();
+			// radio 
+			let touristType = $('input[type=radio][name=touristType]:checked').val();
+			
+			let image1 = $('#image1').val();
+			let image2 = $('#image2').val();
+			let image3 = $('#image3').val();
+			let image4 = $('#image4').val();
+			let image5 = $('#image5').val();
+			
+			if (touristId == "none") {
+				alert("관광지를 선택해주세요");
+				return;
+			}
+			if (image1 == "") {
+				alert("사진을 선택해주세요");
+				return;
+			}
+			if (image2 == "") {
+				alert("사진을 선택해주세요");
+				return;
+			}
+			if (image3 == "") {
+				alert("사진을 선택해주세요");
+				return;
+			}
+			if (image4 == "") {
+				alert("사진을 선택해주세요");
+				return;
+			}
+			if (image5 == "") {
+				alert("사진을 선택해주세요");
+				return;
+			}
+			
+			var formData = new FormData();
+			
+			if (touristType == 2) {
+				
+				var fileInput = $('.files');
+				
+				//alert(fileInput);
+				//console.log(fileInput);
+				// fileInput 개수를 구한다.
+				for (var i = 0; i < fileInput.length; i++) {
+					if (fileInput[i].files.length > 0) {
+						for (var j = 0; j < fileInput[i].files.length; j++) {
+							console.log(" fileInput[i].files[j] :::"+ fileInput[i].files[j]);
+							
+							/* let test = $('.files')[i].files[j].val();
+							alert(test);
+							if (test == "") {
+								alert("사진을 선택해주세요");
+								return;
+							}  */
+							
+							// formData에 'file'이라는 키값으로 fileInput 값을 append 시킨다.  
+							formData.append('file', $('.files')[i].files[j]);
+						}
+					}
+				}
+				
+			}
+			formData.append('touristId', touristId);
+			
+			$.ajax({
+				  type: "POST"
+			      , url: '/category/add_tourist_images'
+			      , data: formData
+			      , contentType: false               
+			      , processData: false               
+			      , enctype : "multipart/form-data"  
+			      , success: function(data) {
+			      if (data.code == 200) {
+			         alert("성공");
+			         location.href = "/admin/create";
+			      } else {
+			        alert("실패");
+			      }
+			   }
+			
+			});
+			
+		})
 	});
 </script>

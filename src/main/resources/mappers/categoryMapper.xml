@@ -545,4 +545,21 @@
  		 WHERE
  		 	`touristId` = #{touristId}
  	</select>
+ 	
+ 	<insert id="insertTouristImages" parameterType="map">
+ 		INSERT INTO `touristPic`
+		 		(
+					`touristId`
+					,`imagePath`
+					,`createdAt`
+					,`updatedAt`
+		 		)
+		 		VALUES
+		 		(
+		 			#{touristId}
+		 			, #{imagePath}
+		 			, NOW()
+		 			, NOW()
+		 		)
+ 	</insert>
  </mapper>

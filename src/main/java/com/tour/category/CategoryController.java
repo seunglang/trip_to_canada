@@ -18,6 +18,7 @@ import com.tour.category.model.RoomFacilities;
 import com.tour.category.model.Tourist;
 import com.tour.review.bo.ReviewBO;
 import com.tour.review.model.AccomoReview;
+import com.tour.review.model.TouristReview;
 import com.tour.thumbLike.bo.ThumbLikeBO;
 
 import jakarta.servlet.http.HttpSession;
@@ -134,11 +135,38 @@ public class CategoryController {
 		// 관광지 사진들 가져오기
 		List<Tourist> touristPic = categoryBO.getTouristPicById(touristId);
 		
+		// 관광지 리뷰 가져오기
+		List<TouristReview> touristReview = reviewBO.getTouristReviewList(touristId);
+		
+		// 관광지 리뷰 점수 평점 가져오기
+		int accomoReviewAVGPoint = reviewBO.getTouristReviewAvgPoint(touristId);
+					
+		// 관광지 리뷰 갯수 가져오기
+		int accomoReviewRowCount = reviewBO.getTouristReviewRowCount(touristId);
+		
+		// 관광지 최신 리뷰중 5점 가져오기
+		TouristReview touristLatestReview = reviewBO.getTouristReviewLatestById(touristId);
+		
+		model.addAttribute("touristLatestReview", touristLatestReview);
+		model.addAttribute("touristReview", touristReview);
+		model.addAttribute("accomoReviewAVGPoint", accomoReviewAVGPoint);
+		model.addAttribute("accomoReviewRowCount", accomoReviewRowCount);
 		model.addAttribute("touristPic", touristPic);
 		model.addAttribute("accomodationList", accomodationList);
 		model.addAttribute("tourist", tourist);
 		model.addAttribute("viewName", "category/touristDetail");
 		
+		return "template/layout";
+	}
+	
+	// 관광지/추천 페이지 호출
+	@GetMapping("/restaurant_list_view")
+	public String restaurantView(Model model) {
+				
+		//List<Tourist> touristList = categoryBO.getTouristList();
+		//model.addAttribute("touristList", touristList);
+		model.addAttribute("viewName", "category/restaurantList");
+				
 		return "template/layout";
 	}
 	

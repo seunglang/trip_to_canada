@@ -80,6 +80,7 @@ figcaption {
 #touristInfoList {width:950px; margin:auto; border-radius: 0px 0px 14px 14px;}
 #touristPoint {width:950px; margin:auto; border-radius: 14px 14px 14px 14px;}
 #touristLocation {width:950px; margin:auto; border-radius: 14px 14px 14px 14px;}
+#touristReviewBox {width:950px; margin:auto; border-radius: 14px 14px 14px 14px;}
 #touristBGColor {width:100vw; margin-left: calc(-50vw + 50%); background-color:#F5F7FA; min-height:500px; border-radius: 40px 40px 40px 40px;}
 .touristContentBGBox {background-color:#ffffff;}
 .tourist-hotel-box {margin-top:15px;}
@@ -93,7 +94,19 @@ figcaption {
         white-space: nowrap;}
 #touristAccomoBox {width:300px; height:500px; margin-top:25px; overflow:scroll;}
 .tourist-accomo-price {margin-top:17px;}
-#qwe {height:60px; background-color:#ffffff;}
+.tourist-website:hover {text-decoration:underline; color:#4A76FF;}
+.tourist-website {text-decoration-line: underline;}
+.area {width:500px; height:135px; background-color:#F4F7FE; border-radius: 14px 14px 14px 14px;}
+.latestReviewBox {
+overflow: hidden;
+text-overflow: ellipsis;
+display: -webkit-box;
+-webkit-line-clamp: 3;
+-webkit-box-orient: vertical;
+	}
+.review-link-a {margin-left:26em;}
+.tourist-review-form {margin-left:30em;}
+
 input {
   padding:10px;
 	font-family: FontAwesome, "Open Sans", Verdana, sans-serif;

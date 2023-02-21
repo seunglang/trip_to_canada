@@ -6,10 +6,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.tour.category.bo.CategoryBO;
 import com.tour.category.model.Accomodation;
+import com.tour.category.model.Tourist;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -35,6 +35,23 @@ public class ReviewController {
 		
 		model.addAttribute("accomodation", accomodation);
 		model.addAttribute("viewName", "review/writeReview");
+		return "template/layout";
+	}
+	
+	@GetMapping("/tourist_form_view")
+	public String touristReview(
+			@RequestParam("touristId") int touristId,
+			Model model,
+			HttpSession session) {
+		Integer userId = (Integer)session.getAttribute("userId");
+		if (userId == null) {
+			return "redirect:/user/sign_in_view";
+		}
+		
+		Tourist tourist = categoryBO.getTouristById(touristId);
+		
+		model.addAttribute("tourist", tourist);
+		model.addAttribute("viewName", "review/touristReview");
 		return "template/layout";
 	}
 }

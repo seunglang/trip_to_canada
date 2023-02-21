@@ -150,4 +150,20 @@ public class CategoryBO {
 	public List<Tourist> getTouristPicById(int getTouristById) {
 		return categoryDAO.selectTouristPicById(getTouristById);
 	}
+	
+	// 관광지 사진들 넣기
+	public int addTouristImages(int touristId, List<MultipartFile> fileList, String loginId) {
+		
+		int count = 0;
+		String imagePath = null;
+		if (fileList != null) { // 파일이 있으면 순차적으로 기능 수행됨 - 파일 있을때만 수행하고 이미지 경로를 얻어낸다.
+			for (int i = 0; i < fileList.size(); i++) {
+				imagePath = fileManagerService.saveFile(loginId, fileList.get(i)); 
+				categoryDAO.insertTouristImages(touristId, imagePath);
+				count++;
+			}
+		}
+		
+		return count;
+	}
 }
