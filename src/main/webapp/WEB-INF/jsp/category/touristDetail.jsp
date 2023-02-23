@@ -174,6 +174,7 @@
 	    var marker = new google.maps.Marker({position: tourist, map: map});
 	 }
 	
+	// 사진 스와이프 기능
 	$(document).ready(function() {
 		new Swiper('.swiper-container', {
 
@@ -197,6 +198,7 @@
 			},
 		});
 		
+		// target <a> 클릭 시 애니메이션 효과 기능
 		 $('.move-to-tourist-review').on('click', function() {
 			 $('html, body').animate({
 			    scrollTop: $($.attr(this, 'href')).offset().top

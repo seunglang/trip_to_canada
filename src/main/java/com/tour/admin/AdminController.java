@@ -26,7 +26,9 @@ public class AdminController {
 		List<Category> categoryList = categoryBO.getCategoryList();
 		List<Accomodation> accomodationList = categoryBO.getAccomodationList();
 		List<Tourist> touristList = categoryBO.getTouristList();
+		List<Package> packageList = categoryBO.getPackageList();
 		
+		model.addAttribute("packageList", packageList);
 		model.addAttribute("touristList", touristList);
 		model.addAttribute("categoryList", categoryList);
 		model.addAttribute("accomodationList", accomodationList);

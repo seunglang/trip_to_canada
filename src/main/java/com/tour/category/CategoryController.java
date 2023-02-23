@@ -159,7 +159,7 @@ public class CategoryController {
 		return "template/layout";
 	}
 	
-	// 관광지/추천 페이지 호출
+	// 식당/예약 페이지 호출
 	@GetMapping("/restaurant_list_view")
 	public String restaurantView(Model model) {
 				
@@ -167,6 +167,17 @@ public class CategoryController {
 		//model.addAttribute("touristList", touristList);
 		model.addAttribute("viewName", "category/restaurantList");
 				
+		return "template/layout";
+	}
+	
+	// 패키지상품 페이지 호출
+	@GetMapping("/package_list_view")
+	public String packageView(Model model) {
+		
+		List<Package> packageList = categoryBO.getPackageList();
+		model.addAttribute("packageList", packageList);
+		model.addAttribute("viewName", "category/packageList");
+		
 		return "template/layout";
 	}
 	

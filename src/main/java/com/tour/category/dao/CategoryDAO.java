@@ -51,6 +51,8 @@ public interface CategoryDAO {
 			@Param("intro") String intro,
 			@Param("intro2") String intro2,
 			@Param("intro3") String intro3,
+			@Param("intro4") String intro4,
+			@Param("intro5") String intro5,
 			@Param("accomoPlace") String accomoPlace,
 			@Param("accomoPlace2") String accomoPlace2,
 			@Param("accomoPlace3") String accomoPlace3,
@@ -72,6 +74,11 @@ public interface CategoryDAO {
 			@Param("commonSense") String commonSense,
 			@Param("recommended") String recommended,
 			@Param("warning") String warning,
+			@Param("participation") String participation,
+			@Param("transport") String transport,
+			@Param("language") String language,
+			@Param("pickUp") String pickUp,
+			@Param("dropOff") String dropOff,
 			@Param("thumbnailPic") String imagePath);
 	
 	// 호텔 리스트 가져오기
@@ -137,5 +144,22 @@ public interface CategoryDAO {
 	// 관광지 사진들 넣기
 	public int insertTouristImages(
 			@Param("touristId") int touristId,
+			@Param("imagePath") String imagePath);
+	
+	// 패키지 리스트 가져오기
+	public List<Package> selectPackageList();
+	
+	// 패키지 사진들 넣기
+	public int insertPackageImages(
+			@Param("packageId") int packageId,
+			@Param("imagePath") String imagePath);
+	
+	// 패키지 코스 저장
+	public int insertPackageCourse(
+			@Param("packageId") int packageId,
+			@Param("title") String title,
+			@Param("content") String content,
+			@Param("content2") String content2, 
+			@Param("durationTime") String durationTime,
 			@Param("imagePath") String imagePath);
 }

@@ -65,11 +65,12 @@ public class CategoryBO {
 	
 	// 선택한 카테고리에 글 저장
 	public boolean addCategoryInfo(String categoryAttr, Integer categoryId, String loginId, String name, String englishName,
-			String address, String zipCode, String recommendTime, String intro, String intro2, String intro3, String accomoPlace,
-			String accomoPlace2, String accomoPlace3, String accomoPlace4, String latitude, String longitude, String website, String price, String phoneNumber, String email,
+			String address, String zipCode, String recommendTime, String intro, String intro2, String intro3, String intro4, 
+			String intro5, String accomoPlace, String accomoPlace2, String accomoPlace3, String accomoPlace4, 
+			String latitude, String longitude, String website, String price, String phoneNumber, String email,
 			String operatingTime, String availableToServe, String type, String happyHour, String durationTime,
 			String field, String vitalItem, String culture, String commonSense, String recommended, 
-			String warning, MultipartFile thumbnail) {
+			String warning, String participation, String transport, String language, String pickUp, String dropOff, MultipartFile thumbnail) {
 		
 		// 카테고리 분별 구문 추가 - 카테고리 id 가져오기
 		if (categoryAttr.equals("accomodation")) {
@@ -90,8 +91,8 @@ public class CategoryBO {
 		}
 		
 		return categoryDAO.insertCategoryInfo(categoryAttr, categoryId, name, englishName, address, zipCode, recommendTime, intro, intro2,
-				intro3, accomoPlace, accomoPlace2, accomoPlace3, accomoPlace4, latitude, longitude, website, price, phoneNumber, email, operatingTime, availableToServe, type, happyHour, durationTime, field,
-				vitalItem, culture, commonSense, recommended, warning, imagePath);
+				intro3, intro4, intro5, accomoPlace, accomoPlace2, accomoPlace3, accomoPlace4, latitude, longitude, website, price, phoneNumber, email, operatingTime, availableToServe, type, happyHour, durationTime, field,
+				vitalItem, culture, commonSense, recommended, warning, participation, transport, language, pickUp, dropOff, imagePath);
 	}
 	
 	// 호텔 리스트 가져오기
@@ -165,5 +166,34 @@ public class CategoryBO {
 		}
 		
 		return count;
+	}
+	
+	// 패키지 리스트 가져오기
+	public List<Package> getPackageList() {
+		return categoryDAO.selectPackageList();
+	}
+	
+	// 패키지 사진들 넣기
+	public int addPackageImages(int packageId, List<MultipartFile> fileList, String loginId) {
+		int count = 0;
+		String imagePath = null;
+		if (fileList != null) { // 파일이 있으면 순차적으로 기능 수행됨 - 파일 있을때만 수행하고 이미지 경로를 얻어낸다.
+			for (int i = 0; i < fileList.size(); i++) {
+				imagePath = fileManagerService.saveFile(loginId, fileList.get(i)); 
+				categoryDAO.insertPackageImages(packageId, imagePath);
+				count++;
+			}
+		}
+		
+		return count;
+	}
+	
+	public int addPackageCourse(int packageId, String title, String content, String content2, String durationTime, MultipartFile picture, String loginId) {
+		String imagePath = null;
+		if (picture != null) { // 파일이 있으면 순차적으로 기능 수행됨 - 파일 있을때만 수행하고 이미지 경로를 얻어낸다.
+			imagePath = fileManagerService.saveFile(loginId, picture); 
+		}
+		
+		return categoryDAO.insertPackageCourse(packageId, title, content, content2, durationTime, imagePath);
 	}
 }

@@ -58,6 +58,11 @@
 						<label for="touristInput" class="small m-1 d-none" id="touristInputId">관광지/추천</label><input type="radio" name="touristType" value="1" id="touristInput" class="mr-1 d-none" checked>
 						<label for="touristImage" class="small m-1 d-none" id="touristImageId">관광지 사진 추가</label><input type="radio" name="touristType" value="2" id="touristImage" class="mr-1 d-none">
 					</div>
+					<div class="d-flex d-none" id="packageRadio">
+						<label for="packageInput" class="small m-1 d-none" id="packageInputId">패키지 상품</label><input type="radio" name="packageType" value="1" id="packageInput" class="mr-1 d-none" checked>
+						<label for="packageImage" class="small m-1 d-none" id="packageImageId">패키지 사진 추가</label><input type="radio" name="packageType" value="2" id="packageImage" class="mr-1 d-none">
+						<label for="packageCourse" class="small m-1 d-none" id="packageCourseId">패키지 코스</label><input type="radio" name="packageType" value="3" id="packageCourse" class="mr-1 d-none">
+					</div>
 					<div class="small text-danger mt-1 ml-1" id="selectCategoryWarn">※&nbsp;카테고리를 선택해주세요.</div>
 					
 					<%-- 호텔 정보 입력란 --%>
@@ -260,21 +265,37 @@
 					<%-- 패키지 정보 입력란 --%>
 					<div class="d-none mt-3" id="packageInputForm">
 						<legend class="mb-4 d-none" id="packageForm">패키지 정보 입력란</legend>
-						<div class="small ml-1 mb-1 mt-3">패키지 이름(영어로 기재) * </div>
+						<div class="small ml-1 mb-1 mt-3">패키지 이름 * </div>
 						<div class="d-flex align-items-center">
 							<input type="text" id="packageName" name="packageName" class="form-control col-12" placeholder="name of package"/>
 						</div>
-						<div class="small ml-1 mb-1 mt-3">패키지 메인주소(영어로 기재) * </div>
+						<div class="small ml-1 mb-1 mt-3">패키지 참여 유형 * </div>
 						<div class="d-flex align-items-center">
-							<input type="text" id="packageMainAddress" name="packageMainAddress" class="form-control col-12 input-lg" placeholder="Main Street ex) 29th Avenue"/>
+							<input type="text" id="packageParticipation" name="packageParticipation" class="form-control col-12 input-lg" placeholder="단독 프라이빗 투어 / 그룹투어(최소 출발인원 1명)"/>
 						</div>
-						<div class="small ml-1 mb-1 mt-3">패키지 우편주소(영어로 기재) * </div>
+						<div class="small ml-1 mb-1 mt-3">패키지 이동 수단 * </div>
 						<div class="d-flex align-items-center">
-							<input type="text" id="packageZipCode" name="packageZipCode" class="form-control col-12 input-lg" placeholder="Zip Code ex) V7R 4J1"/>
+							<input type="text" id="packageTransport" name="packageTransport" class="form-control col-12 input-lg" placeholder="차량 이동"/>
 						</div>
-						<div class="small ml-1 mb-1 mt-3">패키지 소개 *</div>
+						<div class="small ml-1 mb-1 mt-3">패키지 소개 제목 * </div>
 						<div class="d-flex align-items-center">
-							<textarea class="form-control" id="packageIntro" name="packageIntro" placeholder="정보" rows="10"></textarea>
+							<input type="text" id="packageIntro" name="packageIntro" class="form-control col-12 input-lg" placeholder="장거리 투어입니다. (왕복 차량으로 7시간 소요됩니다)"/>
+						</div>
+						<div class="small ml-1 mb-1 mt-3">패키지 소개2 *</div>
+						<div class="d-flex align-items-center">
+							<textarea class="form-control" id="packageIntro2" name="packageIntro2" placeholder="정보" rows="7"></textarea>
+						</div>
+						<div class="small ml-1 mb-1 mt-3">패키지 소개3 *</div>
+						<div class="d-flex align-items-center">
+							<textarea class="form-control" id="packageIntro3" name="packageIntro3" placeholder="정보" rows="7"></textarea>
+						</div>
+						<div class="small ml-1 mb-1 mt-3">패키지 소개4 *</div>
+						<div class="d-flex align-items-center">
+							<textarea class="form-control" id="packageIntro4" name="packageIntro4" placeholder="정보" rows="7"></textarea>
+						</div>
+						<div class="small ml-1 mb-1 mt-3">패키지 소개5 *</div>
+						<div class="d-flex align-items-center">
+							<textarea class="form-control" id="packageIntro5" name="packageIntro5" placeholder="정보" rows="7"></textarea>
 						</div>
 						<div class="small ml-1 mb-1 mt-3">패키지 가격 *</div>
 						<div class="d-flex align-items-center">
@@ -282,15 +303,31 @@
 						</div>
 						<div class="small ml-1 mb-1 mt-3">패키지 소요시간 *</div>
 						<div class="d-flex align-items-center">
-							<input type="text" id="packageDurationTime" name="packageDurationTime" class="form-control col-12 input-lg" placeholder="ex) 25~30분"/>
+							<input type="text" id="packageDurationTime" name="packageDurationTime" class="form-control col-12 input-lg" placeholder="ex) 12시간 소요"/>
 						</div>
 						<div class="small ml-1 mb-1 mt-3">패키지 유형 *</div>
 						<div class="d-flex align-items-center">
 							<input type="text" id="packageField" name="packageField" class="form-control col-12 input-lg" placeholder="패키지 유형 ex)액티비티, 관람, etc..."/>
 						</div>
-						<div class="small ml-1 mb-1 mt-3">패키지 운영시간 *</div>
+						<div class="small ml-1 mb-1 mt-3">패키지 사용 언어 *</div>
 						<div class="d-flex align-items-center">
-							<input type="text" id="packageOperatingTime" name="packageOperatingTime" class="form-control col-12 input-lg" placeholder="9am ~ 5pm"/>
+							<input type="text" id="packageLanguage" name="packageLanguage" class="form-control col-12 input-lg" placeholder="사용 언어 ex)한국어"/>
+						</div>
+						<div class="small ml-1 mb-1 mt-3">패키지 만남장소 위도 *</div>
+						<div class="d-flex align-items-center">
+							<input type="text" id="packagelatitude" name="packagelatitude" class="form-control col-12 input-lg" placeholder="9am ~ 5pm"/>
+						</div>
+						<div class="small ml-1 mb-1 mt-3">패키지 만남장소 경도 *</div>
+						<div class="d-flex align-items-center">
+							<input type="text" id="packagelongitude" name="packagelongitude" class="form-control col-12 input-lg" placeholder="9am ~ 5pm"/>
+						</div>
+						<div class="small ml-1 mb-1 mt-3">패키지 픽업시간 *</div>
+						<div class="d-flex align-items-center">
+							<input type="text" id="packagePickUp" name="packagePickUp" class="form-control col-12 input-lg" placeholder="오전 8 - 9시"/>
+						</div>
+						<div class="small ml-1 mb-1 mt-3">패키지 종료시간 *</div>
+						<div class="d-flex align-items-center">
+							<input type="text" id="packageDropOff" name="packageDropOff" class="form-control col-12 input-lg" placeholder="오후 7시"/>
 						</div>
 					</div>
 					<%-- 공용 썸네일 사진 --%>
@@ -549,7 +586,67 @@
 					
 					<button class="btn mt-4 form-control btn-success d-none" id="touristFormBtn" type="submit">작성 완료</button>
 				</form>
-				<%-- 경계선 --%>
+					<%-- 관광지 이미지 추가 경계선 --%>
+					
+					
+					<%-- 패키지 상품 이미지 추가 및 코스 추가 부분 --%>
+				<form id="packageAjaxForm" action="/category/add_package_info" method="post">
+					<%-- 패키지 상품 선택 selectBox --%>
+					<div class="d-none mb-3" id="packageSelectBox">
+						<div class="small ml-1">패키지 선택 *</div>
+						<select class="form-control col-8" id="selectPackage" name="selectPackage">
+							<option value="none">--선택--</option>
+								<c:forEach items="${packageList}" var="list">
+									<option value="${list.id}">${list.name}</option>
+								</c:forEach>
+						</select>
+					</div>
+					<%-- 패키지 이미지 추가 부분 --%>
+					<div class="d-none" id="packageRoomBox">
+						<legend class="mb-4 d-none" id="packageRoomForm">패키지 사진 추가란</legend>
+						
+						<%-- 패키지 사진 --%>
+						 <input type="file" id="packageImage" name="file_path" class="packagefiles">
+						 <input type="file" id="packageImage2" name="file_path" class="packagefiles">
+						 <input type="file" id="packageImage3" name="file_path" class="packagefiles">
+						 <input type="file" id="packageImage4" name="file_path" class="packagefiles">
+						 <input type="file" id="packageImage5" name="file_path" class="packagefiles">
+					</div>
+					
+					<%-- 패키지 코스 입력란 --%>
+					<div class="d-none" id="packageCourseBox">
+						<legend class="mb-4 d-none" id="packageCourseForm">패키지 코스 입력란</legend>
+						<div class="small ml-1 mb-1 mt-3">패키지 코스 제목 * </div>
+						<div class="d-flex align-items-center">
+							<input type="text" id="courseTitle" name="courseTitle" class="form-control col-12 input-lg" placeholder="ex) 토론토에서 나이아가라 폭포로 이동"/>
+						</div>
+						<div class="small mt-3 ml-1 mb-1">패키지 코스 설명 * </div>
+						<div class="d-flex align-items-center">
+							<textarea class="form-control" id="courseContent" name="courseContent" placeholder="코스에 대한 설명을 작성해주세요." rows="10"></textarea>
+						</div>
+						<div class="small mt-3 ml-1 mb-1">패키지 코스 설명 * </div>
+						<div class="d-flex align-items-center">
+							<textarea class="form-control" id="courseContent2" name="courseContent2" placeholder="코스에 대한 설명을 작성해주세요." rows="10"></textarea>
+						</div>
+						<div class="small ml-1 mb-1 mt-3">이동 시간 * </div>
+						<div class="d-flex align-items-center">
+							<input type="text" id="courseDurationTime" name="courseDurationTime" class="form-control col-12 input-lg" placeholder="ex) 1시간 소요"/>
+						</div>
+						
+						<%-- 호텔 방 썸네일 사진 --%>
+						<div class="small ml-1 mt-3" id="courseThumbnailDivBox">썸네일 첨부 *</div>
+						<div class="file-upload d-flex">
+							<%-- file 태그는 숨겨두고 이미지를 클릭하면 file 태그를 클릭한 것처럼 이벤트를 줄 것이다. --%>
+							<input type="file" id="courseFile" name="roomFile" class="d-none" accept=".gif, .jpg, .png, .jpeg">
+							<%-- 이미지에 마우스 올리면 마우스커서가 링크 커서가 변하도록 a 태그 사용 --%>
+							<a href="#" id="courseFileUploadBtn"><img width="30" src="/static/image/thumbnail.png" class="mt-3" id="thumbnail"></a>
+							<%-- 업로드 된 임시 파일 이름 저장될 곳 --%>
+							<div id="courseFileName" class="ml-2 mt-4 d-none"></div>
+						</div>
+					</div>
+					
+					<button class="btn mt-4 form-control btn-success d-none" id="packageFormBtn" type="submit">작성 완료</button>
+				</form>	
 			</div>
 		</div>
 	</div>
@@ -774,12 +871,22 @@
 			$('#accomoInputBox').addClass('d-none');
 			$('#accomoForm').addClass('d-none');
 			$('#hotelFormBtn').addClass('d-none');
+			// 관광지/추천 radio
 			$('#touristRadio').addClass('d-none');
 			$('#touristInput').addClass('d-none');
 			$('#touristImage').addClass('d-none');
 			$('#touristInputId').addClass('d-none');
 			$('#touristImageId').addClass('d-none');
 			$('#touristFormBtn').addClass('d-none');
+			// 패키지 상품 radio
+			$('#packageRadio').addClass('d-none');
+			$('#packageInput').addClass('d-none');
+			$('#packageImage').addClass('d-none');
+			$('#packageCourse').addClass('d-none');
+			$('#packageInputId').addClass('d-none');
+			$('#packageImageId').addClass('d-none');
+			$('#packageCourseId').addClass('d-none');
+			
 			// 호텔 선택 셀렉트 박스 d-none
 			$('#hotelSelectBox').addClass('d-none');
 			
@@ -807,6 +914,10 @@
 			
 			// 패키지 클래스 remove d-none or d-none
 			$('#packageInputForm').addClass('d-none');
+			
+			// 패키지 코스 remove d-none or d-none
+			$('#packageCourseBox').addClass('d-none');
+			$('#packageCourseForm').addClass('d-none');
 			
 			// 여행 팁 클래스 remove d-none or d-none
 			$('#travleTipInputForm').addClass('d-none');
@@ -1109,6 +1220,199 @@
 				});
 			}
 			
+			// 패키지 상품 추가
+			if (selectCategoryAttr == "package") {
+				// 패키지 상품 카테고리 선택했을 때 디폴트 값으로 관광지 입력한에 대한 input 값 표시 
+				$('#packageInputForm').removeClass('d-none');
+				$('#packageForm').removeClass('d-none');
+				$('#thumbnail').removeClass('d-none');
+				$('#fileName').removeClass('d-none');
+				$('#thumbnailDivBox').removeClass('d-none');
+				$('#categoryFormBtn').removeClass('d-none');
+				
+				// radio 버튼 show
+				$('#packageRadio').removeClass('d-none');
+				$('#packageInput').removeClass('d-none');
+				$('#packageImage').removeClass('d-none');
+				$('#packageCourse').removeClass('d-none');
+				$('#packageInputId').removeClass('d-none');
+				$('#packageImageId').removeClass('d-none');
+				$('#packageCourseId').removeClass('d-none');
+				
+				
+				// radio 버튼 change 동적 이벤트 
+				$('input[name="packageType"]').on('change', function() {
+					// 관광지 정보 입력란 d-none
+					$('#packageInputForm').addClass('d-none');
+					$('#packageForm').addClass('d-none');
+					$('#thumbnail').addClass('d-none');
+					$('#fileName').addClass('d-none');
+					$('#thumbnailDivBox').addClass('d-none');
+					$('#categoryFormBtn').addClass('d-none');
+					
+					// 패키지 사진 추가란 d-none
+					$('#packageRoomBox').addClass('d-none');
+					$('#packageRoomForm').addClass('d-none');
+					
+					// 패키지 폼 버튼 d-none
+					$('#packageFormBtn').addClass('d-none');
+					
+					// 패키지 선택 셀렉트박스 d-none
+					$('#packageSelectBox').addClass('d-none');
+					
+					<%-- 패키지 코스 --%>
+					// 패키지 코스 입력란 d-none
+					$('#packageCourseBox').addClass('d-none');
+					$('#packageCourseForm').addClass('d-none');
+					
+					// 패키지 코스 단일 이미지 유효성 체크
+					// 다른 속성의 라디오 값을 선택했을 때 내용물 비우기
+					fileCount++;
+					//alert(fileCount);
+					if (fileCount > 0) {
+						$('#courseFileName').text("");
+						fileCount = 0;
+					}
+					
+					// 파일업로드 이미지 클릭 => 숨겨져있는 file을 동작시킴
+					$('#courseFileUploadBtn').on('click', function(e) {
+						e.preventDefault(); // a 태그의 올라가는 현상 방지
+						$('#courseFile').click(); // input file을 클릭한 것과 같은 효과
+					});
+					
+					// 사용자가 이미지를 선택했을 때 유효성 확인 및 업로드 된 파일 이름 노출
+					$('#courseFile').on('change', function(e) {
+						//alert("파일 선택");
+						let fileName = e.target.files[0].name; // 07_30_01.png
+						//alert(fileName);
+						
+						// 확장자 유효성 확인
+						let ext = fileName.split(".").pop().toLowerCase();
+						if (ext != 'jpg' && ext != 'jpeg' && ext != 'gif' && ext != 'png') {
+							alert("이미지 파일만 업로드 할 수 있습니다.");
+							$('#courseFile').val(''); // 파일 태그에 실제 파일 제거
+							$("#courseFileName").text(''); // 파일 이름 비우기
+							return;
+						}
+						
+						// 유효성 통과한 이미지는 상자에 업로드 된 파일 이름 노출
+						$('#courseFileName').text(fileName);
+						
+					});
+					
+					
+					// 사용자가 이미지를 선택했을 때 유효성 확인 및 업로드 된 파일 이름 노출
+					$('#packageImage').on('change', function(e) {
+						//alert("파일 선택");
+						let fileName = e.target.files[0].name; // 07_30_01.png
+						//alert(fileName);
+						
+						// 확장자 유효성 확인
+						let ext = fileName.split(".").pop().toLowerCase();
+						if (ext != 'jpg' && ext != 'jpeg' && ext != 'gif' && ext != 'png') {
+							alert("이미지 파일만 업로드 할 수 있습니다.");
+							$('#packageImage').val(''); // 파일 태그에 실제 파일 제거
+							return;
+						}
+						
+					});
+					// 사용자가 이미지를 선택했을 때 유효성 확인 및 업로드 된 파일 이름 노출
+					$('#packageImage2').on('change', function(e) {
+						//alert("파일 선택");
+						let fileName = e.target.files[0].name; // 07_30_01.png
+						//alert(fileName);
+						
+						// 확장자 유효성 확인
+						let ext = fileName.split(".").pop().toLowerCase();
+						if (ext != 'jpg' && ext != 'jpeg' && ext != 'gif' && ext != 'png') {
+							alert("이미지 파일만 업로드 할 수 있습니다.");
+							$('#packageImage2').val(''); // 파일 태그에 실제 파일 제거
+							return;
+						}
+						
+					});
+					// 사용자가 이미지를 선택했을 때 유효성 확인 및 업로드 된 파일 이름 노출
+					$('#packageImage3').on('change', function(e) {
+						//alert("파일 선택");
+						let fileName = e.target.files[0].name; // 07_30_01.png
+						//alert(fileName);
+						
+						// 확장자 유효성 확인
+						let ext = fileName.split(".").pop().toLowerCase();
+						if (ext != 'jpg' && ext != 'jpeg' && ext != 'gif' && ext != 'png') {
+							alert("이미지 파일만 업로드 할 수 있습니다.");
+							$('#packageImage3').val(''); // 파일 태그에 실제 파일 제거
+							return;
+						}
+						
+					});
+					// 사용자가 이미지를 선택했을 때 유효성 확인 및 업로드 된 파일 이름 노출
+					$('#packageImage4').on('change', function(e) {
+						//alert("파일 선택");
+						let fileName = e.target.files[0].name; // 07_30_01.png
+						//alert(fileName);
+						
+						// 확장자 유효성 확인
+						let ext = fileName.split(".").pop().toLowerCase();
+						if (ext != 'jpg' && ext != 'jpeg' && ext != 'gif' && ext != 'png') {
+							alert("이미지 파일만 업로드 할 수 있습니다.");
+							$('#packageImage4').val(''); // 파일 태그에 실제 파일 제거
+							return;
+						}
+						
+					});
+					// 사용자가 이미지를 선택했을 때 유효성 확인 및 업로드 된 파일 이름 노출
+					$('#packageImage5').on('change', function(e) {
+						//alert("파일 선택");
+						let fileName = e.target.files[0].name; // 07_30_01.png
+						//alert(fileName);
+						
+						// 확장자 유효성 확인
+						let ext = fileName.split(".").pop().toLowerCase();
+						if (ext != 'jpg' && ext != 'jpeg' && ext != 'gif' && ext != 'png') {
+							alert("이미지 파일만 업로드 할 수 있습니다.");
+							$('#packageImage5').val(''); // 파일 태그에 실제 파일 제거
+							return;
+						}
+						
+					});
+					
+					
+					let packageType = $(this).val();
+					if (packageType == '1') {
+						$('#packageInputForm').removeClass('d-none');
+						$('#packageForm').removeClass('d-none');
+						$('#categoryFormBtn').removeClass('d-none');
+						$('#thumbnail').removeClass('d-none');
+						$('#fileName').removeClass('d-none');
+						$('#thumbnailDivBox').removeClass('d-none');
+						
+					} else if (packageType == 2) {
+						$('#packageRoomBox').removeClass('d-none');
+						$('#packageRoomForm').removeClass('d-none');
+						// 카테고리 폼 버튼 d-none
+						$('#categoryFormBtn').addClass('d-none');
+						// 패키지 폼 버튼 remove d-none
+						$('#packageFormBtn').removeClass('d-none');
+						// 패키지 셀렉트 박스 remove d-none
+						$('#packageSelectBox').removeClass('d-none');
+						// file 이름 박스 d-none
+						$('#packageFile').removeClass('d-none');
+					} else if (packageType == 3) {
+						$('#packageCourseBox').removeClass('d-none');
+						$('#packageCourseForm').removeClass('d-none');
+						// 카테고리 폼 버튼 d-none
+						$('#categoryFormBtn').addClass('d-none');
+						// 패키지 폼 버튼 remove d-none
+						$('#packageFormBtn').removeClass('d-none');
+						// 패키지 셀렉트 박스 remove d-none
+						$('#packageSelectBox').removeClass('d-none');
+						// 패키지 파일 remove d-none
+						$('#courseFileName').removeClass('d-none');
+					}
+				});
+			}
+			
 			if (selectCategoryAttr == "none") {
 				$('#selectCategoryWarn').removeClass('d-none');
 				$('#postLegend').removeClass('d-none');
@@ -1128,13 +1432,6 @@
 				$('#categoryFormBtn').removeClass('d-none');
 			} else if (selectCategoryAttr == "publicTransport") {
 				
-			} else if (selectCategoryAttr == "package") {
-				$('#packageInputForm').removeClass('d-none');
-				$('#packageForm').removeClass('d-none');
-				$('#thumbnail').removeClass('d-none');
-				$('#fileName').removeClass('d-none');
-				$('#thumbnailDivBox').removeClass('d-none');
-				$('#categoryFormBtn').removeClass('d-none');
 			}
 		});
 		
@@ -1203,12 +1500,21 @@
 			let packageInputForm = $('#packageInputForm').val();
 			let packageForm = $('#packageForm').val();
 			let packageName = $('#packageName').val();
-			let packageMainAddress = $('#packageMainAddress').val();
-			let packageZipCode = $('#packageZipCode').val();
+			let packageParticipation = $('#packageParticipation').val();
+			let packageTransport = $('#packageTransport').val();
 			let packageIntro = $('#packageIntro').val();
+			let packageIntro2 = $('#packageIntro2').val();
+			let packageIntro3 = $('#packageIntro3').val();
+			let packageIntro4 = $('#packageIntro4').val();
+			let packageIntro5 = $('#packageIntro5').val();
 			let packagePrice = $('#packagePrice').val();
 			let packageDurationTime = $('#packageDurationTime').val();
 			let packageField = $('#packageField').val();
+			let packageLanguage = $('#packageLanguage').val();
+			let packagelatitude = $('#packagelatitude').val();
+			let packagelongitude = $('#packagelongitude').val();
+			let packagePickUp = $('#packagePickUp').val();
+			let packageDropOff = $('#packageDropOff').val();
 			let packageOperatingTime = $('#packageOperatingTime').val();
 			
 			// 여행 TIP input 값들
@@ -1417,16 +1723,32 @@
 					alert("패키지 이름을 입력하세요.");
 					return;
 				}
-				if (packageMainAddress == "") {
-					alert("패키지 메인 주소를 입력하세요.");
+				if (packageParticipation == "") {
+					alert("패키지 참여 유형을 입력하세요.");
 					return;
 				}
-				if (packageZipCode == "") {
-					alert("패키지 우편 주소를 입력하세요.");
+				if (packageTransport == "") {
+					alert("패키지 이동 수단을 입력하세요.");
 					return;
 				}
 				if (packageIntro == "") {
-					alert("패키지 정보를 입력하세요.");
+					alert("패키지 소개 제목을 입력하세요");
+					return;
+				}
+				if (packageIntro2 == "") {
+					alert("패키지 소개를 입력하세요");
+					return;
+				}
+				if (packageIntro3 == "") {
+					alert("패키지 소개를 입력하세요")
+					return;
+				}
+				if (packageIntro4 == "") {
+					alert("패키지 소개를 입력하세요")
+					return;
+				}
+				if (packageIntro5 == "") {
+					alert("패키지 소개를 입력하세요")
 					return;
 				}
 				if (packagePrice == "") {
@@ -1439,6 +1761,26 @@
 				}
 				if (packageField == "") {
 					alert("패키지 유형을 입력하세요.");
+					return;
+				}
+				if (packageLanguage == "") {
+					alert("패키지 사용언어를 입력하세요.");
+					return;
+				}
+				if (packagelatitude == "") {
+					alert("패키지 만남장소 위도를 입력하세요.");
+					return;
+				}
+				if (packagelongitude == "") {
+					alert("패키지 만남장소 경도를 입력하세요.");
+					return;
+				}
+				if (packagePickUp == "") {
+					alert("패키지 픽업시간을 입력하세요.");
+					return;
+				}
+				if (packageDropOff == "") {
+					alert("패키지 종료시간을 입력하세요.");
 					return;
 				}
 				if (packageOperatingTime == "") {
@@ -1508,12 +1850,21 @@
 			} else if (categoryAttr == "package") {
 				formData.append("categoryAttr", categoryAttr);
 				formData.append("name", packageName);
-				formData.append("address", packageMainAddress);
-				formData.append("zipCode", packageZipCode);
+				formData.append("participation", packageParticipation);
+				formData.append("transport", packageTransport);
 				formData.append("intro", packageIntro);
+				formData.append("intro2", packageIntro2);
+				formData.append("intro3", packageIntro3);
+				formData.append("intro4", packageIntro4);
+				formData.append("intro5", packageIntro5);
 				formData.append("price", packagePrice);
 				formData.append("durationTime", packageDurationTime);
 				formData.append("field", packageField);
+				formData.append("language", packageLanguage);
+				formData.append("latitude", packagelatitude);
+				formData.append("longitude", packagelongitude);
+				formData.append("pickUp", packagePickUp);
+				formData.append("dropOff", packageDropOff);
 				formData.append("operatingTime", packageOperatingTime);
 				formData.append("file", $('#file')[0].files[0]);
 			} else if (categoryAttr == 'travleTip') {
@@ -1838,7 +2189,132 @@
 			   }
 			
 			});
+		});
+		
+		// 패키지 이미지 및 코스 추가 ajax
+		$('#packageAjaxForm').on('submit', function(e) {
+			e.preventDefault();
 			
-		})
+			// 셀렉트 박스로 선택한 관광지 id
+			let packageId = $('#selectPackage option:selected').val();
+			// radio 
+			let packageType = $('input[type=radio][name=packageType]:checked').val();
+			
+			// 패키지 이미지 5장 value
+			let packageImage = $('#packageImage').val();
+			let packageImage2 = $('#packageImage2').val();
+			let packageImage3 = $('#packageImage3').val();
+			let packageImage4 = $('#packageImage4').val();
+			let packageImage5 = $('#packageImage5').val();
+			
+			// 패키지 코스 input value
+			let courseTitle = $('#courseTitle').val();
+			let courseContent = $('#courseContent').val();
+			let courseContent2 = $('#courseContent2').val();
+			let courseDurationTime = $('#courseDurationTime').val();
+			let courseFile = $('#courseFile').val();
+			//alert(courseFile);
+			
+			if (packageType == 2) {
+				if (packageId == "none") {
+					alert("패키지를 선택해주세요");
+					return;
+				}
+				if (packageImage == "") {
+					alert("사진을 선택해주세요");
+					return;
+				}
+				if (packageImage2 == "") {
+					alert("사진을 선택해주세요");
+					return;
+				}
+				if (packageImage3 == "") {
+					alert("사진을 선택해주세요");
+					return;
+				}
+				if (packageImage4 == "") {
+					alert("사진을 선택해주세요");
+					return;
+				}
+				if (packageImage5 == "") {
+					alert("사진을 선택해주세요");
+					return;
+				}
+			} else if (packageType == 3) {
+				if (courseTitle == "") {
+					alert("코스 제목을 입력하세요");
+					return;
+				}
+				if (courseContent == "") {
+					alert("코스 내용을 입력해주세요");
+					return;
+				}
+				if (courseDurationTime == "") {
+					alert("이동 소요 시간을 입력해주세요");
+					return;
+				}
+				if (courseFile == null) {
+					alert("사진을 추가해주세요");
+					return;
+				}
+			}
+			
+			
+			var formData = new FormData();
+			
+			if (packageType == 2) {
+				
+				var fileInput = $('.packagefiles');
+				
+				//alert(fileInput);
+				//console.log(fileInput);
+				// fileInput 개수를 구한다.
+				for (var i = 0; i < fileInput.length; i++) {
+					if (fileInput[i].files.length > 0) {
+						for (var j = 0; j < fileInput[i].files.length; j++) {
+							console.log(" fileInput[i].files[j] :::"+ fileInput[i].files[j]);
+							
+							/* let test = $('.files')[i].files[j].val();
+							alert(test);
+							if (test == "") {
+								alert("사진을 선택해주세요");
+								return;
+							}  */
+							
+							// formData에 'file'이라는 키값으로 fileInput 값을 append 시킨다.  
+							formData.append('file', $('.packagefiles')[i].files[j]);
+						}
+					}
+				}
+				
+			} else if (packageType == 3) {
+				formData.append('courseTitle', courseTitle);
+				formData.append('courseContent', courseContent);
+				formData.append('courseContent2', courseContent2);
+				formData.append('courseDurationTime', courseDurationTime);
+				formData.append("courseFile", $('#courseFile')[0].files[0])
+			}
+			
+			formData.append('packageId', packageId);
+			
+			$.ajax({
+				  type:"POST"
+			      , url:"/category/add_package_imagesAndCourse"
+			      , data: formData
+			      , contentType: false               
+			      , processData: false               
+			      , enctype : "multipart/form-data"  
+			      , success: function(data) {
+			      if (data.code == 200) {
+			         alert("성공");
+			         location.href = "/admin/create";
+			      } else {
+			        alert("실패");
+			      }
+			   }
+			
+			});
+		});
+		
 	});
 </script>

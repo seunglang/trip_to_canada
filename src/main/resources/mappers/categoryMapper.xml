@@ -224,12 +224,21 @@
 		 		(
 					`categoryId`
 					,`name`
-					,`address`
-					,`zipCode`
+					,`participation`
+					,`transport`
 					,`intro`
+					,`intro2`
+					,`intro3`
+					,`intro4`
+					,`intro5`
 					,`price`
 					,`durationTime`
 					,`field`
+					,`language`
+					,`latitude`
+					,`longitude`
+					,`pickUp`
+					,`dropOff`
 					,`operatingTime`
 					,`thumbnailPic`
 					,`createdAt`
@@ -239,12 +248,21 @@
 		 		(
 		 			#{categoryId}
 		 			, #{name}
-		 			, #{address}
-		 			, #{zipCode}
+		 			, #{participation}
+		 			, #{transport}
 		 			, #{intro}
+		 			, #{intro2}
+		 			, #{intro3}
+		 			, #{intro4}
+		 			, #{intro5}
 		 			, #{price}
 		 			, #{durationTime}
 		 			, #{field}
+		 			, #{language}
+		 			, #{latitude}
+		 			, #{longitude}
+		 			, #{pickUp}
+		 			, #{dropOff}
 		 			, #{operatingTime}
 		 			, #{thumbnailPic}
 		 			, NOW()
@@ -557,6 +575,75 @@
 		 		VALUES
 		 		(
 		 			#{touristId}
+		 			, #{imagePath}
+		 			, NOW()
+		 			, NOW()
+		 		)
+ 	</insert>
+ 	
+ 	<select id="selectPackageList" resultType="com.tour.category.model.Package">
+ 		SELECT
+	 		`id`
+			,`categoryId`
+			,`name`
+			,`participation`
+			,`transport`
+			,`intro`
+			,`intro2`
+			,`intro3`
+			,`intro4`
+			,`intro5`
+			,`price`
+			,`durationTime`
+			,`field`
+			,`language`
+			,`latitude`
+			,`longitude`
+			,`pickUp`
+			,`dropOff`
+			,`operatingTime`
+			,`thumbnailPic`
+			,`createdAt`
+			,`updatedAt`
+		FROM
+			`package`
+ 	</select>
+ 	
+ 	<insert id="insertPackageImages" parameterType="map">
+ 		INSERT INTO `packagePic`
+		 		(
+					`packageId`
+					,`imagePath`
+					,`createdAt`
+					,`updatedAt`
+		 		)
+		 		VALUES
+		 		(
+		 			#{packageId}
+		 			, #{imagePath}
+		 			, NOW()
+		 			, NOW()
+		 		)
+ 	</insert>
+ 	<insert id="insertPackageCourse" parameterType="map">
+ 		INSERT INTO `packageCourse`
+		 		(
+					`packageId`
+					,`title`
+					,`content`
+					,`content2`
+					,`durationTime`
+					,`picture`
+					,`createdAt`
+					,`updatedAt`
+		 		)
+		 		VALUES
+		 		(
+		 			#{packageId}
+		 			, #{title}
+		 			, #{content}
+		 			, #{content2}
+		 			, #{durationTime}
 		 			, #{imagePath}
 		 			, NOW()
 		 			, NOW()

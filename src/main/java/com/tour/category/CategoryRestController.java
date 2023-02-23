@@ -108,6 +108,8 @@ public class CategoryRestController {
 			@RequestParam(value="intro", required=false) String intro, 
 			@RequestParam(value="intro2", required=false) String intro2, 
 			@RequestParam(value="intro3", required=false) String intro3,
+			@RequestParam(value="intro4", required=false) String intro4,
+			@RequestParam(value="intro5", required=false) String intro5,
 			@RequestParam(value="accomoPlace", required=false) String accomoPlace,
 			@RequestParam(value="accomoPlace2", required=false) String accomoPlace2,
 			@RequestParam(value="accomoPlace3", required=false) String accomoPlace3,
@@ -128,6 +130,11 @@ public class CategoryRestController {
 			@RequestParam(value="commonSense", required=false) String commonSense,
 			@RequestParam(value="recommended", required=false) String recommended,
 			@RequestParam(value="warning", required=false) String warning,
+			@RequestParam(value="participation", required=false) String participation,
+			@RequestParam(value="transport", required=false) String transport,
+			@RequestParam(value="language", required=false) String language,
+			@RequestParam(value="pickUp", required=false) String pickUp,
+			@RequestParam(value="dropOff", required=false) String dropOff,
 			@RequestParam("file") MultipartFile file,
 			HttpSession session) {
 		
@@ -147,9 +154,9 @@ public class CategoryRestController {
 		
 		
 		insertCategoryInfo = categoryBO.addCategoryInfo(categoryAttr, categoryId, loginId, name, englishName, address, zipCode,
-		recommendTime, intro, intro2, intro3, accomoPlace, accomoPlace2, accomoPlace3, accomoPlace4, latitude, longitude, website,
+		recommendTime, intro, intro2, intro3, intro4, intro5, accomoPlace, accomoPlace2, accomoPlace3, accomoPlace4, latitude, longitude, website,
 		price, phoneNumber, email, operatingTime, availableToServe, type, happyHour, durationTime, field,
-		vitalItem, culture, commonSense, recommended, warning, file);
+		vitalItem, culture, commonSense, recommended, warning, participation, transport, language, pickUp, dropOff, file);
 		
 		
 		if (insertCategoryInfo) {
@@ -241,6 +248,40 @@ public class CategoryRestController {
 		if (insertTouirstImages >= 5) {
 			result.put("code", 200);
 		}
+		return result;
+	}
+	
+	@PostMapping("/add_package_imagesAndCourse")
+	public Map<String, Object> addPackageImagesAndCourse(
+			@RequestParam("packageId") int packageId,
+			@RequestParam(value="file", required=false) List<MultipartFile> fileList,
+			@RequestParam(value="courseTitle", required=false) String title,
+			@RequestParam(value="courseContent", required=false) String content,
+			@RequestParam(value="courseContent2", required=false) String content2,
+			@RequestParam(value="courseDurationTime", required=false) String durationTime,
+			@RequestParam(value="courseFile", required=false) MultipartFile picture,
+			HttpSession session) {
+		
+		Map<String, Object> result = new HashMap<>();
+		
+		// 세션 만료 혹은 관리자 이외 유저 접근 차단
+		int adminId = (int)session.getAttribute("adminId");
+		// 관리자 로그인 아이디
+		String loginId = (String)session.getAttribute("userLoginId");
+		
+		if (fileList != null) {
+			int insertPackageImages = categoryBO.addPackageImages(packageId, fileList, loginId);
+			if (insertPackageImages >= 5) {
+				result.put("code", 200);
+			}
+		} else if (picture != null) {
+			int insertPackageCourse = categoryBO.addPackageCourse(packageId, title, content, content2, durationTime, picture, loginId);
+			if (insertPackageCourse > 0) {
+				result.put("code", 200);
+			}
+		}
+		
+		
 		return result;
 	}
 }
